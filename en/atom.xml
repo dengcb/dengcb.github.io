@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title xml:lang="en">dengcb</title>
+  <subtitle xml:lang="en">explore better world</subtitle>
+  <link href="https://dengcb.com/en/atom.xml" rel="self"/>
+  <link href="https://dengcb.com/"/>
+  <updated>2018-04-14T12:33:30.416Z</updated>
+  <id>https://dengcb.com/</id>
+  
+  <author>
+    <name>dengcb</name>
+    <email>i@dengcb.com</email>
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title xml:lang="en">Hello, world!</title>
+    <link href="https://dengcb.com/en/nothing/Hello-world/"/>
+    <id>https://dengcb.com/en/nothing/Hello-world/</id>
+    <published>2018-04-10T12:58:02.000Z</published>
+    <updated>2018-04-14T12:33:30.416Z</updated>
+    <content type="html" xml:lang="en">&lt;p&gt;Let’s begin~&lt;/p&gt;
+</content>
+    <summary type="html" xml:lang="en">
+    
+      &lt;p&gt;Let’s begin~&lt;/p&gt;
+
+    
+    </summary>
+    
+      <category term="nothing" scheme="https://dengcb.com/categories/nothing/"/>
+    
+    
+      <category term="anything" scheme="https://dengcb.com/tags/anything/"/>
+    
+  </entry>
+  
+</feed>
