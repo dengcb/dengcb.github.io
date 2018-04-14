@@ -1,0 +1,15 @@
+# Header
+logo_text: # Add text logo instead of logo image
+
+# Content
+excerpt_link: Read More
+toc: false #  Whether to show the table of contents in articles
+fancybox: true
+
+# Miscellaneous
+google_analytics:
+favicon: /favicon.png
+
+# Share
+share_jia: false
+share_addthis: false

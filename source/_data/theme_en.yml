@@ -1,0 +1,13 @@
+﻿# theme configuration
+excerpt_link: Read more
+archive_title: Archives
+lang_name: 简体中文
+lang: en
+
+# Menu
+menu:
+  Home: en/
+  Archive: en/archives
+  Category: en/categories
+  Tag: en/tags
+  About: en/about

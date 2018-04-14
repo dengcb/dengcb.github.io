@@ -1,5 +1,9 @@
-.deploy*/
-node_modules
-public
+.DS_Store
+Thumbs.db
 db.json
+package-lock.json
 *.log
+node_modules/
+themes/landscape
+public/
+.deploy*/
