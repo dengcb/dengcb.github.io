@@ -11,16 +11,23 @@ logo:
 article:
   readtime: true
 
+menu:
+  Archives: /archives
+  Lifestyle: /categories/LifeStyle
+  Music: /categories/Music
+  Technology: /categories/Technology
+  About: /about
+
 search:
   type: insight
 
 share:
   type: sharethis
-  install_url: //platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&product=inline-share-buttons
+  install_url:
 
 comment:
   type: disqus
-  shortname: dengcb
+  shortname:
 
 plugins:
   mathjax: true
@@ -31,6 +38,7 @@ plugins:
 navbar_links:
   GitHub:
     icon: fab fa-github
-    url: https://github.com/dengcb
+    url: https://github.com/ppoffice/hexo-theme-minos
 
 footer_links:
+  GitHub: https://github.com/ppoffice/hexo-theme-minos

@@ -1,0 +1,9 @@
+# Site
+title: dengcb
+
+# Menu
+menu:
+  Archive: /archives
+  Category: /categories
+  Tag: /tags
+  About: /about

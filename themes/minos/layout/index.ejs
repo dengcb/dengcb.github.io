@@ -1,1 +1,10 @@
-<%- partial('_partial/archive', {type: '', index: true}) %>
+<section class="section">
+    <div class="container">
+    <% page.posts.each(function(post){ %>
+        <%- partial('common/article', { post, index: true }) %>
+    <% }); %>
+    <% if (page.total > 1) { %>
+        <%- partial('common/paginator') %>
+    <% } %>
+    </div>
+</section>

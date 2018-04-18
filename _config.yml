@@ -11,19 +11,16 @@ keywords:
   - github
 author: dengcb
 email: i@dengcb.com
-language:
-  - en
-  - zh
+language: [en, zh]
+langname: [English, 简体中文]
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://dengcb.com
 root: /
-permalink: :lang/:category/:title/
+permalink: :title/
 permalink_defaults:
-  lang: en
-  category: uncategorized
 
 # Directory
 source_dir: source
@@ -39,7 +36,7 @@ skip_render:
   - themes/**/*
 
 # Writing
-new_post_name: :lang/:year-:month-:day-:title.md # File name of new posts
+new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
@@ -70,7 +67,7 @@ default_category: uncategorized
 category_map:
   无他: nothing
 tag_map:
-#  随笔: anything
+  随笔: anything
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -98,5 +95,3 @@ deploy:
 
 stylus:
   compress: true
-
-disqus_shortname: dengcb
