@@ -101,8 +101,12 @@ figure.highlight .title {
 figure.highlight .link {
   text-decoration: underline; }
 
-body {
+body, button, input, select, textarea {
   font-family: "Ovo", "Georgia", "STZhongsong", "Microsoft YaHei", serif; }
+
+a.tag.article-tag {
+  font-size: 0.9rem;
+  text-decoration: none; }
 
 @media screen and (min-width: 1024px) {
   .container {
@@ -162,15 +166,6 @@ body {
   border-bottom: 1px dotted transparent; }
   .article .article-more-link a:hover {
     border-bottom-color: darkgray; }
-
-.article .article-tags .column:not(:first-child) {
-  margin-left: -.75rem; }
-
-.article .article-tags span a {
-  color: inherit;
-  background: #f2f2f2;
-  padding: 0.2rem 0.5rem;
-  border-radius: 3px; }
 
 .article .article-nav a {
   color: darkgray;
