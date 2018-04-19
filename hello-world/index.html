@@ -89,12 +89,12 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">8 days ago</time>
+            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">9 days ago</time>
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/en/categories/nothing/">nothing</a>
+            <a class="article-category-link" href="/categories/other/">other</a><span>></span><a class="article-category-link" href="/categories/other/nothing/">nothing</a>
         </span>
         
         
@@ -114,10 +114,21 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/en/tags/anything/">#anything</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/anything/">#anything</a></span>
     
     </div>
     
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/hexo-minos-multi-language/">Hexo multi-language with Minos</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+            
+        </span>
+    </div>
     
 </article>
 
@@ -138,6 +149,8 @@
     var disqus_config = function () {
         this.page.url = 'https://dengcb.com/hello-world/';
         this.page.identifier = 'hello-world/';
+        
+        this.language = 'en';
         
     };
     (function() {
@@ -175,7 +188,7 @@
                 <span class="icon">
                     <i class="fas fa-globe"></i>
                 </span>
-                <span>en</span>
+                <span>English</span>
                 <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -184,9 +197,13 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/hello-world/" class="dropdown-item">English</a>
+                <a href="/hello-world/" class="dropdown-item">
+                    English
+                </a>
             
-                <a href="/zh/hello-world/" class="dropdown-item">简体中文</a>
+                <a href="/zh/hello-world/" class="dropdown-item">
+                    简体中文
+                </a>
             
             </div>
         </div>

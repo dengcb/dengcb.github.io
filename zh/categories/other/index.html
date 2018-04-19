@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Categories - dengcb</title>
+<title>分类: 其他 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -32,7 +32,7 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="/zh">
                 
                 <img src="/images/logo.png" alt="" height="28">
                 
@@ -47,16 +47,16 @@
         <div class="navbar-menu navbar-start">
             
             <a class="navbar-item "
-               href="/archives">Archive</a>
-            
-            <a class="navbar-item is-active"
-               href="/categories">Category</a>
+               href="/zh/archives">归档</a>
             
             <a class="navbar-item "
-               href="/tags">Tag</a>
+               href="/zh/categories">分类</a>
             
             <a class="navbar-item "
-               href="/about">About</a>
+               href="/zh/tags">标签</a>
+            
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -82,31 +82,52 @@
     <section class="section section-heading">
     <div class="container">
         <div class="content">
-            <h5><i class="far fa-folder"></i>Categories</h5>
+            <h5><i class="far fa-folder"></i>其他</h5>
         </div>
     </div>
 </section>
 <section class="section">
     <div class="container">
-        <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh/hello-world/" itemprop="url">你好，世界！</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">9 天前</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh/categories/other/">其他</a><span>></span><a class="article-category-link" href="/zh/categories/other/nothing/">无他</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
             
-            <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/other/">other&nbsp;(1)</a>
-            </span>
             
-            <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/web/">web&nbsp;(1)</a>
-            </span>
-            
-            <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/other/nothing/">nothing&nbsp;(1)</a>
-            </span>
-            
-            <span class="column is-narrow">
-                <a class="tag is-light article-tag" href="/categories/web/hexo/">hexo&nbsp;(1)</a>
-            </span>
-            
-        </div>
+            几秒 读完 (约 4 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>我们走起~</p>
+
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
     </div>
 </section>
     <footer class="footer">
@@ -128,7 +149,7 @@
                 <span class="icon">
                     <i class="fas fa-globe"></i>
                 </span>
-                <span>English</span>
+                <span>简体中文</span>
                 <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -137,11 +158,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/categories/" class="dropdown-item">
+                <a href="/categories/other/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/categories/" class="dropdown-item">
+                <a href="/zh/categories/other/" class="dropdown-item">
                     简体中文
                 </a>
             
@@ -221,7 +242,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -233,13 +254,13 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '/content.zh.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);
