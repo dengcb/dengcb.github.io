@@ -94,7 +94,7 @@ tag_map:
 
   `_config.yml` `_config.en.yml` `_config.zh-cn.yml`
 
-  in \_config.zh.yml, set site name and menu
+  in \_config.zh-cn.yml, set site name and menu
 ```yaml
 # Site
 title: 长斌

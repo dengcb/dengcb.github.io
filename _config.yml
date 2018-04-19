@@ -70,6 +70,7 @@ category_map:
   无他: nothing
   网站: web
   Hexo: hexo
+  IPFS: ipfs
 tag_map:
   随笔: anything
   教程: tutorial

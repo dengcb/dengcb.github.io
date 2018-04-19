@@ -94,7 +94,7 @@ tag_map:
 
   `_config.yml` `_config.en.yml` `_config.zh-cn.yml`
 
-  修改_config.zh.yml，定义站点名称和菜单
+  修改_config.zh-cn.yml，定义站点名称和菜单
 ```yaml
 # Site
 title: 长斌
@@ -137,7 +137,7 @@ hexo s -s
 hexo d
 ```
 
-## 后记
+## 鸣谢
 > 特别感谢Minos作者 [ppoffice](https://ppoffice.github.io "Ruipeng Zhang") 设计实现这么好的主题，在我不停提意见的期间，持续修改，最后，完全完美实现了我对hexo主题的所有理想。
 > 
 > 接下来，我会写一写，如何把刚刚热乎出炉的网站发布到IPFS星际网络里去。
