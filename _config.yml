@@ -11,15 +11,16 @@ keywords:
   - github
 author: dengcb
 email: i@dengcb.com
-language: [en, zh]
-langname: [English, 简体中文]
+language:
+  - en
+  - zh
 timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://dengcb.com
 root: /
-permalink: :category/:title/
+permalink: :title/
 permalink_defaults:
 
 # Directory
@@ -65,9 +66,13 @@ index_generator:
 # Category & Tag
 default_category: uncategorized
 category_map:
+  其他: other
   无他: nothing
+  网站: web
+  Hexo: hexo
 tag_map:
   随笔: anything
+  教程: tutorial
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date

@@ -6,16 +6,11 @@ Changes not staged for commit:
   (use "git checkout -- <file>..." to discard changes in working directory)
 
 	deleted:    languages/ru.yml
-	deleted:    languages/zh-cn.yml
-	modified:   layout/common/footer.ejs
-	modified:   layout/common/languages.ejs
-	modified:   scripts/10_i18n.js
 	modified:   source/images/logo.png
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	languages/zh.yml
 	layout/about.ejs
 	layout/common/about.ejs
 
