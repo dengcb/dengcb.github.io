@@ -17,6 +17,7 @@ tags:
 {% blockquote 长斌 https://dengcb.github.io 欢迎访问我的GitHub主页 %}
 选择English作为默认语言，同时整站对应自己的母语再来一套的装逼行为，折腾自己不纳税系列，英特纳雄耐尔一定实现，全球大团结万岁。
 {% endblockquote %}
+
 - 为什么选择Minos
 
 {% blockquote %}
