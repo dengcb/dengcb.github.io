@@ -17,6 +17,7 @@ I want to build a hexo blog with full site multi-language, search a lot and try,
 {% blockquote dengcb https://dengcb.github.io Welcome to my GitHub %}
 Choose English as the default language, and translate full site into your native language, all items one to one correspondence.
 {% endblockquote %}
+
 - Why use Minos
 
 {% blockquote %}
