@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Hello, world! - dengcb</title>
+<title>Use iTerm2 to telnet SMTH bbs - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -84,48 +84,73 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Hello, world!
+            Use iTerm2 to telnet SMTH bbs
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">16 days ago</time>
+            <time datetime="2018-04-26T12:08:11.000Z" itemprop="datePublished">an hour ago</time>
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/other/">other</a><span>></span><a class="article-category-link" href="/categories/other/nothing/">nothing</a>
+            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/iterm/">iterm</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            a few seconds read (About 3 words)
+            a minute read (About 130 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>Let’s begin~</p>
-
+        <p>When you try BBS in macOS, it’s sucks! Someone uses welly, but I always use iTerm2 to connect servers. Today I’ll show you how to connect to SMTH BBS with iTerm2.</p>
+<a id="more"></a>
+<h2 id="Prepare"><a href="#Prepare" class="headerlink" title="Prepare"></a>Prepare</h2><blockquote>
+<p>Upgrade to 10.13.1, telnet disapeared, try execute<br><strong>brew install telnet</strong><br>Install telnet to <strong><em>/usr/local/bin</em></strong></p>
+</blockquote>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><pre><code>Open Preferences-&gt;Profiles
+</code></pre><p><strong>in General</strong></p>
+<ul>
+<li>Click <code>+</code>, add a new Profile, clone Default’s config</li>
+<li>Change Name, such as <code>SMTH</code></li>
+<li>Add a Shortcut key, such as <code>^⌘S</code></li>
+<li>Add Command, as <code>/usr/local/bin/telnet newsmth.net</code></li>
+</ul>
+<p><strong>in Text</strong></p>
+<ul>
+<li>Check <code>Treat ambiguous-width characters as double-width</code></li>
+<li>Click <code>Change font</code> to right size, don’t change font</li>
+</ul>
+<p><strong>in Terminal</strong></p>
+<ul>
+<li>Character Encoding choose <code>Chinese(GBK)</code></li>
+</ul>
+<p><strong>in Session</strong></p>
+<ul>
+<li>Check <code>When idle, send ASCII code</code></li>
+</ul>
+<blockquote class="colorquote success">Done, happy your SMTH life!</blockquote>
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/anything/">#anything</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
     
     </div>
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
-            
-            <a href="/hexo-minos-multi-language/">Hexo multi-language with Minos</a>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
         </span>
-        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/bring-me-to-ipfs/">Bring Me to IPFS</a>
             
         </span>
     </div>
@@ -147,8 +172,8 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://dengcb.com/hello-world/';
-        this.page.identifier = 'hello-world/';
+        this.page.url = 'https://dengcb.com/use-iterm2-telnet-smth-bbs/';
+        this.page.identifier = 'use-iterm2-telnet-smth-bbs/';
         
         this.language = 'en';
         
@@ -197,11 +222,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/hello-world/" class="dropdown-item">
+                <a href="/use-iterm2-telnet-smth-bbs/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/hello-world/" class="dropdown-item">
+                <a href="/zh/use-iterm2-telnet-smth-bbs/" class="dropdown-item">
                     简体中文
                 </a>
             
