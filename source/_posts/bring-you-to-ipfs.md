@@ -1,5 +1,5 @@
 ---
-title: 'Bring Me to IPFS'
+title: 'Bring You to IPFS'
 date: 2018-04-19 23:35:11
 categories:
 - web
@@ -16,9 +16,9 @@ Last post, I use Hexo with Minos to build a full site multi-language blog, it's 
 IPFS is called for short of ***InterPlanetary FileSystem***, maybe you can visit your data from another galaxy. Due to the limit speed of light, we need quantum entanglement communication to play well.
 {% endblockquote %}
 
-IPFS uses data hash address instead of website domain, but in the next, you will find if you want to visit your data in IPFS within a traditional website, you still need domain. And to get data hash, you have to visit a IPFS node server. So, want to decentralize, you maybe need a centralized server first.
+IPFS uses data hash address instead of website domain, but in the next, you will find if you want to visit your data in IPFS within a traditional website, you still need domain. And to get hash data, you have to visit a IPFS node server. So, want to decentralize, you maybe need a centralized server first.
 
-Meanwhile, distributed data storage will cause waste. Some updated files, previous versions are no longer valid, but are permanently retained inside IPFS and cannot be deleted. Even the owner has forgotten the previous data hash, the dead files become ghosts in the IPFS system.
+Meanwhile, distributed data storage will cause waste. Some updated files, previous versions are no longer valid, but are pinned and permanently retained inside IPFS and cannot be deleted. Even the owner has forgotten the previous data hash, the dead files become ghosts in the IPFS system.
 
 ## Install IPFS
 - Download latest release
@@ -55,6 +55,7 @@ Meanwhile, distributed data storage will cause waste. Some updated files, previo
 - Add to IPFS
   - Execute `ipfs add -r public` to add public folder to IPFS
   - Keep the public hash
+  - Persistent storage `ipfs pin add -r QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM`
   > added ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM*** public
 
     Visit https://ipfs.io/ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM directly
@@ -103,9 +104,43 @@ Meanwhile, distributed data storage will cause waste. Some updated files, previo
   
 - Wait for DNS effect
 
+## Setup Gateway
+> If you want to build your own gateway, go on (not necessary)
+
+- Install Nginx
+  - `apt install nginx-full`
+- Config Nginx
+  - `vi /etc/nginx/sites-available/example_com`
+``` nginx
+upstream ipfs-server {
+    server 127.0.0.1:8080;
+}
+
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://ipfs-server/;
+    }
+}
+```
+  - execute `nsite -e` `service nginx reload`
+
 ## User Experience
 This site's [cloning](https://dengcb.net) uses the IPFS, you can try.
 
-The actual feeling, or progress bar and die, or open quickly, half to half. Why? I think first you get doamin IP adress from DNS, and DNS cached, so traditional web can hold the traffic. Then you get public hash from IPFS NS server, but the server cannot hold your visit. So get data back quickly or die.
+The actual feeling, is different from we thought before. The first open takes a long time, always 504 timeout, but once connection is success, open will be very quick. Why? The IPFS official admits this is caused by the IPNS service bugs. We published name in the past, so we don't need modify DNS while change files.
 
-If, IPFS cannot enhance the performance of server, now it's unstable already, how can think about future?
+However, ipns service is very time-consuming and takes more than 1 minute often. Meanwhile, ipfs is almost seconds. [IPFS Officle website](https://ipfs.io) content is fixed, so hash address doesn't change, using ipfs and open fast.
+
+If, IPFS cannot enhance the speed of ipns service, first open needs ONE minute always, who can wait?

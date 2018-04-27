@@ -1,5 +1,5 @@
 ---
-title: '带我去星际'
+title: '带你去星际'
 date: 2018-04-19 23:35:11
 categories:
 - 网站
@@ -7,7 +7,7 @@ categories:
 tags:
 - 教程
 ---
-这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让我飞，带我去星际。
+这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。
 
 <!--more-->
 
@@ -25,9 +25,9 @@ tags:
 星际文件系统（InterPlanetary FileSystem），简称星际。突然间，一口霸气涌上心头，这已经把未来第一次接触后的宇宙合作考虑进去了。的确，咱地球有这么多好片，怎能光顾着自己享受呢？就是不知量子纠缠通信什么时候普及，否则两颗星球之间共享个片，浩叹会耗费多少光年。
 {% endblockquote %}
 
-星际使用内容寻址代替域名寻址，但是后面章节可以看见，要用传统方式访问星际系统里的网站文件，还是离不开域名配置。而去获取内容哈希得到的地址，也要访问星际中心节点服务器。某种意义，去中心化文件存储的起点，还是离不开中心化的服务器。
+星际使用内容寻址代替域名寻址，但是后面章节可以看见，要用传统方式访问星际系统里的网站文件，还是离不开域名配置。而去获取内容哈希得到的地址，也要访问星际节点服务器。某种意义上，去中心化文件存储的起点，还是离不开中心化的服务器。
 
-而分布式的数据存储，必然造成浪费。有些持续升级的文件，之前存储的内容不再有效，但是却永久保留在系统内部，无法删除。甚至连文件的主人都已经忘记了之前的内容地址，死文件成了游荡在星际系统里的孤魂野鬼。
+而分布式的数据存储，必然造成浪费。有些持续升级的文件，之前存储的内容不再有效，使用pin后却永久保留在星际内部，无法剔除。甚至连文件的主人都没有保留之前的内容地址，死文件成了游荡在星际系统里的孤魂野鬼。
 
 ## 安装星际
 - 下载最新安装包
@@ -65,6 +65,7 @@ tags:
 - 发布至星际
   - 输入命令 `ipfs add -r public` 将public目录发布至星际
   - 将public目录生成的哈希拷贝留用
+  - 持久保存 `ipfs pin add -r QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM`
   > added ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM*** public
 
     可以通过https://ipfs.io/ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM 直接访问
@@ -113,9 +114,43 @@ tags:
   
 - 静静等待
 
+## 搭建网关
+> 希望提供自己gateway服务的，再参考下面步骤（非必须）
+
+- 安装Nginx
+  - `apt install nginx-full`
+- 配置Nginx
+  - `vi /etc/nginx/sites-available/example_com`
+``` nginx
+upstream ipfs-server {
+    server 127.0.0.1:8080;
+}
+
+map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+
+server {
+    listen 80;
+    server_name example.com;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://ipfs-server/;
+    }
+}
+```
+  - 运行 `nsite -e` `service nginx reload`
+
 ## 使用体验
 本站的 [克隆站](https://dengcb.net) 使用了星际系统，你可以访问体验。
 
-实际使用效果，要么出现进度条，但是访问不了，要么就是瞬间打开，成功率不超过一半。这是为什么呢？我认为，访问克隆站时，首先从DNS Server获取IP地址，传统DNS其实是有缓存的，可以承受住全球访问量。然后根据DNS得到的IP地址前往星际中心节点服务器，再从IPNS得到网站根目录（public）的哈希值。这时候可以看出，访问星际服务存储的网站，中心节点服务器还扛不住。要么立即连接成功返回数据，要么卡死在节点连接。
+实际使用效果，和想象中有点差别。第一次连接会花很长时间，经常出现Timeout，但连接成功一次后就飞快了。这是为什么呢？IPFS官方承认，这是他们IPNS服务不完善造成的。前面，我们把ipfs用代名转成ipns，是为了文件升级时，不用再次修改DNS。
 
-所以，如果星际系统不能增强自己中心节点服务器的性能，目前这些访问量都hold不住，更大规模应用从何谈起。
+然而，ipns寻址需要非常耗时，一般都超过1分钟。这和ipfs寻址几乎秒开，形成鲜明对比。[IPFS官方网站](https://ipfs.io) 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。
+
+所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页都要超过一分钟，谁能等待呢？

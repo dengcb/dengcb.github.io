@@ -71,6 +71,7 @@ category_map:
   网站: web
   Hexo: hexo
   IPFS: ipfs
+  iTerm: iterm
 tag_map:
   随笔: anything
   教程: tutorial
