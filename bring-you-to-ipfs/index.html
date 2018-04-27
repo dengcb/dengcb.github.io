@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head>
     <meta charset="utf-8">
-<title>Bring Me to IPFS - dengcb</title>
+<title>Bring You to IPFS - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -84,12 +84,12 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Bring Me to IPFS
+            Bring You to IPFS
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-19T15:35:11.000Z" itemprop="datePublished">7 days ago</time>
+            <time datetime="2018-04-19T15:35:11.000Z" itemprop="datePublished">8 days ago</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -101,7 +101,7 @@
         <span class="column is-narrow">
             
             
-            4 minutes read (About 624 words)
+            5 minutes read (About 766 words)
         </span>
         
     </div>
@@ -111,8 +111,8 @@
 <a id="more"></a>
 <h2 id="What-is-IPFS"><a href="#What-is-IPFS" class="headerlink" title="What is IPFS"></a>What is IPFS</h2><blockquote><p>IPFS is called for short of <strong><em>InterPlanetary FileSystem</em></strong>, maybe you can visit your data from another galaxy. Due to the limit speed of light, we need quantum entanglement communication to play well.</p>
 <footer><strong>dengcb</strong><cite><a href="https://dengcb.github.io" target="_blank" rel="noopener">Welcome to my GitHub</a></cite></footer></blockquote>
-<p>IPFS uses data hash address instead of website domain, but in the next, you will find if you want to visit your data in IPFS within a traditional website, you still need domain. And to get data hash, you have to visit a IPFS node server. So, want to decentralize, you maybe need a centralized server first.</p>
-<p>Meanwhile, distributed data storage will cause waste. Some updated files, previous versions are no longer valid, but are permanently retained inside IPFS and cannot be deleted. Even the owner has forgotten the previous data hash, the dead files become ghosts in the IPFS system.</p>
+<p>IPFS uses data hash address instead of website domain, but in the next, you will find if you want to visit your data in IPFS within a traditional website, you still need domain. And to get hash data, you have to visit a IPFS node server. So, want to decentralize, you maybe need a centralized server first.</p>
+<p>Meanwhile, distributed data storage will cause waste. Some updated files, previous versions are no longer valid, but are pinned and permanently retained inside IPFS and cannot be deleted. Even the owner has forgotten the previous data hash, the dead files become ghosts in the IPFS system.</p>
 <h2 id="Install-IPFS"><a href="#Install-IPFS" class="headerlink" title="Install IPFS"></a>Install IPFS</h2><ul>
 <li>Download latest release<ul>
 <li>Open <a href="https://ipfs.io/docs/install/" target="_blank" rel="noopener">Official Site</a>, click <code>Download IPFS for your platform</code></li>
@@ -159,7 +159,8 @@
 <li><p>Add to IPFS</p>
 <ul>
 <li>Execute <code>ipfs add -r public</code> to add public folder to IPFS</li>
-<li><p>Keep the public hash</p>
+<li>Keep the public hash</li>
+<li><p>Persistent storage <code>ipfs pin add -r QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM</code></p>
 <blockquote>
 <p>added <strong><em>QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM</em></strong> public</p>
 </blockquote>
@@ -224,9 +225,28 @@
 <ul>
 <li>Wait for DNS effect</li>
 </ul>
+<h2 id="Setup-Gateway"><a href="#Setup-Gateway" class="headerlink" title="Setup Gateway"></a>Setup Gateway</h2><blockquote>
+<p>If you want to build your own gateway, go on (not necessary)</p>
+</blockquote>
+<ul>
+<li>Install Nginx<ul>
+<li><code>apt install nginx-full</code></li>
+</ul>
+</li>
+<li><p>Config Nginx</p>
+<ul>
+<li><p><code>vi /etc/nginx/sites-available/example_com</code></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ipfs-server &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="attribute">default</span> upgrade;</span><br><span class="line">    ''      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-NginX-Proxy <span class="literal">true</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://ipfs-server/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>execute <code>nsite -e</code> <code>service nginx reload</code></p>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="User-Experience"><a href="#User-Experience" class="headerlink" title="User Experience"></a>User Experience</h2><p>This site’s <a href="https://dengcb.net" target="_blank" rel="noopener">cloning</a> uses the IPFS, you can try.</p>
-<p>The actual feeling, or progress bar and die, or open quickly, half to half. Why? I think first you get doamin IP adress from DNS, and DNS cached, so traditional web can hold the traffic. Then you get public hash from IPFS NS server, but the server cannot hold your visit. So get data back quickly or die.</p>
-<p>If, IPFS cannot enhance the performance of server, now it’s unstable already, how can think about future?</p>
+<p>The actual feeling, is different from we thought before. The first open takes a long time, always 504 timeout, but once connection is success, open will be very quick. Why? The IPFS official admits this is caused by the IPNS service bugs. We published name in the past, so we don’t need modify DNS while change files.</p>
+<p>However, ipns service is very time-consuming and takes more than 1 minute often. Meanwhile, ipfs is almost seconds. <a href="https://ipfs.io" target="_blank" rel="noopener">IPFS Officle website</a> content is fixed, so hash address doesn’t change, using ipfs and open fast.</p>
+<p>If, IPFS cannot enhance the speed of ipns service, first open needs ONE minute always, who can wait?</p>
 
     
     </div>
@@ -268,8 +288,8 @@
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://dengcb.com/bring-me-to-ipfs/';
-        this.page.identifier = 'bring-me-to-ipfs/';
+        this.page.url = 'https://dengcb.com/bring-you-to-ipfs/';
+        this.page.identifier = 'bring-you-to-ipfs/';
         
         this.language = 'en';
         
@@ -318,11 +338,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/bring-me-to-ipfs/" class="dropdown-item">
+                <a href="/bring-you-to-ipfs/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/bring-me-to-ipfs/" class="dropdown-item">
+                <a href="/zh/bring-you-to-ipfs/" class="dropdown-item">
                     简体中文
                 </a>
             
