@@ -69,9 +69,11 @@ category_map:
   其他: other
   无他: nothing
   网站: web
+  编码: coding
   Hexo: hexo
   IPFS: ipfs
   iTerm: iterm
+  GitHub: github
 tag_map:
   随笔: anything
   教程: tutorial

@@ -65,18 +65,18 @@ tags:
 - 发布至星际
   - 输入命令 `ipfs add -r public` 将public目录发布至星际
   - 将public目录生成的哈希拷贝留用
-  - 持久保存 `ipfs pin add -r QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM`
-  > added ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM*** public
+  - 持久保存 `ipfs pin add -r QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS`
+  > added ***QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS*** public
 
-    可以通过https://ipfs.io/ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM 直接访问
+    可以通过https://ipfs.io/ipfs/QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS 直接访问
   
   
 - 绑定代名
   - 输入命令，将public目录哈希值绑定当前节点代名
-  > ipfs name publish ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM***
+  > ipfs name publish ***QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS***
 
   - 绑定成功，该代名就是在上一章init时生成的peer值
-  > Published to ***Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH***: /ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM
+  > Published to ***Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH***: /ipfs/QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS
 
     可以通过https://ipfs.io/ipns/Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH 代名访问
 

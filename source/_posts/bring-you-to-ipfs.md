@@ -55,18 +55,18 @@ Meanwhile, distributed data storage will cause waste. Some updated files, previo
 - Add to IPFS
   - Execute `ipfs add -r public` to add public folder to IPFS
   - Keep the public hash
-  - Persistent storage `ipfs pin add -r QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM`
-  > added ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM*** public
+  - Persistent storage `ipfs pin add -r QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS`
+  > added ***QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS*** public
 
-    Visit https://ipfs.io/ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM directly
+    Visit https://ipfs.io/ipfs/QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS directly
   
   
 - Name publish
   - Execute below, bind node name with public folder hash
-  > ipfs name publish ***QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM***
+  > ipfs name publish ***QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS***
 
   - Bind success, the name is the peer when node init
-  > Published to ***Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH***: /ipfs/QmYGDrqriAZmhKjqZcRxBLzD8gXb5q3ghMFXKLs42FaqbM
+  > Published to ***Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH***: /ipfs/QmXW1287aSKirPBVotV4L5SqhkMGdXqe5RrBNXRMR1JYkS
 
     Visit https://ipfs.io/ipns/Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH namely
 
