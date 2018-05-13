@@ -36,6 +36,11 @@ Install telnet to ***/usr/local/bin***
 **in Session**
 - Check `When idle, send ASCII code`
 
+**in Keys**
+- Click `+`, Shortcut: Home(fn + arrow right), Action: Send Escape Sequence, `[1~`
+- Click `+`, Shortcut: End(fn + arrow left), Action: Send Escape Sequence, `[4~`
+
+
 {% colorquote success %}
 Done, happy your SMTH life!
 {% endcolorquote %}
