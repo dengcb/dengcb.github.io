@@ -19,8 +19,9 @@ Today, I use GitHub for almost one month. The more you use, the more you get, ju
 ## Desktop
 > General users, just like me, better use [GitHub Desktop](https://desktop.github.com/). Command line is cool, but it's too heavy to life.
 
-## Pages页
+## Pages
 > Look [Hexo multi-language with Minos](/hexo-minos-multi-language/), GitHub gives you free static space to build blog or documents.
+Now you can use your doamin with https, 👍
 Conscience business!
 
 ## GitBook
