@@ -21,6 +21,7 @@ tags:
 
 ## Pages页
 > 参考 [用Minos搭建Hexo全站多语言站点](/zh/hexo-minos-multi-language/)，GitHub提供免费静态空间，可搭建博客或写文档。
+现在已经支持自定义域名https，👍
 良心企业！
 
 ## GitBook
