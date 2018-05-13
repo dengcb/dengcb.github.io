@@ -36,6 +36,11 @@ tags:
 **在Session栏**
 - 可以勾上`When idle, send ASCII code`
 
+**在Keys栏**
+- 点`+`，Shortcut输入：Home（fn+方向右键），Action输入：Send Escape Sequence，写`[1~`
+- 点`+`，Shortcut输入：End（fn+方向左键），Action输入：Send Escape Sequence，写`[4~`
+
+
 {% colorquote success %}
 好了，试试愉快的和水母一起玩耍吧！
 {% endcolorquote %}
