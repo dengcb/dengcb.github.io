@@ -37,8 +37,8 @@ Install telnet to ***/usr/local/bin***
 - Check `When idle, send ASCII code`
 
 **in Keys**
-- Click `+`, Shortcut: Home(fn + arrow right), Action: Send Escape Sequence, `[1~`
-- Click `+`, Shortcut: End(fn + arrow left), Action: Send Escape Sequence, `[4~`
+- Click `+`, Shortcut: Home (fn + arrow right), Action: Send Escape Sequence, `[1~`
+- Click `+`, Shortcut: End (fn + arrow left), Action: Send Escape Sequence, `[4~`
 
 
 {% colorquote success %}
