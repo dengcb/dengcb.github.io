@@ -2,8 +2,6 @@ $family-serif: "Ovo", "Georgia", "STZhongsong", "Microsoft YaHei", serif;
 $family-mono: "Source Code Pro", monospace, "Microsoft YaHei";
 $border-color: #dbdbdb;
 
-@import "../../../../node_modules/highlight.js/styles/atom-one-light";
-
 body, button, input, select, textarea {
     font-family: $family-serif;
 }
@@ -40,6 +38,11 @@ a.tag.article-tag {
 
     a.navbar-item.is-active {
         color: #3273dc;
+    }
+
+    .toc .navbar-dropdown {
+        max-height: 500px;
+        overflow-y: auto;
     }
 }
 
@@ -430,26 +433,15 @@ a.tag.article-tag {
     }
 }
 
-$hljs-classes: "comment" "quote" "variable" "template" "attribute" "tag" "name" "regexp" "link" "name" "selector"
-                "selector" "number" "meta" "built_in" "builtin" "literal" "type" "params" "string" "symbol" "bullet"
-                "title" "section" "keyword" "selector" "deletion" "addition" "deletion" "addition" "emphasis" "strong";
-
 code, pre {
     font-size: 0.85rem;
     font-family: $family-mono;
 }
 
 figure.highlight {
-    @extend .hljs;
     padding: 0;
     width: 100%;
     margin: 0 0 1.5rem;
-
-    @each $class in $hljs-classes {
-        .#{$class} {
-            @extend .hljs-#{$class} !optional;
-        }
-    }
 
     pre,
     table tr:hover {
@@ -463,6 +455,7 @@ figure.highlight {
 
     pre {
         padding: 0;
+        overflow: visible;
 
         .line {
             line-height: 1.5rem;
@@ -497,7 +490,8 @@ figure.highlight {
 
     .tag,
     .title,
-    .number {
+    .number,
+    .section {
         display: inherit;
         font: inherit;
         margin: inherit;
@@ -612,10 +606,6 @@ figure.highlight {
         font-family: inherit !important;
         line-height: 1.5;
     }
-}
-
-figure.highlight .section {
-    padding: 0!important;
 }
 
 @import "insight";

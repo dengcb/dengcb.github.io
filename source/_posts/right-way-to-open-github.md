@@ -21,7 +21,7 @@ Today, I use GitHub for almost one month. The more you use, the more you get, ju
 
 ## Pages
 > Look [Hexo multi-language with Minos](/hexo-minos-multi-language/), GitHub gives you free static space to build blog or documents.
-Now you can use your doamin with https, 👍
+Now you can use your custom domain with https, 👍
 Conscience business!
 
 ## GitBook

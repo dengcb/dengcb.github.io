@@ -413,7 +413,7 @@ hexo.extend.helper.register('i18n_path', function (language) {
     const path = this.page.path;
     const lang = getPageLanguage(this.page);
     const base = path.startsWith(lang) ? path.slice(lang.length + 1) : path;
-    return (language ? '/' + language : '') + '/' + base.replace(/index.html/g, "");
+    return (language ? '/' + language : '') + '/' + base;
 });
 
 /**

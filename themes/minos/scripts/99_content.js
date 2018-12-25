@@ -15,16 +15,21 @@ const MOMENTJS_SUPPORTED_LANGUAGES = ['af', 'ar-dz', 'ar-kw', 'ar-ly', 'ar-ma', 
     'tzl', 'tzm-latn', 'tzm', 'ug-cn', 'uk', 'ur', 'uz-latn', 'uz', 'vi', 'x-pseudo', 'yo',
     'zh-cn', 'zh-hk', 'zh-tw'];
 
-function injectMomentLocale(func) {
-    return function() {
-        let language = formatRfc5646(getPageLanguage(this.page));
-        if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(language) === -1) {
-            if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(formatIso639(language)) > -1) {
-                language = formatIso639(language);
-            } else if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(getClosestRfc5646WithCountryCode(language).toLowerCase()) > -1) {
-                language = getClosestRfc5646WithCountryCode(language);
-            }
+function getMomentLocale(language) {
+    let locale = formatRfc5646(language);
+    if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(locale) === -1) {
+        if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(formatIso639(locale)) > -1) {
+            locale = formatIso639(locale);
+        } else if (MOMENTJS_SUPPORTED_LANGUAGES.indexOf(getClosestRfc5646WithCountryCode(locale).toLowerCase()) > -1) {
+            locale = getClosestRfc5646WithCountryCode(locale);
         }
+    }
+    return locale;
+}
+
+function injectMomentLocale(func) {
+    return function () {
+        let language = getMomentLocale(getPageLanguage(this.page));
         moment.locale(language);
         const args = Array.prototype.slice.call(arguments).map(arg => {
             if (arg instanceof moment) {
@@ -47,7 +52,7 @@ hexo.extend.helper.register('is_tags', function () {
 /**
  * Generate html head title based on page type
  */
-hexo.extend.helper.register('page_title', function() {
+hexo.extend.helper.register('page_title', function () {
     const page = this.page;
     let title = page.title;
 
@@ -70,28 +75,35 @@ hexo.extend.helper.register('page_title', function() {
 
     const getConfig = hexo.extend.helper.get('get_config').bind(this);
 
-    return [title, getConfig('title', '', true)].filter(str => typeof(str) !== 'undefined' && str.trim() !== '').join(' - ');
+    return [title, getConfig('title', '', true)].filter(str => typeof (str) !== 'undefined' && str.trim() !== '').join(' - ');
 });
 
 /**
  * Format date to string without year.
  */
-hexo.extend.helper.register('format_date', injectMomentLocale(function(date) {
+hexo.extend.helper.register('format_date', injectMomentLocale(function (date) {
     return moment(date).format('MMM D');
 }));
 
 /**
- * Export moment.duration
+ * Format date to string with year.
  */
-hexo.extend.helper.register('duration', injectMomentLocale(function() {
-    return moment.duration.apply(null, arguments);
+hexo.extend.helper.register('format_date_full', injectMomentLocale(function (date) {
+    return moment(date).format('MMM D YYYY');
 }));
 
 /**
- * Get the difference between the page date time from now
+ * Get moment.js supported page locale
  */
-hexo.extend.helper.register('from_now', injectMomentLocale(function(date = null) {
-    return moment(date || this.page.date).fromNow();
+hexo.extend.helper.register('momentjs_locale', function () {
+    return getMomentLocale(getPageLanguage(this.page));
+});
+
+/**
+ * Export moment.duration
+ */
+hexo.extend.helper.register('duration', injectMomentLocale(function () {
+    return moment.duration.apply(null, arguments);
 }));
 
 /**
@@ -106,26 +118,69 @@ hexo.extend.helper.register('word_count', (content) => {
 /**
  * Export a list of headings of an article
  * [
- *     ['1', 'heading-anchor-1', 'Title of the heading 1'],
- *     ['1.1', 'heading-anchor-1-1', 'Title of the heading 1.1'],
+ *     ['1', 'heading-anchor-1', 'Title of the heading 1', 1],
+ *     ['1.1', 'heading-anchor-1-1', 'Title of the heading 1.1', 2],
  * ]
  */
 hexo.extend.helper.register('toc_list', (content) => {
-    const $ = cheerio.load(content);
+    const $ = cheerio.load(content, { decodeEntities: false });
     const levels = [0, 0, 0];
-    const headings = $(['h1', 'h2', 'h3'].join(','));
-
+    const levelTags = [];
+    // Get top 3 headings
+    for (let i = 1; i <= 6; i++) {
+        if ($('h' + i).length > 0) {
+            levelTags.push('h' + i);
+        }
+        if (levelTags.length === 3) {
+            break;
+        }
+    }
     const tocList = [];
-    headings.each(function() {
-        const level = +this.name[1];
+    if (levelTags.length === 0) {
+        return tocList;
+    }
+    const headings = $(levelTags.join(','));
+    headings.each(function () {
+        const level = levelTags.indexOf(this.name);
         const id = $(this).attr('id');
         const text = _.escape($(this).text());
 
-        levels[level - 1] += 1;
-        for (let i = level; i < levels.length; i++) {
-            levels[i] = 0;
+        for (let i = 0; i < levels.length; i++) {
+            if (i > level) {
+                levels[i] = 0;
+            } else if (i < level) {
+                // if headings start with a lower level heading, set the former heading index to 1
+                // e.g. h3, h2, h1, h2, h3 => 1.1.1, 1.2, 2, 2.1, 2.1.1
+                if (levels[i] === 0) {
+                    levels[i] = 1;
+                }
+            } else {
+                levels[i] += 1;
+            }
         }
-        tocList.push([levels.slice(0, level).join('.'), id, text]);
+        tocList.push([levels.slice(0, level + 1).join('.'), id, text, level + 1]);
     });
     return tocList;
+});
+
+function patchCodeHighlight(content) {
+    const $ = cheerio.load(content, { decodeEntities: false });
+    $('figure.highlight').addClass('hljs');
+    $('figure.highlight .code .line span').each(function () {
+        const classes = $(this).attr('class').split(' ');
+        if (classes.length === 1) {
+            $(this).addClass('hljs-' + classes[0]);
+            $(this).removeClass(classes[0]);
+        }
+    });
+    return $.html();
+}
+
+/**
+ * Add .hljs class name to the code blocks and code elements
+ */
+hexo.extend.filter.register('after_post_render', function (data) {
+    data.content = data.content ? patchCodeHighlight(data.content) : data.content;
+    data.excerpt = data.excerpt ? patchCodeHighlight(data.excerpt) : data.excerpt;
+    return data;
 });
