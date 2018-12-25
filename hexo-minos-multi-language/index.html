@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
 <title>Hexo multi-language with Minos - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
+
+<meta name="description" content="dengcb's open source code">
+
+
+
+<meta name="keywords" content="dengcb,github">
+
+
+
+    <meta name="description" content="I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo multi-language with Minos">
+<meta property="og:url" content="https://dengcb.com/hexo-minos-multi-language/index.html">
+<meta property="og:site_name" content="dengcb">
+<meta property="og:description" content="I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-04-20T04:43:19.458Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo multi-language with Minos">
+<meta name="twitter:description" content="I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.">
 
 
 
@@ -23,8 +44,22 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
 
 
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
 <link rel="stylesheet" href="/css/style.css">
+
 <script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
 
 </head>
 <body>
@@ -46,29 +81,25 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item "
-               href="/archives">Archive</a>
+            <a class="navbar-item " href="/archives">Archive</a>
             
-            <a class="navbar-item "
-               href="/categories">Category</a>
+            <a class="navbar-item " href="/categories">Category</a>
             
-            <a class="navbar-item "
-               href="/tags">Tag</a>
+            <a class="navbar-item " href="/tags">Tag</a>
             
-            <a class="navbar-item "
-               href="/about">About</a>
+            <a class="navbar-item " href="/about">About</a>
             
         </div>
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" href="javascript:;">
+            <a class="navbar-item search" title="Search" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
             
             
-            <a class="navbar-item" href="https://github.com/dengcb">
+            <a class="navbar-item" title="GitHub" href="https://github.com/dengcb">
                 
                 <i class="fab fa-github"></i>
                 
@@ -81,7 +112,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             Hexo multi-language with Minos
@@ -89,7 +120,7 @@
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">25 days ago</time>
+            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">Apr 19 2018</time>
         </span>
         
         <span class="column is-narrow article-category">
@@ -139,20 +170,20 @@
 </ul>
 <ol>
 <li><p>Use default config, try not to whim</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">language:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">en</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">zh-cn</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:title/</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:title.md</span></span><br><span class="line"><span class="attr">category_map:</span></span><br><span class="line">  <span class="string">无他:</span> <span class="string">nothing</span></span><br><span class="line"><span class="attr">tag_map:</span></span><br><span class="line">  <span class="string">随笔:</span> <span class="string">anything</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">language:</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">en</span></span><br><span class="line"><span class="hljs-bullet">  -</span> <span class="hljs-string">zh-cn</span></span><br><span class="line"><span class="hljs-attr">permalink:</span> <span class="hljs-string">:title/</span></span><br><span class="line"><span class="hljs-attr">i18n_dir:</span> <span class="hljs-string">:lang</span></span><br><span class="line"><span class="hljs-attr">new_post_name:</span> <span class="hljs-string">:title.md</span></span><br><span class="line"><span class="hljs-attr">category_map:</span></span><br><span class="line">  <span class="hljs-string">无他:</span> <span class="hljs-string">nothing</span></span><br><span class="line"><span class="hljs-attr">tag_map:</span></span><br><span class="line">  <span class="hljs-string">随笔:</span> <span class="hljs-string">anything</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Install minimal plugins, less is better</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="attr">  "name":</span> <span class="string">"dengcb.github.io"</span><span class="string">,</span></span><br><span class="line"><span class="attr">  "version":</span> <span class="string">"1.0.0"</span><span class="string">,</span></span><br><span class="line"><span class="attr">  "private":</span> <span class="literal">true</span><span class="string">,</span></span><br><span class="line"><span class="attr">  "hexo":</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    "version":</span> <span class="string">"3.7.1"</span></span><br><span class="line">  <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">  "dependencies":</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    "hexo":</span> <span class="string">"^3.7.1"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-deployer-git":</span> <span class="string">"^0.3.1"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-generator-archive":</span> <span class="string">"^0.1.5"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-generator-category":</span> <span class="string">"^0.1.3"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-generator-index":</span> <span class="string">"^0.2.1"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-generator-tag":</span> <span class="string">"^0.2.0"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-renderer-ejs":</span> <span class="string">"^0.3.0"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-renderer-marked":</span> <span class="string">"^0.3.0"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-renderer-sass":</span> <span class="string">"^0.3.2"</span><span class="string">,</span></span><br><span class="line"><span class="attr">    "hexo-server":</span> <span class="string">"^0.2.0"</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-string">&#123;</span></span><br><span class="line"><span class="hljs-attr">  "name":</span> <span class="hljs-string">"dengcb.github.io"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">  "version":</span> <span class="hljs-string">"1.0.0"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">  "private":</span> <span class="hljs-literal">true</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">  "hexo":</span> <span class="hljs-string">&#123;</span></span><br><span class="line"><span class="hljs-attr">    "version":</span> <span class="hljs-string">"3.7.1"</span></span><br><span class="line">  <span class="hljs-string">&#125;,</span></span><br><span class="line"><span class="hljs-attr">  "dependencies":</span> <span class="hljs-string">&#123;</span></span><br><span class="line"><span class="hljs-attr">    "hexo":</span> <span class="hljs-string">"^3.7.1"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-deployer-git":</span> <span class="hljs-string">"^0.3.1"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-generator-archive":</span> <span class="hljs-string">"^0.1.5"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-generator-category":</span> <span class="hljs-string">"^0.1.3"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-generator-index":</span> <span class="hljs-string">"^0.2.1"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-generator-tag":</span> <span class="hljs-string">"^0.2.0"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-renderer-ejs":</span> <span class="hljs-string">"^0.3.0"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-renderer-marked":</span> <span class="hljs-string">"^0.3.0"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-renderer-sass":</span> <span class="hljs-string">"^0.3.2"</span><span class="hljs-string">,</span></span><br><span class="line"><span class="hljs-attr">    "hexo-server":</span> <span class="hljs-string">"^0.2.0"</span></span><br><span class="line">  <span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Install Minos from root</p>
 <p><code>git clone https://github.com/ppoffice/hexo-theme-minos.git themes/minos</code></p>
 <p>at themes/minos, new 3 config files</p>
 <p><code>_config.yml</code> <code>_config.en.yml</code> <code>_config.zh-cn.yml</code></p>
 <p>in _config.zh-cn.yml, set site name and menu</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">长斌</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Menu</span></span><br><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="string">归档:</span> <span class="string">/zh-cn/archives</span></span><br><span class="line">  <span class="string">分类:</span> <span class="string">/zh-cn/categories</span></span><br><span class="line">  <span class="string">标签:</span> <span class="string">/zh-cn/tags</span></span><br><span class="line">  <span class="string">关于:</span> <span class="string">/zh-cn/about</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment"># Site</span></span><br><span class="line"><span class="hljs-attr">title:</span> <span class="hljs-string">长斌</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment"># Menu</span></span><br><span class="line"><span class="hljs-attr">menu:</span></span><br><span class="line">  <span class="hljs-string">归档:</span> <span class="hljs-string">/zh-cn/archives</span></span><br><span class="line">  <span class="hljs-string">分类:</span> <span class="hljs-string">/zh-cn/categories</span></span><br><span class="line">  <span class="hljs-string">标签:</span> <span class="hljs-string">/zh-cn/tags</span></span><br><span class="line">  <span class="hljs-string">关于:</span> <span class="hljs-string">/zh-cn/about</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>Create posts, and follow the structure</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">_post/</span><br><span class="line">  hello-world.md</span><br><span class="line">  zh-cn/</span><br><span class="line">    hello_world.md</span><br><span class="line">about/</span><br><span class="line">  index.md</span><br><span class="line">zh-cn/</span><br><span class="line">  about/</span><br><span class="line">    index.md</span><br><span class="line">CNAME</span><br><span class="line">favicon.png</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">_post/</span><br><span class="line">  hello-world.md</span><br><span class="line">  zh-cn/</span><br><span class="line">    hello_world.md</span><br><span class="line">about/</span><br><span class="line">  index.md</span><br><span class="line">zh-cn/</span><br><span class="line">  about/</span><br><span class="line">    index.md</span><br><span class="line">CNAME</span><br><span class="line">favicon.png</span><br></pre></td></tr></table></figure>
 <p>Copy post to <code>source/_post/&lt;lang&gt;/</code></p>
 <p>Copy page to<code>source/&lt;lang&gt;/</code></p>
 <p>That’s the <strong>Convention best</strong>, create the structure, then generate full site multi-language, done.</p>
@@ -160,7 +191,7 @@
 </ol>
 <ol start="5">
 <li><p>Generate, Test, Deploy, enjoy it!</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s -s</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s -s</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <h2 id="Thanks"><a href="#Thanks" class="headerlink" title="Thanks"></a>Thanks</h2><blockquote>
@@ -197,7 +228,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
 </div>
 
@@ -235,8 +266,7 @@
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
                 &copy; 2018 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
-                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -275,6 +305,7 @@
     </div>
 </footer>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
 
 <!-- test if the browser is outdated -->
 <div id="outdated">
@@ -285,7 +316,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
 <script>
     $(document).ready(function () {
-        //plugin function, place inside DOM ready function
+        // plugin function, place inside DOM ready function
         outdatedBrowser({
             bgColor: '#f25648',
             color: '#ffffff',
@@ -298,6 +329,7 @@
     window.FontAwesomeConfig = {
         searchPseudoElements: true
     }
+    moment.locale("en-AU");
 </script>
 
 
@@ -342,7 +374,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
