@@ -18,6 +18,6 @@ comments: false
 - Consensus
 
 ### Where I go
-- Shared economy
-- Mobile internet
-- Blockaichian
+- [Shared economy](https://at.cn)
+- [Mobile internet](https://www.artec.com)
+- [Smart ecarhome](https://www.ecarhome.com)

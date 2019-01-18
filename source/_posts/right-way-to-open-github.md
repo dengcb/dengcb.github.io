@@ -36,6 +36,10 @@ You can put e-books inside and write your own api documents.
 > If you update
 > `git submodule update`
 
+## Private Repository
+> New year, good news.
+GitHub under Microsoft free the private repository to all personal users.
+
 ## Follow, Watch, Star, Fork
 > Follow: like someone, follow his, catch every move
 > Watch: like something, subscrible it, listen any change
