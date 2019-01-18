@@ -91,6 +91,7 @@ tags:
   这里，推荐使用 [CloudFlare](https://www.cloudflare.com) 作为域名解析商，原因是：
   - 免费解析
   - 免费支持https，加密传输更快（天朝你懂的）
+  - 官方支持ipfs域名解析
 
   将DNS Server改成下列即可
   > dahlia.ns.cloudflare.com
@@ -98,18 +99,13 @@ tags:
   
   
 - 修改解析
-  - DNS菜单，添加A记录，指向某个ipfs.io服务器（可以用dig命令查询）
+  - DNS菜单，添加CNAME记录，指向cloudflare-ipfs.com
 
-  - DNS菜单，添加TXT记录，使用刚刚的代名
+  - DNS菜单，添加TXT记录_dnslink，使用刚刚的代名
   > dnslink=/ipns/Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH
 
-  - Crypto菜单，SSL选择为full
-  - Page Rules菜单，添加一条规则
-
-    {% blockquote %}
-    ht<span>tp://</span>exa<span>mple.c</span>om/*
-    Always Use HTTPS
-    {% endblockquote %}
+  - [申请数字证书网址](https://www.cloudflare.com/distributed-web-gateway/)
+  输入域名
   
   
 - 静静等待
@@ -151,6 +147,6 @@ server {
 
 实际使用效果，和想象中有点差别。第一次连接会花很长时间，经常出现Timeout，但连接成功一次后就飞快了。这是为什么呢？IPFS官方承认，这是他们IPNS服务不完善造成的。前面，我们把ipfs用代名转成ipns，是为了文件升级时，不用再次修改DNS。
 
-然而，ipns寻址需要非常耗时，一般都超过1分钟。这和ipfs寻址几乎秒开，形成鲜明对比。[IPFS官方网站](https://ipfs.io) 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。
+然而，ipns寻址需要非常耗时，一般都超过20秒。这和ipfs寻址几乎秒开，形成鲜明对比。[IPFS官方网站](https://ipfs.io) 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。
 
-所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页都要超过一分钟，谁能等待呢？
+所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页会遇到超时，谁愿意等待呢？

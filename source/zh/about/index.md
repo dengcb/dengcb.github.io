@@ -17,7 +17,7 @@ comments: false
 - 微信小程序
 - 共识算法
 
-### 我干啥
-- 分享经济
-- 移动互联
-- 智能区块链
+### 我做啥
+- [分享经济](https://at.cn)
+- [移动互联](https://www.artec.com)
+- [智能电车](https://www.ecarhome.com)

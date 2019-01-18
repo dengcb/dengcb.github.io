@@ -81,6 +81,7 @@ Meanwhile, distributed data storage will cause waste. Some updated files, previo
   Now, please use [CloudFlare](https://www.cloudflare.com), for some reason:
   - Free DNS
   - Free https, dynamic and security
+  - Free IPFS gateway
 
   Please set DNS Server as
   > dahlia.ns.cloudflare.com
@@ -88,18 +89,13 @@ Meanwhile, distributed data storage will cause waste. Some updated files, previo
   
   
 - Add DNS record
-  - DNS, add A record, set as ipfs.io IP(try `dig +short ipfs.io`)
+  - DNS, add CNAME record, set as `cloudflare-ipfs.com`
 
-  - DNS, add TXT record, use ipfs node name
+  - DNS, add TXT record `_dnslink`, use ipfs node name
   > dnslink=/ipns/Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH
 
-  - Crypto, set SSL as `full`
-  - Page Rules, add one rule
-
-    {% blockquote %}
-    ht<span>tp://</span>exa<span>mple.c</span>om/*
-    Always Use HTTPS
-    {% endblockquote %}
+  - [Apply ssl certificate](https://www.cloudflare.com/distributed-web-gateway/)
+  input your domain
   
   
 - Wait for DNS effect
@@ -141,6 +137,6 @@ This site's [cloning](https://dengcb.net) uses the IPFS, you can try.
 
 The actual feeling, is different from we thought before. The first open takes a long time, always 504 timeout, but once connection is success, open will be very quick. Why? The IPFS official admits this is caused by the IPNS service bugs. We published name in the past, so we don't need modify DNS while change files.
 
-However, ipns service is very time-consuming and takes more than 1 minute often. Meanwhile, ipfs is almost seconds. [IPFS Officle website](https://ipfs.io) content is fixed, so hash address doesn't change, using ipfs and open fast.
+However, ipns service is very time-consuming and takes more than 20 seconds often. Meanwhile, ipfs is almost second. [IPFS Officle website](https://ipfs.io) content is fixed, so hash address doesn't change, using ipfs and open fast.
 
-If, IPFS cannot enhance the speed of ipns service, first open needs ONE minute always, who can wait?
+If, IPFS cannot enhance the speed of ipns service, first open meets 504 always, who can wait?
