@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Hello, world! - dengcb</title>
+<title>迁移LDAP服务 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,18 +16,18 @@
 
 
 
-    <meta name="description" content="Let’s begin~">
-<meta name="keywords" content="anything">
+    <meta name="description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
+<meta name="keywords" content="教程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello, world!">
-<meta property="og:url" content="https://dengcb.com/hello-world/index.html">
+<meta property="og:title" content="迁移LDAP服务">
+<meta property="og:url" content="https://dengcb.com/zh/migrate-ldap/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="Let’s begin~">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-04-19T06:54:05.011Z">
+<meta property="og:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-01-18T08:25:58.762Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello, world!">
-<meta name="twitter:description" content="Let’s begin~">
+<meta name="twitter:title" content="迁移LDAP服务">
+<meta name="twitter:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
 
 
 
@@ -67,7 +67,7 @@
 <nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
     <div class="container">
         <div class="navbar-brand">
-            <a class="navbar-item navbar-logo" href="/">
+            <a class="navbar-item navbar-logo" href="/zh">
                 
                 <img src="/images/logo.png" alt="" height="28">
                 
@@ -81,19 +81,19 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archive</a>
+            <a class="navbar-item " href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/categories">Category</a>
+            <a class="navbar-item " href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/tags">Tag</a>
+            <a class="navbar-item " href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item " href="/zh/about">关于</a>
             
         </div>
         
         <div class="navbar-menu navbar-end">
             
-            <a class="navbar-item search" title="Search" href="javascript:;">
+            <a class="navbar-item search" title="搜索" href="javascript:;">
                 <i class="fas fa-search"></i>
             </a>
             
@@ -115,48 +115,73 @@
     <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Hello, world!
+            迁移LDAP服务
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">Apr 10 2018</time>
+            <time datetime="2019-01-15T09:29:43.000Z" itemprop="datePublished">1月 15 2019</time>
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/other/">other</a><span>></span><a class="article-category-link" href="/categories/other/nothing/">nothing</a>
+            <a class="article-category-link" href="/zh/categories/maintain/">维护</a><span>></span><a class="article-category-link" href="/zh/categories/maintain/ldap/">LDAP</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            a few seconds read (About 3 words)
+            2 分钟 读完 (约 267 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>Let’s begin~</p>
+        <p>LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>在新服务器安装OPENLDAP<br><code>apt install slapd ldap-utils php-ldap phpldapadmin</code></p>
+</li>
+<li><p>在旧服务器查询Suffix<br><code>slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix&quot;</code></p>
+</li>
+</ul>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><ul>
+<li><p>备份config<br><code>slapcat -b cn=config -l config.ldif</code></p>
+</li>
+<li><p>备份database<br><code>slapcat -b dc=dengcb,dc=com -l dengcb.ldif</code></p>
+</li>
+</ul>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><ul>
+<li><p>恢复config</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/ldap</span><br><span class="line">cp -a slapd.d slapd.d.bak</span><br><span class="line">rm -rf slapd.d/*</span><br><span class="line">slapadd -F slapd.d -b cn=config -l config.ldif</span><br><span class="line">chown -R openldap.openldap slapd.d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>恢复database</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix\|^olcDbDirectory&quot;</span><br><span class="line">cd /var/lib</span><br><span class="line">cp -a ldap ldap.bak</span><br><span class="line">rm -f ldap/*</span><br><span class="line">cd /etc/ldap</span><br><span class="line">slapadd -F slapd.d -b dc=dengcb,dc=com -l dengcb.ldif</span><br><span class="line">chown openldap.openldap /var/lib/ldap/*</span><br><span class="line">/etc/init.d/slapd restart</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
+<li>如果遇到和php7兼容问题，请<a href="https://github.com/leenooks/phpLDAPadmin/files/688183/pla-php7.zip" target="_blank" rel="noopener">下载修改过的包</a><br>替换掉<code>/usr/share/phpldapadmin</code>即可</li>
+<li>修改配置文件<br><code>vi /usr/share/phpldapadmin/config/config.php</code></li>
+</ul>
 
     
     </div>
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/anything/">#anything</a></span>
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh/tags/tutorial/">#教程</a></span>
     
     </div>
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
-            
-            <a href="/hexo-minos-multi-language/">Hexo multi-language with Minos</a>
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
         </span>
-        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-next">
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh/right-way-to-open-github/">GitHub的正确打开方式</a>
             
         </span>
     </div>
@@ -174,14 +199,14 @@
 
 
 <div class="comments">
-    <h3 class="title is-4">Comments</h3>
+    <h3 class="title is-4">评论</h3>
     
 <script>
     var disqus_config = function () {
-        this.page.url = 'https://dengcb.com/hello-world/';
-        this.page.identifier = 'hello-world/';
+        this.page.url = 'https://dengcb.com/zh/migrate-ldap/';
+        this.page.identifier = 'zh/migrate-ldap/';
         
-        this.language = 'en';
+        this.language = 'zh';
         
     };
     (function() {
@@ -218,7 +243,7 @@
                 <span class="icon">
                     <i class="fas fa-globe"></i>
                 </span>
-                <span>English</span>
+                <span>简体中文</span>
                 <span class="icon is-small">
             <i class="fas fa-angle-down" aria-hidden="true"></i>
           </span>
@@ -227,11 +252,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/hello-world/" class="dropdown-item">
+                <a href="/migrate-ldap/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/hello-world/" class="dropdown-item">
+                <a href="/zh/migrate-ldap/" class="dropdown-item">
                     简体中文
                 </a>
             
@@ -268,7 +293,7 @@
     window.FontAwesomeConfig = {
         searchPseudoElements: true
     }
-    moment.locale("en-AU");
+    moment.locale("zh-CN");
 </script>
 
 
@@ -313,7 +338,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -325,13 +350,13 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
-                UNTITLED: '(Untitled)',
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
             },
-            CONTENT_URL: '/content.json',
+            CONTENT_URL: '/content.zh.json',
         };
         window.INSIGHT_CONFIG = INSIGHT_CONFIG;
     })(window);

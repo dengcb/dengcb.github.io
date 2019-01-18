@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Category: hexo - dengcb</title>
+<title>Migrate LDAP server - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/categories/web/hexo/index.html">
+    <meta name="description" content="LDAP is a tree query system, mainly used for member management. Query more than modification, so always stable. Leave this post here to help your migration.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate LDAP server">
+<meta property="og:url" content="https://dengcb.com/migrate-ldap/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="LDAP is a tree query system, mainly used for member management. Query more than modification, so always stable. Leave this post here to help your migration.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-18T08:27:34.837Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Migrate LDAP server">
+<meta name="twitter:description" content="LDAP is a tree query system, mainly used for member management. Query more than modification, so always stable. Leave this post here to help your migration.">
 
 
 
@@ -109,57 +110,121 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5><i class="far fa-folder"></i>hexo</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/hexo-minos-multi-language/" itemprop="url">Hexo multi-language with Minos</a>
+            Migrate LDAP server
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">Apr 19 2018</time>
+            <time datetime="2019-01-15T09:29:43.000Z" itemprop="datePublished">Jan 15 2019</time>
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/hexo/">hexo</a>
+            <a class="article-category-link" href="/categories/maintain/">maintain</a><span>></span><a class="article-category-link" href="/categories/maintain/ldap/">ldap</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            5 minutes read (About 697 words)
+            a minute read (About 188 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.</p>
-        <p class="article-more-link">
-            <a href="/hexo-minos-multi-language/#more">Read More</a>
-        </p>
+        <p>LDAP is a tree query system, mainly used for member management. Query more than modification, so always stable. Leave this post here to help your migration.</p>
+<a id="more"></a>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
+<li><p>install OPENLDAP in new server<br><code>apt install slapd ldap-utils php-ldap phpldapadmin</code></p>
+</li>
+<li><p>search Suffix in old server<br><code>slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix&quot;</code></p>
+</li>
+</ul>
+<h2 id="Backup"><a href="#Backup" class="headerlink" title="Backup"></a>Backup</h2><ul>
+<li><p>backup config<br><code>slapcat -b cn=config -l config.ldif</code></p>
+</li>
+<li><p>backup database<br><code>slapcat -b dc=dengcb,dc=com -l dengcb.ldif</code></p>
+</li>
+</ul>
+<h2 id="Migrate"><a href="#Migrate" class="headerlink" title="Migrate"></a>Migrate</h2><ul>
+<li><p>restore config</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/ldap</span><br><span class="line">cp -a slapd.d slapd.d.bak</span><br><span class="line">rm -rf slapd.d/*</span><br><span class="line">slapadd -F slapd.d -b cn=config -l config.ldif</span><br><span class="line">chown -R openldap.openldap slapd.d</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>restore database</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix\|^olcDbDirectory&quot;</span><br><span class="line">cd /var/lib</span><br><span class="line">cp -a ldap ldap.bak</span><br><span class="line">rm -f ldap/*</span><br><span class="line">cd /etc/ldap</span><br><span class="line">slapadd -F slapd.d -b dc=dengcb,dc=com -l dengcb.ldif</span><br><span class="line">chown openldap.openldap /var/lib/ldap/*</span><br><span class="line">/etc/init.d/slapd restart</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h2><ul>
+<li><p>if get error in php7, <a href="https://github.com/leenooks/phpLDAPadmin/files/688183/pla-php7.zip" target="_blank" rel="noopener">download the modified</a><br>replace <code>/usr/share/phpldapadmin</code></p>
+</li>
+<li><p>modify the config<br><code>vi /usr/share/phpldapadmin/config/config.php</code></p>
+</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
     
     </div>
     
     
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/right-way-to-open-github/">Right Way to Open GitHub</a>
+            
+        </span>
+    </div>
+    
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
 
 
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
     
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/migrate-ldap/';
+        this.page.identifier = 'migrate-ldap/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
     
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -189,11 +254,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/categories/web/hexo/index.html" class="dropdown-item">
+                <a href="/migrate-ldap/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/categories/web/hexo/index.html" class="dropdown-item">
+                <a href="/zh/migrate-ldap/" class="dropdown-item">
                     简体中文
                 </a>
             

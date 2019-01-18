@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2018-05-13T18:32:05.821Z">
+<meta property="og:updated_time" content="2019-01-18T07:32:05.102Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="带你去星际">
 <meta name="twitter:description" content="这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。">
@@ -132,7 +132,7 @@
         <span class="column is-narrow">
             
             
-            11 分钟 读完 (约 1626 字)
+            11 分钟 读完 (约 1611 字)
         </span>
         
     </div>
@@ -231,6 +231,7 @@
 <ul>
 <li>免费解析</li>
 <li>免费支持https，加密传输更快（天朝你懂的）</li>
+<li>官方支持ipfs域名解析</li>
 </ul>
 <p>将DNS Server改成下列即可</p>
 <blockquote>
@@ -241,18 +242,14 @@
 <ul>
 <li><p>修改解析</p>
 <ul>
-<li><p>DNS菜单，添加A记录，指向某个ipfs.io服务器（可以用dig命令查询）</p>
+<li><p>DNS菜单，添加CNAME记录，指向cloudflare-ipfs.com</p>
 </li>
-<li><p>DNS菜单，添加TXT记录，使用刚刚的代名</p>
+<li><p>DNS菜单，添加TXT记录_dnslink，使用刚刚的代名</p>
 <blockquote>
 <p>dnslink=/ipns/Qmdn4vrHjbmsQvHPXAiJvWFHQRqGd5fP33HJqd9AE4EjMH</p>
 </blockquote>
 </li>
-<li><p>Crypto菜单，SSL选择为full</p>
-</li>
-<li><p>Page Rules菜单，添加一条规则</p>
-<blockquote><p>ht<span>tp://</span>exa<span>mple.c</span>om/*<br>Always Use HTTPS</p>
-</blockquote>
+<li><p><a href="https://www.cloudflare.com/distributed-web-gateway/" target="_blank" rel="noopener">申请数字证书网址</a><br>输入域名</p>
 </li>
 </ul>
 </li>
@@ -280,8 +277,8 @@
 </ul>
 <h2 id="使用体验"><a href="#使用体验" class="headerlink" title="使用体验"></a>使用体验</h2><p>本站的 <a href="https://dengcb.net" target="_blank" rel="noopener">克隆站</a> 使用了星际系统，你可以访问体验。</p>
 <p>实际使用效果，和想象中有点差别。第一次连接会花很长时间，经常出现Timeout，但连接成功一次后就飞快了。这是为什么呢？IPFS官方承认，这是他们IPNS服务不完善造成的。前面，我们把ipfs用代名转成ipns，是为了文件升级时，不用再次修改DNS。</p>
-<p>然而，ipns寻址需要非常耗时，一般都超过1分钟。这和ipfs寻址几乎秒开，形成鲜明对比。<a href="https://ipfs.io" target="_blank" rel="noopener">IPFS官方网站</a> 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。</p>
-<p>所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页都要超过一分钟，谁能等待呢？</p>
+<p>然而，ipns寻址需要非常耗时，一般都超过20秒。这和ipfs寻址几乎秒开，形成鲜明对比。<a href="https://ipfs.io" target="_blank" rel="noopener">IPFS官方网站</a> 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。</p>
+<p>所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页会遇到超时，谁愿意等待呢？</p>
 
     
     </div>
@@ -349,7 +346,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2018 dengcb&nbsp;
+                &copy; 2019 dengcb&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
