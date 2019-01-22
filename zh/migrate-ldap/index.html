@@ -24,7 +24,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-18T08:25:58.762Z">
+<meta property="og:updated_time" content="2019-01-19T15:31:01.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迁移LDAP服务">
 <meta name="twitter:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
@@ -132,7 +132,7 @@
         <span class="column is-narrow">
             
             
-            2 分钟 读完 (约 267 字)
+            2 分钟 读完 (约 263 字)
         </span>
         
     </div>
@@ -161,7 +161,7 @@
 </li>
 </ul>
 <h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
-<li>如果遇到和php7兼容问题，请<a href="https://github.com/leenooks/phpLDAPadmin/files/688183/pla-php7.zip" target="_blank" rel="noopener">下载修改过的包</a><br>替换掉<code>/usr/share/phpldapadmin</code>即可</li>
+<li>如果遇到和php7兼容问题，请<a href="https://github.com/breisig/phpLDAPadmin" target="_blank" rel="noopener">下载修改过的包</a><br>替换掉<code>/usr/share/phpldapadmin</code>即可</li>
 <li>修改配置文件<br><code>vi /usr/share/phpldapadmin/config/config.php</code></li>
 </ul>
 
@@ -176,7 +176,9 @@
     
     
     <div class="columns is-mobile is-multiline article-nav">
-        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh/migrate-mysql/">迁移MySQL数据库</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">

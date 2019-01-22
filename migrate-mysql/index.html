@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Tag: tutorial - dengcb</title>
+<title>Migrate MySQL server - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/tags/tutorial/index.html">
+    <meta name="description" content="MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate MySQL server">
+<meta property="og:url" content="https://dengcb.com/migrate-mysql/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-22T10:43:00.216Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Migrate MySQL server">
+<meta name="twitter:description" content="MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.">
 
 
 
@@ -109,20 +110,12 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5>#tutorial</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/migrate-mysql/" itemprop="url">Migrate MySQL server</a>
+            Migrate MySQL server
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -146,220 +139,91 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.</p>
-        <p class="article-more-link">
-            <a href="/migrate-mysql/#more">Read More</a>
-        </p>
+<a id="more"></a>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
+<li><p>install MySQL in new server<br><code>apt install mysql-server-5.7 php7.2-mysql</code></p>
+</li>
+<li><p>install phpmyadmin in new server</p>
+<ul>
+<li>open <a href="https://www.phpmyadmin.net/downloads/" target="_blank" rel="noopener">official download</a></li>
+<li>download latest zip package</li>
+<li>unzip to /usr/share/phpmyadmin</li>
+</ul>
+</li>
+</ul>
+<h2 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h2><ul>
+<li>modify MySQL config<br><code>vi /etc/mysql/mysql.conf.d/mysql.cnf</code></li>
+<li>modify phpmyadmin config<br><code>https://db.yourdomain.com/setup</code><br>save as<br><code>/usr/share/phpmyadmin/config.inc.php</code></li>
+<li>modify root password<br>MySQL 5.7 root has no password initially<br><code>set password for &#39;root&#39;@&#39;localhost&#39; = password(&#39;123&#39;);</code></li>
+<li>login with phpmyadmin<br>if failed with <code>Access denied for user &#39;root&#39;@&#39;localhost&#39;</code><br>change root login method<br><code>update mysql.user set plugin = &#39;mysql_native_password&#39; where user = &#39;root&#39;;</code></li>
+<li>flush every time changed<br><code>flush privileges;</code></li>
+</ul>
+<h2 id="Backup"><a href="#Backup" class="headerlink" title="Backup"></a>Backup</h2><ul>
+<li>backup database<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p mydb | bzip2 &gt; /opt/bak/db_mydb_`date +%y_%m_%d`.bz2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Migrate"><a href="#Migrate" class="headerlink" title="Migrate"></a>Migrate</h2><ul>
+<li>restore database<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bzip2 -d db_mydb.bz2</span><br><span class="line">mysql -uroot -p</span><br><span class="line">use mydb</span><br><span class="line">source /opt/bak/db_mydb</span><br></pre></td></tr></table></figure></li>
+</ul>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/migrate-ldap/">Migrate LDAP server</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/migrate-ldap/" itemprop="url">Migrate LDAP server</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-01-15T09:29:43.000Z" itemprop="datePublished">Jan 15 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/maintain/">maintain</a><span>></span><a class="article-category-link" href="/categories/maintain/ldap/">ldap</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            a minute read (About 184 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>LDAP is a tree query system, mainly used for member management. Query more than modification, so always stable. Leave this post here to help your migration.</p>
-        <p class="article-more-link">
-            <a href="/migrate-ldap/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/migrate-mysql/';
+        this.page.identifier = 'migrate-mysql/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
     
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/right-way-to-open-github/" itemprop="url">Right Way to Open GitHub</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-30T05:36:30.000Z" itemprop="datePublished">Apr 30 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/coding/">coding</a><span>></span><a class="article-category-link" href="/categories/coding/github/">github</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 minutes read (About 306 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>Today, I use GitHub for almost one month. The more you use, the more you get, just one word: Cool! Nice can’t be hidden, just share it! Even using too short to know more, we can share it with going.</p>
-        <p class="article-more-link">
-            <a href="/right-way-to-open-github/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/use-iterm2-telnet-smth-bbs/" itemprop="url">Use iTerm2 to telnet SMTH bbs</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-26T12:08:11.000Z" itemprop="datePublished">Apr 26 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/iterm/">iterm</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            a minute read (About 158 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>When you try BBS in macOS, it sucks! Someone uses welly, but I always use iTerm2 to ssh servers. Today I’ll show you how to telnet SMTH BBS with iTerm2.</p>
-        <p class="article-more-link">
-            <a href="/use-iterm2-telnet-smth-bbs/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/bring-you-to-ipfs/" itemprop="url">Bring You to IPFS</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-19T15:35:11.000Z" itemprop="datePublished">Apr 19 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/ipfs/">ipfs</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            5 minutes read (About 753 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>Last post, I use Hexo with Minos to build a full site multi-language blog, it’s exciting! So in this post, I will tell you how to bring the new blog to IPFS.</p>
-        <p class="article-more-link">
-            <a href="/bring-you-to-ipfs/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/hexo-minos-multi-language/" itemprop="url">Hexo multi-language with Minos</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">Apr 19 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/hexo/">hexo</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            5 minutes read (About 697 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.</p>
-        <p class="article-more-link">
-            <a href="/hexo-minos-multi-language/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-    
     </div>
 </section>
     <footer class="footer">
@@ -389,11 +253,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/tags/tutorial/index.html" class="dropdown-item">
+                <a href="/migrate-mysql/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/tags/tutorial/index.html" class="dropdown-item">
+                <a href="/zh/migrate-mysql/" class="dropdown-item">
                     简体中文
                 </a>
             

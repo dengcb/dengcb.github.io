@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>归档 - 长斌</title>
+<title>迁移MySQL数据库 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/zh/archives/index.html">
+    <meta name="description" content="MySQL是现在最流行的开源数据库系统，基本上个人或小公司都在用，已经是业界标配。在此记录一次数据库服务器的迁移过程，以备查询和共享。">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移MySQL数据库">
+<meta property="og:url" content="https://dengcb.com/zh/migrate-mysql/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="MySQL是现在最流行的开源数据库系统，基本上个人或小公司都在用，已经是业界标配。在此记录一次数据库服务器的迁移过程，以备查询和共享。">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-01-22T09:53:32.564Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="迁移MySQL数据库">
+<meta name="twitter:description" content="MySQL是现在最流行的开源数据库系统，基本上个人或小公司都在用，已经是业界标配。在此记录一次数据库服务器的迁移过程，以备查询和共享。">
 
 
 
@@ -80,7 +81,7 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item is-active" href="/zh/archives">归档</a>
+            <a class="navbar-item " href="/zh/archives">归档</a>
             
             <a class="navbar-item " href="/zh/categories">分类</a>
             
@@ -111,65 +112,118 @@
 
     <section class="section">
     <div class="container">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            迁移MySQL数据库
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-22T05:54:23.000Z" itemprop="datePublished">1月 22 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh/categories/maintain/">维护</a><span>></span><a class="article-category-link" href="/zh/categories/maintain/MYSQL/">MYSQL</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 分钟 读完 (约 267 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>MySQL是现在最流行的开源数据库系统，基本上个人或小公司都在用，已经是业界标配。在此记录一次数据库服务器的迁移过程，以备查询和共享。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
+<li><p>在新服务器安装MySQL<br><code>apt install mysql-server-5.7 php7.2-mysql</code></p>
+</li>
+<li><p>在新服务器安装phpmyadmin</p>
+<ul>
+<li>打开<a href="https://www.phpmyadmin.net/downloads/" target="_blank" rel="noopener">官网下载页面</a></li>
+<li>下载最新版的zip包</li>
+<li>解压到/usr/share/phpmyadmin</li>
+</ul>
+</li>
+</ul>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
+<li>修改MySQL配置<br><code>vi /etc/mysql/mysql.conf.d/mysql.cnf</code></li>
+<li>修改phpmyadmin配置<br><code>https://db.yourdomain.com/setup</code><br>修改完成后保存为<br><code>/usr/share/phpmyadmin/config.inc.php</code></li>
+<li>修改root密码<br>MySQL5.7默认root没有密码<br><code>set password for &#39;root&#39;@&#39;localhost&#39; = password(&#39;123&#39;);</code></li>
+<li>用phpmyadmin登录<br>如果发生错误<code>Access denied for user &#39;root&#39;@&#39;localhost&#39;</code><br>需要更改root登录模式<br><code>update mysql.user set plugin = &#39;mysql_native_password&#39; where user = &#39;root&#39;;</code></li>
+<li>记得每次修改后都要刷新权限<br><code>flush privileges;</code></li>
+</ul>
+<h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><ul>
+<li>备份数据库<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p mydb | bzip2 &gt; /opt/bak/db_mydb_`date +%y_%m_%d`.bz2</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><ul>
+<li>恢复数据库<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bzip2 -d db_mydb.bz2</span><br><span class="line">mysql -uroot -p</span><br><span class="line">use mydb</span><br><span class="line">source /opt/bak/db_mydb</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh/tags/tutorial/">#教程</a></span>
+    
+    </div>
     
     
-        <div class="archive content">
-            <h4 class="title is-4" id="2019">2019</h4>
-            <div class="articles">
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-22T05:54:23.000Z" itemprop="datePublished">
-                        1月 22</time>
-                    <h6 class="title is-6"><a href="/zh/migrate-mysql/">迁移MySQL数据库</a></h6>
-                </div>
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-15T09:29:43.000Z" itemprop="datePublished">
-                        1月 15</time>
-                    <h6 class="title is-6"><a href="/zh/migrate-ldap/">迁移LDAP服务</a></h6>
-                </div>
+            <a href="/zh/migrate-ldap/">迁移LDAP服务</a>
             
-            </div>
-        </div>
+        </span>
+    </div>
     
-        <div class="archive content">
-            <h4 class="title is-4" id="2018">2018</h4>
-            <div class="articles">
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2018-04-30T05:36:30.000Z" itemprop="datePublished">
-                        4月 30</time>
-                    <h6 class="title is-6"><a href="/zh/right-way-to-open-github/">GitHub的正确打开方式</a></h6>
-                </div>
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2018-04-26T12:08:11.000Z" itemprop="datePublished">
-                        4月 26</time>
-                    <h6 class="title is-6"><a href="/zh/use-iterm2-telnet-smth-bbs/">Mac下使用iTerm2连接水木BBS</a></h6>
-                </div>
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2018-04-19T15:35:11.000Z" itemprop="datePublished">
-                        4月 19</time>
-                    <h6 class="title is-6"><a href="/zh/bring-you-to-ipfs/">带你去星际</a></h6>
-                </div>
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">
-                        4月 19</time>
-                    <h6 class="title is-6"><a href="/zh/hexo-minos-multi-language/">用Minos搭建Hexo全站多语言站点</a></h6>
-                </div>
-            
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">
-                        4月 10</time>
-                    <h6 class="title is-6"><a href="/zh/hello-world/">你好，世界！</a></h6>
-                </div>
-            
-            </div>
-        </div>
+</article>
+
+
+<div class="sharebox">
     
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
     
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/zh/migrate-mysql/';
+        this.page.identifier = 'zh/migrate-mysql/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -199,11 +253,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/archives/index.html" class="dropdown-item">
+                <a href="/migrate-mysql/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/archives/index.html" class="dropdown-item">
+                <a href="/zh/migrate-mysql/" class="dropdown-item">
                     简体中文
                 </a>
             
