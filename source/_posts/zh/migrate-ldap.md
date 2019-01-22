@@ -48,7 +48,7 @@ chown openldap.openldap /var/lib/ldap/*
 ```
 
 ## 修改
-- 如果遇到和php7兼容问题，请[下载修改过的包](https://github.com/leenooks/phpLDAPadmin/files/688183/pla-php7.zip)
+- 如果遇到和php7兼容问题，请[下载修改过的包](https://github.com/breisig/phpLDAPadmin)
 替换掉`/usr/share/phpldapadmin`即可
 - 修改配置文件
 `vi /usr/share/phpldapadmin/config/config.php`

@@ -48,7 +48,7 @@ chown openldap.openldap /var/lib/ldap/*
 ```
 
 ## Modify
-- if get error in php7, [download the modified](https://github.com/leenooks/phpLDAPadmin/files/688183/pla-php7.zip)
+- if get error in php7, [download the modified](https://github.com/breisig/phpLDAPadmin)
 replace `/usr/share/phpldapadmin`
 
 - modify the config
