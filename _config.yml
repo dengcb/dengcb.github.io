@@ -76,6 +76,7 @@ category_map:
   iTerm: iterm
   GitHub: github
   LDAP: ldap
+  MySQL: mysql
 tag_map:
   随笔: anything
   教程: tutorial
