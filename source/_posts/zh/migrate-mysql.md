@@ -3,7 +3,7 @@ title: '迁移MySQL数据库'
 date: 2019-01-22 13:54:23
 categories:
 - 维护
-- MYSQL
+- MySQL
 tags:
 - 教程
 ---

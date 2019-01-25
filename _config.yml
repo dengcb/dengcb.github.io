@@ -77,6 +77,8 @@ category_map:
   GitHub: github
   LDAP: ldap
   MySQL: mysql
+  Redis: redis
+  Rails: rails
 tag_map:
   随笔: anything
   教程: tutorial
