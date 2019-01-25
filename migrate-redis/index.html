@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Archives: 2019/1 - dengcb</title>
+<title>Migrate Redis server - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/archives/2019/01/index.html">
+    <meta name="description" content="Redis is the most popular memory database system, enhance your site just like fly in sky by using it. Redis is easy to config, and record something to someone need it.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate Redis server">
+<meta property="og:url" content="https://dengcb.com/migrate-redis/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="Redis is the most popular memory database system, enhance your site just like fly in sky by using it. Redis is easy to config, and record something to someone need it.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-23T09:19:24.493Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Migrate Redis server">
+<meta name="twitter:description" content="Redis is the most popular memory database system, enhance your site just like fly in sky by using it. Redis is easy to config, and record something to someone need it.">
 
 
 
@@ -111,40 +112,121 @@
 
     <section class="section">
     <div class="container">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Migrate Redis server
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-23T07:36:31.000Z" itemprop="datePublished">Jan 23 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/maintain/">maintain</a><span>></span><a class="article-category-link" href="/categories/maintain/redis/">redis</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            a minute read (About 134 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Redis is the most popular memory database system, enhance your site just like fly in sky by using it. Redis is easy to config, and record something to someone need it.</p>
+<a id="more"></a>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
+<li><p>install Redis in new server<br><code>apt install redis-server php-redis</code></p>
+</li>
+<li><p>install phpRedisAdmin in new server</p>
+<ul>
+<li>open <a href="https://github.com/ErikDubbelboer/phpRedisAdmin" target="_blank" rel="noopener">GitHub site</a></li>
+<li>clone latest to /usr/share/phpredisadmin</li>
+</ul>
+</li>
+</ul>
+<h2 id="Config"><a href="#Config" class="headerlink" title="Config"></a>Config</h2><ul>
+<li><p>modify Redis config<br><code>vi /etc/redis/redis.conf</code></p>
+</li>
+<li><p>modify Nginx config</p>
+<ul>
+<li><p>install apache2 utils, generate htpasswd</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install apache2-utils</span><br><span class="line">htpasswd -c /etc/phpreadmin/htpasswd admin</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>encrypt phpRedisAdmin website login</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  auth_basic &quot;Dengcb Redis Admin&quot;;</span><br><span class="line">  auth_basic_user_file /etc/phpreadmin/htpasswd;</span><br><span class="line">  try_files $uri $uri/ /index.php?$args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>modify php config</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Session]</span><br><span class="line">session.save_handler = redis</span><br><span class="line">session.save_path = &quot;unix:///var/run/redis/redis-server.sock?persistent=1&amp;weight=1&quot;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
     
     
-        <div class="archive content">
-            <h4 class="title is-4" id="2019">2019</h4>
-            <div class="articles">
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-24T08:42:09.000Z" itemprop="datePublished">
-                        Jan 24</time>
-                    <h6 class="title is-6"><a href="/migrate-redmine-and-gitlab/">Migrate Redmine and Gitlab</a></h6>
-                </div>
+            <a href="/migrate-redmine-and-gitlab/">Migrate Redmine and Gitlab</a>
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-23T07:36:31.000Z" itemprop="datePublished">
-                        Jan 23</time>
-                    <h6 class="title is-6"><a href="/migrate-redis/">Migrate Redis server</a></h6>
-                </div>
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-22T05:54:23.000Z" itemprop="datePublished">
-                        Jan 22</time>
-                    <h6 class="title is-6"><a href="/migrate-mysql/">Migrate MySQL server</a></h6>
-                </div>
+            <a href="/migrate-mysql/">Migrate MySQL server</a>
             
-                <div class="article content>">
-                    <time class="is-text-small" datetime="2019-01-15T09:29:43.000Z" itemprop="datePublished">
-                        Jan 15</time>
-                    <h6 class="title is-6"><a href="/migrate-ldap/">Migrate LDAP server</a></h6>
-                </div>
-            
-            </div>
-        </div>
+        </span>
+    </div>
     
+</article>
+
+
+<div class="sharebox">
     
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/migrate-redis/';
+        this.page.identifier = 'migrate-redis/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -174,11 +256,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/archives/2019/01/index.html" class="dropdown-item">
+                <a href="/migrate-redis/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/archives/2019/01/index.html" class="dropdown-item">
+                <a href="/zh/migrate-redis/" class="dropdown-item">
                     简体中文
                 </a>
             

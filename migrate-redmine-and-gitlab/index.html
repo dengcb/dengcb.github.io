@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Migrate Redmine and Gitlab - dengcb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="dengcb's open source code">
+
+
+
+<meta name="keywords" content="dengcb,github">
+
+
+
+    <meta name="description" content="Redmine and Gitlab are great project and code management systems, both based on Ruby on Rails, so I migrate them together and record Rails migration notes here.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate Redmine and Gitlab">
+<meta property="og:url" content="https://dengcb.com/migrate-redmine-and-gitlab/index.html">
+<meta property="og:site_name" content="dengcb">
+<meta property="og:description" content="Redmine and Gitlab are great project and code management systems, both based on Ruby on Rails, so I migrate them together and record Rails migration notes here.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-01-25T10:13:29.487Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Migrate Redmine and Gitlab">
+<meta name="twitter:description" content="Redmine and Gitlab are great project and code management systems, both based on Ruby on Rails, so I migrate them together and record Rails migration notes here.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archive</a>
+            
+            <a class="navbar-item " href="/categories">Category</a>
+            
+            <a class="navbar-item " href="/tags">Tag</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/dengcb">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Migrate Redmine and Gitlab
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-24T08:42:09.000Z" itemprop="datePublished">Jan 24 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/maintain/">maintain</a><span>></span><a class="article-category-link" href="/categories/maintain/rails/">rails</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 730 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Redmine and Gitlab are great project and code management systems, both based on Ruby on Rails, so I migrate them together and record Rails migration notes here.</p>
+<a id="more"></a>
+<h2 id="Install-Rails"><a href="#Install-Rails" class="headerlink" title="Install Rails"></a>Install Rails</h2><ul>
+<li><p>install RVM in new server</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gpg2 --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB</span><br><span class="line">\curl -sSL https://get.rvm.io | bash -s stable</span><br><span class="line">source ~/.bashrc</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">rvm -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install Ruby in new server</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br><span class="line">rvm install 2.6.0 --disable-binary</span><br><span class="line">rvm use 2.6.0 --default</span><br><span class="line">rvm list</span><br><span class="line">rvm remove 1.8.7</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>create new Gemset</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rvm use 2.6.0</span><br><span class="line">rvm gemset create rails522</span><br><span class="line">rvm gemset list</span><br><span class="line">rvm use 2.6.0@rails522</span><br><span class="line">gem -v</span><br><span class="line">gem install bundler</span><br><span class="line">gem install rails -v 5.2.2</span><br><span class="line">gem install thin -v 1.7.2</span><br><span class="line">bundle -v</span><br><span class="line">rails -v</span><br><span class="line">thin -v</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="Migrate-Redmine"><a href="#Migrate-Redmine" class="headerlink" title="Migrate Redmine"></a>Migrate Redmine</h2><ul>
+<li><p>install dev package needed</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install libmysqlclient-dev</span><br><span class="line">apt install imagemagick libmagickcore-dev libmagickwand-dev</span><br></pre></td></tr></table></figure>
+<p>if libjbig0 error in 18.04, download <a href="https://packages.ubuntu.com/bionic/amd64/libjbig0/download" target="_blank" rel="noopener">right version</a><br><code>dpkg -i libjbig0_2.1-3.1build1_amd64.deb</code></p>
+</li>
+</ul>
+<ul>
+<li><p>modify thin config</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin install</span><br><span class="line">vi /etc/thin/redmine.yml</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>---<br>chdir: /var/www/artec/mine<br>environment: production<br>address: 0.0.0.0<br>port: 3000<br>timeout: 30<br>log: log/thin.log<br>pid: tmp/pids/thin.pid<br>max_conns: 1024<br>max_persistent_conns: 512<br>require: []<br>wait: 30<br>servers: 5<br>daemonize: true</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>migrate Redmine</p>
+<ul>
+<li>download <a href="http://www.redmine.org/projects/redmine/wiki/Download" target="_blank" rel="noopener">latest</a></li>
+<li><p>migrate config</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config/database.yml ./config</span><br><span class="line">cp config/configuration.yml ./config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>migrate files and theme</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -r files ./</span><br><span class="line">cp -r public/themes/dengcb public/themes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install gems, Gemfile add <code>gem &quot;thin&quot;, &quot;~&gt; 1.7.2&quot;</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bundle install --without development test</span><br><span class="line">bundle exec rake generate_secret_token</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake tmp:cache:clear RAILS_ENV=production</span><br><span class="line">chown -R www-data.www-data *</span><br><span class="line">/etc/init.d/thin start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Migrate-Gitlab"><a href="#Migrate-Gitlab" class="headerlink" title="Migrate Gitlab"></a>Migrate Gitlab</h2><ul>
+<li><p>install dependency package</p>
+<ul>
+<li><p>install nodejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh</span><br><span class="line">bash nodesource_setup.sh</span><br><span class="line">apt install nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install yarn</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -</span><br><span class="line">echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">apt update</span><br><span class="line">apt install yarn</span><br><span class="line">yarn -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>install go</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install golang</span><br><span class="line">go version</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>install others<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install graphicsmagick</span><br><span class="line">apt install postfix</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>Upgrade System</p>
+<ul>
+<li><p>upgrade Gitlab</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd ~/gitlab</span><br><span class="line">git fetch --all --prune</span><br><span class="line">git checkout -- db/schema.rb</span><br><span class="line">git checkout -- locale</span><br><span class="line">git checkout 11-8-stable</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upgrade gitlab-shell</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-shell</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_SHELL_VERSION)</span><br><span class="line">bin/compile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upgrade gitlab-workhorse</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-workhorse</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_WORKHORSE_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upgrade Gitaly</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i.pre-10.1 &apos;s/\[\[storages\]\]/[[storage]]/&apos; /home/git/gitaly/config.toml</span><br><span class="line">cd ~/gitaly</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITALY_SERVER_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upgrade gitlab-pages</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-pages</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_PAGES_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Update config</p>
+<ul>
+<li><p>update gitlab.yml</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/11-7-stable:config/gitlab.yml.example origin/11-8-stable:config/gitlab.yml.example</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>update script</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp lib/support/init.d/gitlab /etc/init.d/gitlab</span><br><span class="line">cp lib/support/init.d/gitlab.default.example /etc/default/gitlab</span><br><span class="line">update-rc.d gitlab defaults 21</span><br><span class="line">cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>start migration</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle install --deployment --without development test postgres aws kerberos</span><br><span class="line">bundle clean</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake gettext:compile RAILS_ENV=production</span><br><span class="line">bundle exec rake yarn:install gitlab:assets:clean gitlab:assets:compile RAILS_ENV=production NODE_ENV=production</span><br><span class="line">bundle exec rake cache:clear RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>start checking</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service gitlab start</span><br><span class="line">service nginx restart</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle exec rake gitlab:env:info RAILS_ENV=production</span><br><span class="line">bundle exec rake gitlab:check RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>additional</p>
+<ul>
+<li><p>fix <code>gnutls_handshake error</code> with git</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential fakeroot dpkg-dev libcurl4-openssl-dev</span><br><span class="line">apt build-dep git</span><br><span class="line">mkdir ~/git-openssl</span><br><span class="line">cd ~/git-openssl</span><br><span class="line">apt source git</span><br><span class="line">dpkg-source -x git_2.17.1-1.dsc</span><br><span class="line">cd git-2.17.1</span><br><span class="line">vi debian/control //replace libcurl4-gnutls-dev with libcurl4-openssl-dev</span><br><span class="line">dpkg-buildpackage -rfakeroot -b //if fail on test, comment TEST=test in debian/rules</span><br><span class="line">dpkg -i ../git_2.17.1-1ubuntu0.4_amd64.deb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>fix <code>JavaScript heap out of memory</code> with nodejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/migrate-redis/">Migrate Redis server</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/migrate-redmine-and-gitlab/';
+        this.page.identifier = 'migrate-redmine-and-gitlab/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu">
+            <div class="dropdown-content">
+            
+                <a href="/migrate-redmine-and-gitlab/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh/migrate-redmine-and-gitlab/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>

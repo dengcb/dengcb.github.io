@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>迁移Redmine和Gitlab - 长斌</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<meta name="description" content="dengcb's open source code">
+
+
+
+<meta name="keywords" content="dengcb,github">
+
+
+
+    <meta name="description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="迁移Redmine和Gitlab">
+<meta property="og:url" content="https://dengcb.com/zh/migrate-redmine-and-gitlab/index.html">
+<meta property="og:site_name" content="dengcb">
+<meta property="og:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-01-25T07:27:02.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="迁移Redmine和Gitlab">
+<meta name="twitter:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh/archives">归档</a>
+            
+            <a class="navbar-item " href="/zh/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh/tags">标签</a>
+            
+            <a class="navbar-item " href="/zh/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/dengcb">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            迁移Redmine和Gitlab
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-01-24T08:42:09.000Z" itemprop="datePublished">1月 24 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh/categories/maintain/">维护</a><span>></span><a class="article-category-link" href="/zh/categories/maintain/rails/">Rails</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 885 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。</p>
+<a id="more"></a>
+<h2 id="安装Rails环境"><a href="#安装Rails环境" class="headerlink" title="安装Rails环境"></a>安装Rails环境</h2><ul>
+<li><p>在新服务器安装RVM</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gpg2 --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB</span><br><span class="line">\curl -sSL https://get.rvm.io | bash -s stable</span><br><span class="line">source ~/.bashrc</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">rvm -v</span><br><span class="line">echo &quot;ruby_url=https://cache.ruby-china.org/pub/ruby&quot; &gt; ~/.rvm/user/db</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在新服务器安装ruby</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br><span class="line">rvm install 2.6.0 --disable-binary</span><br><span class="line">rvm use 2.6.0 --default</span><br><span class="line">rvm list</span><br><span class="line">rvm remove 1.8.7</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置新的gemset</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rvm use 2.6.0</span><br><span class="line">rvm gemset create rails522</span><br><span class="line">rvm gemset list</span><br><span class="line">rvm use 2.6.0@rails522</span><br><span class="line">gem -v</span><br><span class="line">gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/</span><br><span class="line">gem sources -l</span><br><span class="line">bundle config mirror.https://rubygems.org https://gems.ruby-china.com</span><br><span class="line">gem install bundler</span><br><span class="line">gem install rails -v 5.2.2</span><br><span class="line">gem install thin -v 1.7.2</span><br><span class="line">bundle -v</span><br><span class="line">rails -v</span><br><span class="line">thin -v</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="迁移Redmine"><a href="#迁移Redmine" class="headerlink" title="迁移Redmine"></a>迁移Redmine</h2><ul>
+<li><p>补充开发包</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install libmysqlclient-dev</span><br><span class="line">apt install imagemagick libmagickcore-dev libmagickwand-dev</span><br></pre></td></tr></table></figure>
+<p>如果在18.04下遇到libjbig0版本过高，可以下载<a href="https://packages.ubuntu.com/bionic/amd64/libjbig0/download" target="_blank" rel="noopener">降级安装包</a><br><code>dpkg -i libjbig0_2.1-3.1build1_amd64.deb</code></p>
+</li>
+</ul>
+<ul>
+<li><p>修改thin配置</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin install</span><br><span class="line">vi /etc/thin/redmine.yml</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>---<br>chdir: /var/www/artec/mine<br>environment: production<br>address: 0.0.0.0<br>port: 3000<br>timeout: 30<br>log: log/thin.log<br>pid: tmp/pids/thin.pid<br>max_conns: 1024<br>max_persistent_conns: 512<br>require: []<br>wait: 30<br>servers: 5<br>daemonize: true</p>
+</blockquote>
+</li>
+</ul>
+<ul>
+<li><p>迁移Redmine</p>
+<ul>
+<li>下载<a href="http://www.redmine.org/projects/redmine/wiki/Download" target="_blank" rel="noopener">最新版</a></li>
+<li><p>迁移配置</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config/database.yml ./config</span><br><span class="line">cp config/configuration.yml ./config</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>迁移数据和主题</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -r files ./</span><br><span class="line">cp -r public/themes/dengcb public/themes</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装gems，在Gemfile中添加<code>gem &quot;thin&quot;, &quot;~&gt; 1.7.2&quot;</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bundle install --without development test</span><br><span class="line">bundle exec rake generate_secret_token</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake tmp:cache:clear RAILS_ENV=production</span><br><span class="line">chown -R www-data.www-data *</span><br><span class="line">/etc/init.d/thin start</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="迁移Gitlab"><a href="#迁移Gitlab" class="headerlink" title="迁移Gitlab"></a>迁移Gitlab</h2><ul>
+<li><p>安装依赖软件</p>
+<ul>
+<li><p>安装nodejs</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh</span><br><span class="line">bash nodesource_setup.sh</span><br><span class="line">apt install nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装yarn</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -</span><br><span class="line">echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">apt update</span><br><span class="line">apt install yarn</span><br><span class="line">yarn -v</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装go</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install golang</span><br><span class="line">go version</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>安装其他<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install graphicsmagick</span><br><span class="line">apt install postfix</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>更新系统</p>
+<ul>
+<li><p>更新Gitlab</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd ~/gitlab</span><br><span class="line">git fetch --all --prune</span><br><span class="line">git checkout -- db/schema.rb</span><br><span class="line">git checkout -- locale</span><br><span class="line">git checkout 11-8-stable</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新gitlab-shell</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-shell</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_SHELL_VERSION)</span><br><span class="line">bin/compile</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新gitlab-workhorse</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-workhorse</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_WORKHORSE_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新Gitaly</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i.pre-10.1 &apos;s/\[\[storages\]\]/[[storage]]/&apos; /home/git/gitaly/config.toml</span><br><span class="line">cd ~/gitaly</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITALY_SERVER_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更新gitlab-pages</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-pages</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_PAGES_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>更新配置</p>
+<ul>
+<li><p>更新gitlab.yml</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/11-7-stable:config/gitlab.yml.example origin/11-8-stable:config/gitlab.yml.example</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动脚本</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp lib/support/init.d/gitlab /etc/init.d/gitlab</span><br><span class="line">cp lib/support/init.d/gitlab.default.example /etc/default/gitlab</span><br><span class="line">update-rc.d gitlab defaults 21</span><br><span class="line">cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>开始迁移</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle install --deployment --without development test postgres aws kerberos</span><br><span class="line">bundle clean</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake gettext:compile RAILS_ENV=production</span><br><span class="line">bundle exec rake yarn:install gitlab:assets:clean gitlab:assets:compile RAILS_ENV=production NODE_ENV=production</span><br><span class="line">bundle exec rake cache:clear RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动检查</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service gitlab start</span><br><span class="line">service nginx restart</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle exec rake gitlab:env:info RAILS_ENV=production</span><br><span class="line">bundle exec rake gitlab:check RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>补充</p>
+<ul>
+<li><p>解决git时gnutls_handshake问题</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential fakeroot dpkg-dev libcurl4-openssl-dev</span><br><span class="line">apt build-dep git</span><br><span class="line">mkdir ~/git-openssl</span><br><span class="line">cd ~/git-openssl</span><br><span class="line">apt source git</span><br><span class="line">dpkg-source -x git_2.17.1-1.dsc</span><br><span class="line">cd git-2.17.1</span><br><span class="line">vi debian/control //找到libcurl4-gnutls-dev，替换为libcurl4-openssl-dev</span><br><span class="line">dpkg-buildpackage -rfakeroot -b //如果fail on test，可以将文件debian/rules中的TEST=test注释掉</span><br><span class="line">dpkg -i ../git_2.17.1-1ubuntu0.4_amd64.deb</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决nodejs的<code>JavaScript heap out of memory</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh/tags/tutorial/">#教程</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh/migrate-redis/">迁移Redis内存数据库</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/zh/migrate-redmine-and-gitlab/';
+        this.page.identifier = 'zh/migrate-redmine-and-gitlab/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu">
+            <div class="dropdown-content">
+            
+                <a href="/migrate-redmine-and-gitlab/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh/migrate-redmine-and-gitlab/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
