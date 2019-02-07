@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: 编码 - 长斌</title>
+<title>Android Keystore 笔记 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/zh/categories/coding/index.html">
+    <meta name="description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Keystore 笔记">
+<meta property="og:url" content="https://dengcb.com/zh/android-keystore-note/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-02-07T08:56:17.188Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Android Keystore 笔记">
+<meta name="twitter:description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
 
 
 
@@ -109,20 +110,12 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5><i class="far fa-folder"></i>编码</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/zh/android-keystore-note/" itemprop="url">Android Keystore 笔记</a>
+            Android Keystore 笔记
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -146,60 +139,94 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。</p>
-        <p class="article-more-link">
-            <a href="/zh/android-keystore-note/#more">阅读更多</a>
-        </p>
+<a id="more"></a>
+<h2 id="了解keystore"><a href="#了解keystore" class="headerlink" title="了解keystore"></a>了解keystore</h2><blockquote>
+<p>数字证书包含公钥/私钥对的公钥，以及可以标识密钥所有者的一些其他元数据（例如名称和位置）。而证书所有者持有对应的私钥。</p>
+<p>当用数字证书对apk进行签名时，会将公钥证书附加到apk文件里，从而变成“指纹”，关联唯一的私钥，成为apk所有者的唯一标识，用以鉴别始作俑者和抄袭者李鬼。而所有者手里的私钥就是应用签名秘钥，从始至终，不能改变，要好好保存。</p>
+<p>keystore是一个包含至少一个私钥的二进制文件，就是证书所有者的保险柜。</p>
+</blockquote>
+<h2 id="新建keystore"><a href="#新建keystore" class="headerlink" title="新建keystore"></a>新建keystore</h2><blockquote>
+<p>Android Studio在新安装和调试时，会创建<code>$HOME/.android/debug.keystore</code>这个调试密钥库和调试证书，并设置密钥库和密钥密码。</p>
+<p>但应用商店不接受调试密钥发布的apk，为了验证你开发者的身份，必须创建一个自己的keystore：<br><code>keytool -genkey -v -keystore dengcb.keystore -keyalg RSA -keysize 2048 -validity 11029 -alias dengcb</code> </p>
+</blockquote>
+<h2 id="查看keystore"><a href="#查看keystore" class="headerlink" title="查看keystore"></a>查看keystore</h2><blockquote>
+<p>想要查看某个keystore里的信息：<br><code>keytool -list -v -keystore dengcb.keystore</code></p>
+</blockquote>
+<h2 id="修改keystore"><a href="#修改keystore" class="headerlink" title="修改keystore"></a>修改keystore</h2><blockquote>
+<p>导出某个密钥：<br><code>keytool -export -alias dengcb -keystore dengcb.keystore -file ~/dengcb.crt</code></p>
+<p>导入某个密钥：<br><code>keytool -import -alias dengcb -keystore dengcb.keystore -file ~/dengcb.crt</code></p>
+<p>删除某个密钥：<br><code>keytool -delete -alias dengcb -keystore dengcb.keystore</code></p>
+<p>查看某个密钥：<br><code>keytool -printcert -file ~/dengcb.crt</code></p>
+</blockquote>
+<h2 id="替换测试keystore"><a href="#替换测试keystore" class="headerlink" title="替换测试keystore"></a>替换测试keystore</h2><blockquote>
+<p><strong><em>为什么要替换默认debug keystore？</em></strong><br><code>因为无聊呗！</code>开玩笑的。因为很多第三方库都在服务端进行了签名验证，如果你用了debug证书联机调试，就会无法通过验证报错。为了不报错，你就得每次用发布证书打包安装测试，很麻烦不是吗？把debug证书改成和你打包证书一样的密钥不就解决问题了？但是要注意测试密钥的使用安全，不要外泄哦！</p>
+<p>默认debug.keystore的信息如下：<br>Keystore name: “debug.keystore”<br>Keystore password: “android”<br>Key alias: “androiddebugkey”<br>Key password: “android”<br>CN: “CN=Android Debug,O=Android,C=US”</p>
+<ul>
+<li>重命名dengcb.keystore为<code>debug.keystore</code></li>
+<li>修改密钥库密码：<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
+<li>修改密钥别名和密码：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code></li>
+</ul>
+<p>复制替换<code>~/.android/debug.keystore</code></p>
+</blockquote>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh/tags/tutorial/">#教程</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh/migrate-redmine-and-gitlab/">迁移Redmine和Gitlab</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh/right-way-to-open-github/" itemprop="url">GitHub的正确打开方式</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-30T05:36:30.000Z" itemprop="datePublished">4月 30 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/zh/categories/coding/">编码</a><span>></span><a class="article-category-link" href="/zh/categories/coding/github/">GitHub</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            4 分钟 读完 (约 589 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>开始用GitHub到今天，其实不到一个月。越用越能体会到，就一个字：好用。好东西不能藏着掖着，众乐乐才乐。因为时间短，认识肤浅，很多好东西还没发现，且走且分享吧！</p>
-        <p class="article-more-link">
-            <a href="/zh/right-way-to-open-github/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/zh/android-keystore-note/';
+        this.page.identifier = 'zh/android-keystore-note/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
     
-    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -229,11 +256,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/categories/coding/index.html" class="dropdown-item">
+                <a href="/android-keystore-note/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/categories/coding/index.html" class="dropdown-item">
+                <a href="/zh/android-keystore-note/" class="dropdown-item">
                     简体中文
                 </a>
             

@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>Category: coding - dengcb</title>
+<title>Android Keystore Note - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
@@ -16,17 +16,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/categories/coding/index.html">
+    <meta name="description" content="Android developers use keystore to complie, debug and release APK files. You have debug key in debugging phase, and release key in release phase. Here is some notes for keystore.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android Keystore Note">
+<meta property="og:url" content="https://dengcb.com/android-keystore-note/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="Android developers use keystore to complie, debug and release APK files. You have debug key in debugging phase, and release key in release phase. Here is some notes for keystore.">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-07T09:49:34.456Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Android Keystore Note">
+<meta name="twitter:description" content="Android developers use keystore to complie, debug and release APK files. You have debug key in debugging phase, and release key in release phase. Here is some notes for keystore.">
 
 
 
@@ -109,20 +110,12 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5><i class="far fa-folder"></i>coding</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/android-keystore-note/" itemprop="url">Android Keystore Note</a>
+            Android Keystore Note
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -146,60 +139,94 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>Android developers use keystore to complie, debug and release APK files. You have debug key in debugging phase, and release key in release phase. Here is some notes for keystore.</p>
-        <p class="article-more-link">
-            <a href="/android-keystore-note/#more">Read More</a>
-        </p>
+<a id="more"></a>
+<h2 id="about-keystore"><a href="#about-keystore" class="headerlink" title="about keystore"></a>about keystore</h2><blockquote>
+<p>A digital certificate contains the public key of a public/private key pair, as well as some other metadata identifying the owner (for example, name and location) who holds the corresponding private key.</p>
+<p>When signing your app, the signing tool attaches the certificate to your app, as fingerprint which associates the APK to your corresponding private key. This helps Android ensure the original author of the app. This key is called the signing key, <code>CAN NOT</code> be changed, so be careful to save it.</p>
+<p>Keystore is a binary file that serves as a repository of certificates and private keys.</p>
+</blockquote>
+<h2 id="create-keystore"><a href="#create-keystore" class="headerlink" title="create keystore"></a>create keystore</h2><blockquote>
+<p>Android Studio will create a new in <code>$HOME/.android/debug.keystore</code> when first packaging apk.</p>
+<p>But app store doesn’t accept the apk signed by a debug keystore. Create a new for publishing:<br><code>keytool -genkey -v -keystore dengcb.keystore -keyalg RSA -keysize 2048 -validity 11029 -alias dengcb</code> </p>
+</blockquote>
+<h2 id="detail-keystore"><a href="#detail-keystore" class="headerlink" title="detail keystore"></a>detail keystore</h2><blockquote>
+<p>view detail in keystore:<br><code>keytool -list -v -keystore dengcb.keystore</code></p>
+</blockquote>
+<h2 id="modify-keystore"><a href="#modify-keystore" class="headerlink" title="modify keystore"></a>modify keystore</h2><blockquote>
+<p>export certificate:<br><code>keytool -export -alias dengcb -keystore dengcb.keystore -file ~/dengcb.crt</code></p>
+<p>import certificate:<br><code>keytool -import -alias dengcb -keystore dengcb.keystore -file ~/dengcb.crt</code></p>
+<p>delete certificate:<br><code>keytool -delete -alias dengcb -keystore dengcb.keystore</code></p>
+<p>print certificate:<br><code>keytool -printcert -file ~/dengcb.crt</code></p>
+</blockquote>
+<h2 id="replace-debug-keystore"><a href="#replace-debug-keystore" class="headerlink" title="replace debug keystore"></a>replace debug keystore</h2><blockquote>
+<p><strong><em>Why do this？</em></strong><br><code>Boring!</code>Just kidding! Some third-party libraries verify the signed certificate of app in server side. If you use debug certificate to test app, will receive signed error, unless you sign with release certificate every time. Are you kidding me? So modifying your release certificate just like a debug certificate is a good idea. But, please keep this modified DEBUG certificate safe, don’t leak it!</p>
+<p>default debug.keystore detail:<br>Keystore name: “debug.keystore”<br>Keystore password: “android”<br>Key alias: “androiddebugkey”<br>Key password: “android”<br>CN: “CN=Android Debug,O=Android,C=US”</p>
+<ul>
+<li>rename dengcb.keystore to<code>debug.keystore</code></li>
+<li>modify keystore password:<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
+<li>modify key alias and password:<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code></li>
+</ul>
+<p>replace<code>~/.android/debug.keystore</code></p>
+</blockquote>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/migrate-redmine-and-gitlab/">Migrate Redmine and Gitlab</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/right-way-to-open-github/" itemprop="url">Right Way to Open GitHub</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-30T05:36:30.000Z" itemprop="datePublished">Apr 30 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/coding/">coding</a><span>></span><a class="article-category-link" href="/categories/coding/github/">github</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 minutes read (About 306 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>Today, I use GitHub for almost one month. The more you use, the more you get, just one word: Cool! Nice can’t be hidden, just share it! Even using too short to know more, we can share it with going.</p>
-        <p class="article-more-link">
-            <a href="/right-way-to-open-github/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/android-keystore-note/';
+        this.page.identifier = 'android-keystore-note/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
     
-    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -229,11 +256,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/categories/coding/index.html" class="dropdown-item">
+                <a href="/android-keystore-note/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/categories/coding/index.html" class="dropdown-item">
+                <a href="/zh/android-keystore-note/" class="dropdown-item">
                     简体中文
                 </a>
             
