@@ -79,6 +79,7 @@ category_map:
   MySQL: mysql
   Redis: redis
   Rails: rails
+  Android: android
 tag_map:
   随笔: anything
   教程: tutorial
