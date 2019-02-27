@@ -222,3 +222,26 @@ daemonize: true
   ```
   node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js
   ```
+  - fix Rails conflict of Redmine and Gitlab
+  `rvm use 2.5.3 --default`
+  `vi /usr/local/rvm/bin/bootup_thin`
+  ``` sh
+#!/usr/bin/env bash
+
+if
+  [[ -s "/usr/local/rvm/gems/ruby-2.6.0/environment" ]]
+then
+  source "/usr/local/rvm/gems/ruby-2.6.0/environment"
+  exec thin "$@"
+else
+  echo "ERROR: Missing RVM environment file: '/usr/local/rvm/gems/ruby-2.6.0/environment'" >&2
+  exit 1
+fi
+  ```
+    `vi /etc/init.d/thin`
+  ```
+...
+#DAEMON=/usr/local/rvm/gems/ruby-2.6.0@rails522/bin/thin
+DAEMON=/usr/local/rvm/bin/bootup_thin
+...
+  ```

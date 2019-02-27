@@ -33,6 +33,9 @@ menu:
 search:
   type: insight
 
+# Navigation bar toc settings
+toc: false
+
 # Share plugin settings.
 share:
   type: sharethis
@@ -46,6 +49,7 @@ comment:
 # Other plugins and their settings.
 plugins:
   mathjax: true
+  katex: false
   gallery: true
   clipboard: true
   google-analytics:

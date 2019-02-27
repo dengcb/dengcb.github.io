@@ -30,7 +30,7 @@ Redis is the most popular memory database system, enhance your site just like fl
   htpasswd -c /etc/phpreadmin/htpasswd admin
   ```
   - encrypt phpRedisAdmin website login
-  ```
+  ``` nginx
   location / {
     auth_basic "Dengcb Redis Admin";
     auth_basic_user_file /etc/phpreadmin/htpasswd;
@@ -39,7 +39,7 @@ Redis is the most popular memory database system, enhance your site just like fl
   ```
 
 - modify php config
-```
+``` ini
 [Session]
 session.save_handler = redis
 session.save_path = "unix:///var/run/redis/redis-server.sock?persistent=1&weight=1"

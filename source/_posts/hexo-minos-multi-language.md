@@ -39,7 +39,7 @@ This is a real plugin that changes the kernel, you should uninstall all official
 Such as build two sites and different route; or rewrite the core code. I think it's not what I want, drop it.
 
 #### Meeting Minos
-View a lot of themes, choose Minos at last, not the popular next theme. Because I want the classical website to be less colorful, less drawing, just words or ascii codes. So Minos wins. I hope more hexor can choose Minos like me.
+View a lot of themes, choose Minos at last, not the popular **NEXT** theme. Because I want the classical website to be less colorful, less drawing, just words or ascii codes. So Minos wins. I hope more hexor can choose Minos like me.
 
 When using Minos at first, it doesn't support multi-language yet. Its 1.0 version has been released more than 2 years. Author just want to update to 2.0, and plan to support i18n fully. I test this days and feedback some issues, the latest release finally achieve the full site multi-language support today (post、page、archive、category、tag、search、switcher etc.). Now I can tell you how I build site with Minos.
 
@@ -70,19 +70,21 @@ tag_map:
   "version": "1.0.0",
   "private": true,
   "hexo": {
-    "version": "3.7.1"
+    "version": "3.8.0"
   },
   "dependencies": {
-    "hexo": "^3.7.1",
+    "hexo": "^3.8.0",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.5",
     "hexo-generator-category": "^0.1.3",
     "hexo-generator-index": "^0.2.1",
     "hexo-generator-tag": "^0.2.0",
-    "hexo-renderer-ejs": "^0.3.0",
-    "hexo-renderer-marked": "^0.3.0",
+    "hexo-pagination": "^0.1.0",
+    "hexo-renderer-ejs": "^0.3.1",
+    "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-sass": "^0.3.2",
-    "hexo-server": "^0.2.0"
+    "hexo-renderer-stylus": "^0.3.3",
+    "hexo-server": "^0.3.3"
   }
 }
 ```
