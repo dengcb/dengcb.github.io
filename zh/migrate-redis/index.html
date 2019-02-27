@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<link href="/migrate-redis/" rel="alternate" hreflang="en">
+    
+
+
 <meta name="description" content="dengcb's open source code">
 
 
@@ -24,7 +28,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Redis是现在最流行的内存数据库系统，你要想让自己的应用跑得飞起，就要用它。相对其他服务，Redis算很好配置的了，简单记录，以备查用。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-24T09:06:27.118Z">
+<meta property="og:updated_time" content="2019-02-15T15:54:33.461Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迁移Redis内存数据库">
 <meta name="twitter:description" content="Redis是现在最流行的内存数据库系统，你要想让自己的应用跑得飞起，就要用它。相对其他服务，Redis算很好配置的了，简单记录，以备查用。">
@@ -132,7 +136,7 @@
         <span class="column is-narrow">
             
             
-            1 分钟 读完 (约 195 字)
+            1 分钟 读完 (约 197 字)
         </span>
         
     </div>
@@ -159,12 +163,12 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install apache2-utils</span><br><span class="line">htpasswd -c /etc/phpreadmin/htpasswd admin</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在phpRedisAdmin的web配置中加密</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">location / &#123;</span><br><span class="line">  auth_basic &quot;Dengcb Redis Admin&quot;;</span><br><span class="line">  auth_basic_user_file /etc/phpreadmin/htpasswd;</span><br><span class="line">  try_files $uri $uri/ /index.php?$args;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">  <span class="hljs-attribute">auth_basic</span> <span class="hljs-string">"Dengcb Redis Admin"</span>;</span><br><span class="line">  <span class="hljs-attribute">auth_basic_user_file</span> /etc/phpreadmin/htpasswd;</span><br><span class="line">  <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.php?<span class="hljs-variable">$args</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>修改php配置</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Session]</span><br><span class="line">session.save_handler = redis</span><br><span class="line">session.save_path = &quot;unix:///var/run/redis/redis-server.sock?persistent=1&amp;weight=1&quot;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[Session]</span></span><br><span class="line">session.save_handler = redis</span><br><span class="line">session.save_path = "unix:///var/run/redis/redis-server.sock?persistent=1&amp;weight=1"</span><br></pre></td></tr></table></figure></li>
 </ul>
 
     

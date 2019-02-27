@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
+<link href="/migrate-redmine-and-gitlab/" rel="alternate" hreflang="en">
+    
+
+
 <meta name="description" content="dengcb's open source code">
 
 
@@ -24,7 +28,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-25T07:27:02.267Z">
+<meta property="og:updated_time" content="2019-02-15T15:50:11.043Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="迁移Redmine和Gitlab">
 <meta name="twitter:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
@@ -132,7 +136,7 @@
         <span class="column is-narrow">
             
             
-            6 分钟 读完 (约 885 字)
+            4 分钟 读完 (约 561 字)
         </span>
         
     </div>
@@ -242,7 +246,12 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential fakeroot dpkg-dev libcurl4-openssl-dev</span><br><span class="line">apt build-dep git</span><br><span class="line">mkdir ~/git-openssl</span><br><span class="line">cd ~/git-openssl</span><br><span class="line">apt source git</span><br><span class="line">dpkg-source -x git_2.17.1-1.dsc</span><br><span class="line">cd git-2.17.1</span><br><span class="line">vi debian/control //找到libcurl4-gnutls-dev，替换为libcurl4-openssl-dev</span><br><span class="line">dpkg-buildpackage -rfakeroot -b //如果fail on test，可以将文件debian/rules中的TEST=test注释掉</span><br><span class="line">dpkg -i ../git_2.17.1-1ubuntu0.4_amd64.deb</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>解决nodejs的<code>JavaScript heap out of memory</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决Redmine和Gitlab不同Rails环境冲突<br><code>rvm use 2.5.3 --default</code><br><code>vi /usr/local/rvm/bin/bootup_thin</code></p>
+<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span></span><br><span class="line">  [[ -s <span class="hljs-string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span> ]]</span><br><span class="line"><span class="hljs-keyword">then</span></span><br><span class="line">  <span class="hljs-built_in">source</span> <span class="hljs-string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span></span><br><span class="line">  <span class="hljs-built_in">exec</span> thin <span class="hljs-string">"<span class="hljs-variable">$@</span>"</span></span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">  <span class="hljs-built_in">echo</span> <span class="hljs-string">"ERROR: Missing RVM environment file: '/usr/local/rvm/gems/ruby-2.6.0/environment'"</span> &gt;&amp;2</span><br><span class="line">  <span class="hljs-built_in">exit</span> 1</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br></pre></td></tr></table></figure>
+<p><code>vi /etc/init.d/thin</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">#DAEMON=/usr/local/rvm/gems/ruby-2.6.0@rails522/bin/thin</span><br><span class="line">DAEMON=/usr/local/rvm/bin/bootup_thin</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -260,7 +269,7 @@
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/zh/android-keystore-note/">Android Keystore 笔记</a>
+            <a href="/zh/android-keystore-note/">Android Keystore笔记</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+<title>Edit Hexo with VSCode - dengcb</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh/edit-hexo-with-vscode/" rel="alternate" hreflang="zh">
+    
+
+
+<meta name="description" content="dengcb's open source code">
+
+
+
+<meta name="keywords" content="dengcb,github">
+
+
+
+    <meta name="description" content="What’s your favorite editor for hexo? Powerful edit function? Amazing preview effect? Saving your code anytime? This post show you how to write your hexo with Visual Studio Code.">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Edit Hexo with VSCode">
+<meta property="og:url" content="https://dengcb.com/edit-hexo-with-vscode/index.html">
+<meta property="og:site_name" content="dengcb">
+<meta property="og:description" content="What’s your favorite editor for hexo? Powerful edit function? Amazing preview effect? Saving your code anytime? This post show you how to write your hexo with Visual Studio Code.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-02-27T17:44:16.253Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Edit Hexo with VSCode">
+<meta name="twitter:description" content="What’s your favorite editor for hexo? Powerful edit function? Amazing preview effect? Saving your code anytime? This post show you how to write your hexo with Visual Studio Code.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+
+
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt="" height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/archives">Archive</a>
+            
+            <a class="navbar-item " href="/categories">Category</a>
+            
+            <a class="navbar-item " href="/tags">Tag</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/dengcb">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Edit Hexo with VSCode
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            <time datetime="2019-02-15T06:13:54.000Z" itemprop="datePublished">Feb 15 2019</time>
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/hexo/">hexo</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 374 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>What’s your favorite editor for hexo? Powerful edit function? Amazing preview effect? Saving your code anytime? This post show you how to write your hexo with Visual Studio Code.</p>
+<a id="more"></a>
+<h2 id="What’s-VSCode"><a href="#What’s-VSCode" class="headerlink" title="What’s VSCode"></a>What’s VSCode</h2><blockquote>
+<p>VSCode is <code>Visual Studio Code</code>, belong to Microsoft. The preferred lightweight development tool for many coders, it’s hot.</p>
+<p>First, I was finding an editor for html. I think the markdown file is easy, neither compiling nor debugging. So, I tried UltraEdit and HexoEditor. The experience is terrible, I can’t satisfy completely.</p>
+<p>Installed the <code>Markdown Preview Enhanced</code> extension, customize the css and quote styles to make your Hexo preview as consistent as release. That’s very attractive.</p>
+</blockquote>
+<h2 id="Install-MPE-extension"><a href="#Install-MPE-extension" class="headerlink" title="Install MPE extension"></a>Install MPE extension</h2><blockquote>
+<p>search <code>Markdown Preview Enhanced</code> in VSCode, and install MPE</p>
+<p>Preview: <code>cmd+k v</code> </p>
+</blockquote>
+<h2 id="Import-Hexo-theme-style"><a href="#Import-Hexo-theme-style" class="headerlink" title="Import Hexo theme style"></a>Import Hexo theme style</h2><blockquote>
+<p>Open css:<code>cmd-shift-p</code>, run<code>Markdown Preview Enhanced: Customize Css</code></p>
+<p>or edit<code>~/.mume/style.less</code></p>
+<p>such as Minos theme:</p>
+</blockquote>
+<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.markdown-preview</span><span class="hljs-selector-class">.markdown-preview</span> &#123;</span><br><span class="line">  h2 &#123;</span><br><span class="line">    <span class="hljs-selector-tag">font-size</span>: 20<span class="hljs-selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">h3</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">table</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">code</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ff3860</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f5f5f5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">a</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">color</span>: black;</span><br><span class="line">    <span class="hljs-attribute">text-decoration</span>:underline</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">overflow</span>: auto;</span><br><span class="line">    <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0px</span>;</span><br><span class="line">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1px</span>,<span class="hljs-number">1px</span>;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">    <span class="hljs-attribute">background</span>: <span class="hljs-number">#f3f3f3</span>;</span><br><span class="line">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.6</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f5f5f5</span>;</span><br><span class="line">    <span class="hljs-attribute">border-left</span>: <span class="hljs-number">4px</span> solid <span class="hljs-number">#dbdbdb</span>;</span><br><span class="line">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span> <span class="hljs-number">24px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.info</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#209cee</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#def0fd</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.success</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#23d160</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#cbf6da</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.warning</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#ffdd57</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fff6d1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.danger</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#ff3860</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ffb3c2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-tag">h2</span>, <span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-tag">h4</span>, <span class="hljs-selector-tag">h5</span>, <span class="hljs-selector-tag">h6</span>, <span class="hljs-selector-tag">blockquote</span>, <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">"Ovo"</span>, <span class="hljs-string">"Georgia"</span>, <span class="hljs-string">"STZhongsong"</span>, <span class="hljs-string">"Microsoft YaHei"</span>, serif;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">code</span>, <span class="hljs-selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">"Source Code Pro"</span>, monospace, <span class="hljs-string">"Microsoft YaHei"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>edit<code>~/.mume/parser.js</code></p>
+</blockquote>
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  onWillParseMarkdown: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-comment">//quote Parser</span></span><br><span class="line">      <span class="hljs-keyword">var</span> quotePatt = <span class="hljs-regexp">/&#123;%\s*colorquote .+?\s*%&#125;\n.+?\n&#123;%\s*endcolorquote\s*%&#125;/g</span>;</span><br><span class="line">      <span class="hljs-keyword">var</span> quoteResult;</span><br><span class="line">      <span class="hljs-keyword">var</span> quoteContent;</span><br><span class="line">      <span class="hljs-keyword">while</span>((quoteResult = quotePatt.exec(markdown)) != <span class="hljs-literal">null</span>)&#123;</span><br><span class="line">        quoteContent = quoteResult[<span class="hljs-number">0</span>];</span><br><span class="line">        typePatt=<span class="hljs-regexp">/info|success|warning|danger/g</span>;</span><br><span class="line">        typeResult = typePatt.exec(quoteContent);</span><br><span class="line">        typeContent = typeResult[<span class="hljs-number">0</span>];</span><br><span class="line">        reg = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"&#123;%\\s*colorquote "</span> + typeContent + <span class="hljs-string">"\\s*%&#125;"</span>,<span class="hljs-string">"g"</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(reg,<span class="hljs-string">""</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(<span class="hljs-regexp">/&#123;%\s*endcolorquote\s*%&#125;/</span>,<span class="hljs-string">""</span>);</span><br><span class="line">        markdown = markdown.replace(quoteResult, </span><br><span class="line">          <span class="hljs-string">"&lt;blockquote class='colorquote "</span>+typeContent+<span class="hljs-string">"'&gt;"</span>+quoteContent+<span class="hljs-string">"&lt;/blockquote&gt;"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">return</span> resolve(markdown)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onDidParseMarkdown: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">html</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> resolve(html)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/android-keystore-note/">Android Keystore Note</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/edit-hexo-with-vscode/';
+        this.page.identifier = 'edit-hexo-with-vscode/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2019 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu">
+            <div class="dropdown-content">
+            
+                <a href="/edit-hexo-with-vscode/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh/edit-hexo-with-vscode/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+</footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+    
+</body>
+</html>
