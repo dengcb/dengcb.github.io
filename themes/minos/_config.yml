@@ -10,6 +10,7 @@ logo:
 
 article:
   readtime: true
+  highlight: atom-one-light
 
 search:
   type: insight

@@ -30,7 +30,7 @@ Redis是现在最流行的内存数据库系统，你要想让自己的应用跑
   htpasswd -c /etc/phpreadmin/htpasswd admin
   ```
   - 在phpRedisAdmin的web配置中加密
-  ```
+  ``` nginx
   location / {
     auth_basic "Dengcb Redis Admin";
     auth_basic_user_file /etc/phpreadmin/htpasswd;
@@ -39,7 +39,7 @@ Redis是现在最流行的内存数据库系统，你要想让自己的应用跑
   ```
 
 - 修改php配置
-```
+``` ini
 [Session]
 session.save_handler = redis
 session.save_path = "unix:///var/run/redis/redis-server.sock?persistent=1&weight=1"
