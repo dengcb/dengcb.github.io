@@ -115,7 +115,7 @@ menu:
 _post/
   hello-world.md
   zh-cn/
-    hello_world.md
+    hello-world.md
 about/
   index.md
 zh-cn/
