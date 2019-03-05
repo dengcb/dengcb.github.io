@@ -80,6 +80,7 @@ category_map:
   Redis: redis
   Rails: rails
   Android: android
+  证书: ssl
 tag_map:
   随笔: anything
   教程: tutorial
@@ -110,3 +111,8 @@ deploy:
 
 stylus:
   compress: true
+
+# sitemap
+sitemap:
+  path: sitemap.xml
+  template: ./scaffolds/sitemap_template.xml
