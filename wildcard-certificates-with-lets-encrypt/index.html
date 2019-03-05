@@ -2,13 +2,13 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>dengcb</title>
+<title>Wildcard Certificates With Let&#39;s Encrypt - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/zh/page/2/index.html" rel="alternate" hreflang="zh">
+<link href="/zh/wildcard-certificates-with-lets-encrypt/" rel="alternate" hreflang="zh">
     
 
 
@@ -20,17 +20,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/page/2/index.html">
+    <meta name="description" content="Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Le">
+<meta name="keywords" content="tutorial">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Wildcard Certificates With Let&#39;s Encrypt">
+<meta property="og:url" content="https://dengcb.com/wildcard-certificates-with-lets-encrypt/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Le">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-05T14:55:45.992Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="Wildcard Certificates With Let&#39;s Encrypt">
+<meta name="twitter:description" content="Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Le">
 
 
 
@@ -115,103 +116,121 @@
 
     <section class="section">
     <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/hexo-minos-multi-language/" itemprop="url">Hexo multi-language with Minos</a>
+            Wildcard Certificates With Let&#39;s Encrypt
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
-            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">Apr 19 2018</time>
+            <time datetime="2019-03-05T08:00:13.000Z" itemprop="datePublished">Mar 5 2019</time>
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/hexo/">hexo</a>
+            <a class="article-category-link" href="/categories/web/">web</a><span>></span><a class="article-category-link" href="/categories/web/ssl/">ssl</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            5 minutes read (About 702 words)
+            2 minutes read (About 340 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>I want to build a hexo blog with full site multi-language, search a lot and try, but no one perfect. Today it’s done, finally I can white down a tutorial for your reference.</p>
-        <p class="article-more-link">
-            <a href="/hexo-minos-multi-language/#more">Read More</a>
-        </p>
+        <p>Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Let’s Encrypt?</p>
+<a id="more"></a>
+<h2 id="What’s-Let’s-Encrypt"><a href="#What’s-Let’s-Encrypt" class="headerlink" title="What’s Let’s Encrypt"></a>What’s Let’s Encrypt</h2><blockquote>
+<p>Let’s Encrypt is a public benefit organization by the<code>Internet Security Research Group</code>(ISRG), and sponsored by many famous foundations, such as Mozilla, Linux, Cisco, etc.</p>
+<p>The purpose of Let’s Encrypt is to promote<code>HTTPS</code>to whole internet, reduce the difficulty of obtaining and deploying certificates through the<code>Automated Certificate Management Environment</code>(ACME), and realize the simple, automatic and free ssl certificate of the website.</p>
+<p>For simple and safe, the certificate is only valid for 3 months, so the client must have the ability to automatically renew, otherwise every 3 months, millions of website manual renewals will become a nightmare.</p>
+</blockquote>
+<h2 id="Why-use-acme-sh"><a href="#Why-use-acme-sh" class="headerlink" title="Why use acme.sh"></a>Why use acme.sh</h2><blockquote>
+<p>There are more than 30 clients, include the official client: certbot, I read the document, it’s very powerful and professional, the others are available for many languages and platforms. However, I don’t need the power or the function, I just hope it quick and simple.</p>
+<p>So I choose the most recommended client:<code>acme.sh</code><br>Using bash, and auto update!</p>
+</blockquote>
+<h2 id="How-use-acme-sh"><a href="#How-use-acme-sh" class="headerlink" title="How use acme.sh"></a>How use acme.sh</h2><blockquote>
+<p>install acme.sh:<code>curl https://get.acme.sh | sh</code><br>login again</p>
+</blockquote>
+<blockquote>
+<p>to auto update, get DNS API token,  for example: <a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">Tencent Cloud</a><br>record ID and Token, then run in shell:<br><code>export DP_Id=&quot;id&quot;</code><br><code>export DP_Key=&quot;token&quot;</code><br>run once, remembered by acme.sh</p>
+</blockquote>
+<blockquote>
+<p>issue cert:<code>acme.sh --issue -d dengcb.com -d *.dengcb.com --dns dns_dp</code><br>if alias mode, add:<code>--challenge-alias alias.com</code>(optional)<br>install cert:</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --installcert -d dengcb.com -d *.dengcb.com \</span><br><span class="line">         --key-file /etc/nginx/ssl/dengcb.key \</span><br><span class="line">         --fullchain-file /etc/nginx/ssl/fullchain.cer \</span><br><span class="line">         --reloadcmd &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>update cert: latest acme.sh supported auto update already</p>
+</blockquote>
+<blockquote>
+<p>auto update acme.sh:<code>acme.sh --upgrade --auto-upgrade</code></p>
+</blockquote>
+<blockquote>
+<p>error debug:<code>acme.sh --issue ..... --debug</code>(optional)</p>
+</blockquote>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/tutorial/">#tutorial</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/edit-hexo-with-vscode/">Edit Hexo with VSCode</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/hello-world/" itemprop="url">Hello, world!</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-10T12:58:02.000Z" itemprop="datePublished">Apr 10 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/other/">other</a><span>></span><a class="article-category-link" href="/categories/other/nothing/">nothing</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            a few seconds read (About 3 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>Let’s begin~</p>
-
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/wildcard-certificates-with-lets-encrypt/';
+        this.page.identifier = 'wildcard-certificates-with-lets-encrypt/';
+        
+        this.language = 'en';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
     
-    
-        
-<nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
-    <div class="pagination-previous">
-        <a href="/">Prev</a>
-    </div>
-    <div class="pagination-next is-invisible is-hidden-mobile">
-        <a href="/page/3/">Next</a>
-    </div>
-    <ul class="pagination-list is-hidden-mobile">
-        
-        <li><a class="pagination-link" href="/">1</a></li>
-        
-        <li><a class="pagination-link is-current" href="/page/2/">2</a></li>
-        
-    </ul>
-</nav>
-    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
     </div>
 </section>
     <footer class="footer">
@@ -241,11 +260,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/page/2/index.html" class="dropdown-item">
+                <a href="/wildcard-certificates-with-lets-encrypt/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/page/2/index.html" class="dropdown-item">
+                <a href="/zh/wildcard-certificates-with-lets-encrypt/" class="dropdown-item">
                     简体中文
                 </a>
             

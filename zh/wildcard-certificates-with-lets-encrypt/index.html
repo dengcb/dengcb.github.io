@@ -2,13 +2,13 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-<title>分类: 网站 - 长斌</title>
+<title>用Let&#39;s Encrypt生成泛域名证书 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/categories/web/index.html" rel="alternate" hreflang="en">
+<link href="/wildcard-certificates-with-lets-encrypt/" rel="alternate" hreflang="en">
     
 
 
@@ -20,17 +20,18 @@
 
 
 
-    <meta name="description" content="dengcb&apos;s open source code">
-<meta name="keywords" content="dengcb,github">
-<meta property="og:type" content="website">
-<meta property="og:title" content="dengcb">
-<meta property="og:url" content="https://dengcb.com/zh/categories/web/index.html">
+    <meta name="description" content="现在已经是全民HTTPS的年代，不论哪朵云都可以免费申请到ssl证书，但是泛域名（*.domain.com）证书还没有免费。本篇就教你用Let’s Encrypt来生成你的第一个免费泛域名证书。">
+<meta name="keywords" content="教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Let&#39;s Encrypt生成泛域名证书">
+<meta property="og:url" content="https://dengcb.com/zh/wildcard-certificates-with-lets-encrypt/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="dengcb&apos;s open source code">
+<meta property="og:description" content="现在已经是全民HTTPS的年代，不论哪朵云都可以免费申请到ssl证书，但是泛域名（*.domain.com）证书还没有免费。本篇就教你用Let’s Encrypt来生成你的第一个免费泛域名证书。">
 <meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-03-05T14:55:57.720Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="dengcb">
-<meta name="twitter:description" content="dengcb&apos;s open source code">
+<meta name="twitter:title" content="用Let&#39;s Encrypt生成泛域名证书">
+<meta name="twitter:description" content="现在已经是全民HTTPS的年代，不论哪朵云都可以免费申请到ssl证书，但是泛域名（*.domain.com）证书还没有免费。本篇就教你用Let’s Encrypt来生成你的第一个免费泛域名证书。">
 
 
 
@@ -113,20 +114,12 @@
     </div>
 </nav>
 
-    <section class="section section-heading">
+    <section class="section">
     <div class="container">
-        <div class="content">
-            <h5><i class="far fa-folder"></i>网站</h5>
-        </div>
-    </div>
-</section>
-<section class="section">
-    <div class="container">
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope="" itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/zh/wildcard-certificates-with-lets-encrypt/" itemprop="url">用Let&#39;s Encrypt生成泛域名证书</a>
+            用Let&#39;s Encrypt生成泛域名证书
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -150,180 +143,94 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>现在已经是全民HTTPS的年代，不论哪朵云都可以免费申请到ssl证书，但是泛域名（*.domain.com）证书还没有免费。本篇就教你用Let’s Encrypt来生成你的第一个免费泛域名证书。</p>
-        <p class="article-more-link">
-            <a href="/zh/wildcard-certificates-with-lets-encrypt/#more">阅读更多</a>
-        </p>
+<a id="more"></a>
+<h2 id="了解Let’s-Encrypt"><a href="#了解Let’s-Encrypt" class="headerlink" title="了解Let’s Encrypt"></a>了解Let’s Encrypt</h2><blockquote>
+<p>Let’s Encrypt是一个由<code>互联网安全研究小组</code>（ISRG）发起的公益组织，得到了一大票世界闻名的基金会支持，比如Mozilla、Linux、思科等。</p>
+<p>此组织诞生的目的就是推广全网络的https化，通过自动证书管理环境（ACME）降低获取和部署证书的难度，实现网站简单、自动、免费地加持ssl证书，你说香不香？</p>
+<p>为了实现简单和安全双响，该证书有效期只有3个月，所以客户端必须拥有自动续期的能力，否则每隔3个月，成千上万的网站续期会成为推广该证书的最大的障碍。</p>
+</blockquote>
+<h2 id="选择客户端"><a href="#选择客户端" class="headerlink" title="选择客户端"></a>选择客户端</h2><blockquote>
+<p>我数了下，目前就有30多个客户端。其中，官方自己有一个客户端：certbot，我研究了一下文档，很专业很强大。其他的客户端各式各样，适合各种语言和平台。但是，我并不想太强调功能的强大，我希望先上手立刻用上，简单就好。</p>
+<p>所以我选择了大多数网友推荐的：<code>acme.sh</code><br>基于bash脚本，可以自动更新，夫复何求！</p>
+</blockquote>
+<h2 id="使用acme-sh"><a href="#使用acme-sh" class="headerlink" title="使用acme.sh"></a>使用acme.sh</h2><blockquote>
+<p>安装acme.sh：<code>curl https://get.acme.sh | sh</code><br>重新登录</p>
+</blockquote>
+<blockquote>
+<p>为了以后自动更新，需要生成DNS API token，以腾讯云为例，<a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">登录入口</a><br>记录获取的ID和Token，然后输入：<br><code>export DP_Id=&quot;id&quot;</code><br><code>export DP_Key=&quot;token&quot;</code><br>输入一次，acme.sh会记住，以后不用再输</p>
+</blockquote>
+<blockquote>
+<p>颁发证书：<code>acme.sh --issue -d dengcb.com -d *.dengcb.com --dns dns_dp</code><br>如果使用alias模式，后面加上：<code>--challenge-alias alias.com</code>（可选）<br>安装证书：</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --installcert -d dengcb.com -d *.dengcb.com \</span><br><span class="line">         --key-file /etc/nginx/ssl/dengcb.key \</span><br><span class="line">         --fullchain-file /etc/nginx/ssl/fullchain.cer \</span><br><span class="line">         --reloadcmd &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>更新证书：最新版acme.sh已经支持自动更新，无需另外设置</p>
+</blockquote>
+<blockquote>
+<p>自动更新acme.sh：<code>acme.sh --upgrade --auto-upgrade</code></p>
+</blockquote>
+<blockquote>
+<p>出错调试：<code>acme.sh --issue ..... --debug</code>（可选）</p>
+</blockquote>
+
     
     </div>
     
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh/tags/tutorial/">#教程</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh/edit-hexo-with-vscode/">用VSCode来写Hexo</a>
+            
+        </span>
+    </div>
     
 </article>
 
 
+<div class="sharebox">
+    
+<div class="sharethis-inline-share-buttons"></div>
+<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
 
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh/edit-hexo-with-vscode/" itemprop="url">用VSCode来写Hexo</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2019-02-15T06:13:54.000Z" itemprop="datePublished">2月 15 2019</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/zh/categories/web/">网站</a><span>></span><a class="article-category-link" href="/zh/categories/web/hexo/">Hexo</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            4 分钟 读完 (约 557 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>你用什么工具来写自己的Hexo？使用过程中是不是发现了很多痛点，比如编辑功能太弱，预览差强人意，崩溃没有保存，等等。这篇教程教你用Visual Studio Code来写Hexo。</p>
-        <p class="article-more-link">
-            <a href="/zh/edit-hexo-with-vscode/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+</div>
 
 
 
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://dengcb.com/zh/wildcard-certificates-with-lets-encrypt/';
+        this.page.identifier = 'zh/wildcard-certificates-with-lets-encrypt/';
+        
+        this.language = 'zh';
+        
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'dengcb' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
 
+<div id="disqus_thread">
     
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh/use-iterm2-telnet-smth-bbs/" itemprop="url">Mac下使用iTerm2连接水木BBS</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-26T12:08:11.000Z" itemprop="datePublished">4月 26 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/zh/categories/web/">网站</a><span>></span><a class="article-category-link" href="/zh/categories/web/iterm/">iTerm</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 分钟 读完 (约 298 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>用macOS的时候，总感觉上BBS很费劲，有人说，用welly啊，我还真没用过。但是平时总是用iTerm2来连服务器，今天就尝试下用它来连连水木的BBS看。</p>
-        <p class="article-more-link">
-            <a href="/zh/use-iterm2-telnet-smth-bbs/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
 
-
-
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh/bring-you-to-ipfs/" itemprop="url">带你去星际</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-19T15:35:11.000Z" itemprop="datePublished">4月 19 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/zh/categories/web/">网站</a><span>></span><a class="article-category-link" href="/zh/categories/web/ipfs/">IPFS</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            11 分钟 读完 (约 1611 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。</p>
-        <p class="article-more-link">
-            <a href="/zh/bring-you-to-ipfs/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope="" itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh/hexo-minos-multi-language/" itemprop="url">用Minos搭建Hexo全站多语言站点</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            <time datetime="2018-04-19T06:37:37.000Z" itemprop="datePublished">4月 19 2018</time>
-        </span>
-        
-        <span class="column is-narrow article-category">
-            <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/zh/categories/web/">网站</a><span>></span><a class="article-category-link" href="/zh/categories/web/hexo/">Hexo</a>
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            8 分钟 读完 (约 1245 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>为了搭建一个Hexo博客，开始了寻找全站多语言之路。看了很多文章，做了很多实验，都没有完美的方案。今天终于搞定了，把教程发上来，供后来者参考。</p>
-        <p class="article-more-link">
-            <a href="/zh/hexo-minos-multi-language/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-    
     </div>
 </section>
     <footer class="footer">
@@ -353,11 +260,11 @@
         <div class="dropdown-menu has-text-left" role="menu">
             <div class="dropdown-content">
             
-                <a href="/categories/web/index.html" class="dropdown-item">
+                <a href="/wildcard-certificates-with-lets-encrypt/" class="dropdown-item">
                     English
                 </a>
             
-                <a href="/zh/categories/web/index.html" class="dropdown-item">
+                <a href="/zh/wildcard-certificates-with-lets-encrypt/" class="dropdown-item">
                     简体中文
                 </a>
             
