@@ -34,14 +34,14 @@ tags:
 > `export DP_Key="token"`
 > 输入一次，acme.sh会记住，以后不用再输
 
-> 颁发证书：`acme.sh --issue -d dengcb.com -d *.dengcb.com --dns dns_dp`
+> 颁发证书：`acme.sh --issue --force -d dengcb.com -d *.dengcb.com --dns dns_dp --dnssleep`
 > 如果使用alias模式，后面加上：`--challenge-alias alias.com`（可选）
 > 安装证书：
 
 ```
 acme.sh  --installcert -d dengcb.com -d *.dengcb.com \
          --key-file /etc/nginx/ssl/dengcb.key \
-         --fullchain-file /etc/nginx/ssl/fullchain.cer \
+         --cert-file /etc/nginx/ssl/dengcb.cer \
          --reloadcmd "service nginx force-reload"
 ```
 

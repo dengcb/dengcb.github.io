@@ -34,14 +34,14 @@ Now it is a HTTPS age, you can apply free ssl certificates with any cloud platfo
 > `export DP_Key="token"`
 > run once, remembered by acme.sh
 
-> issue cert:`acme.sh --issue -d dengcb.com -d *.dengcb.com --dns dns_dp`
+> issue cert:`acme.sh --issue --force -d dengcb.com -d *.dengcb.com --dns dns_dp --dnssleep`
 > if alias mode, add:`--challenge-alias alias.com`(optional)
 > install cert:
 
 ```
 acme.sh  --installcert -d dengcb.com -d *.dengcb.com \
          --key-file /etc/nginx/ssl/dengcb.key \
-         --fullchain-file /etc/nginx/ssl/fullchain.cer \
+         --cert-file /etc/nginx/ssl/dengcb.cer \
          --reloadcmd "service nginx force-reload"
 ```
 
