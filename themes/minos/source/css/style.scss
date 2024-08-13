@@ -1,9 +1,14 @@
-$family-serif: "Ovo", "Georgia", "STZhongsong", "Microsoft YaHei", serif;
+$family-serif: "Ovo", "Georgia", "PingFangSC-Regular", "Microsoft YaHei", serif;
 $family-mono: "Source Code Pro", monospace, "Microsoft YaHei";
 $border-color: #dbdbdb;
 
 body, button, input, select, textarea {
     font-family: $family-serif;
+}
+
+body {
+    font-size: 1.1rem;
+    line-height: 1.75;
 }
 
 
@@ -90,6 +95,10 @@ a.tag.article-tag {
                 position: absolute;
                 right: 100%;
             }
+        }
+
+        a {
+            word-break: break-word;
         }
     }
 
@@ -605,6 +614,20 @@ figure.highlight {
         font-weight: 300;
         font-family: inherit !important;
         line-height: 1.5;
+    }
+}
+
+.video-container {
+    width: 100%;
+    margin-bottom: 20px;
+    padding-top: 56.25%;
+    position: relative;
+    iframe {
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
     }
 }
 
