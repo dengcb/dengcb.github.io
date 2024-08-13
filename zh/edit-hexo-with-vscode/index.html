@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>用VSCode来写Hexo - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/edit-hexo-with-vscode/" rel="alternate" hreflang="en">
+<link href="/edit-hexo-with-vscode/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="你用什么工具来写自己的Hexo？使用过程中是不是发现了很多痛点，比如编辑功能太弱，预览差强人意，崩溃没有保存，等等。这篇教程教你用Visual Studio Code来写Hexo。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-27T17:21:44.682Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="用VSCode来写Hexo">
-<meta name="twitter:description" content="你用什么工具来写自己的Hexo？使用过程中是不是发现了很多痛点，比如编辑功能太弱，预览差强人意，崩溃没有保存，等等。这篇教程教你用Visual Studio Code来写Hexo。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             用VSCode来写Hexo
@@ -144,6 +146,7 @@
     
         <p>你用什么工具来写自己的Hexo？使用过程中是不是发现了很多痛点，比如编辑功能太弱，预览差强人意，崩溃没有保存，等等。这篇教程教你用Visual Studio Code来写Hexo。</p>
 <a id="more"></a>
+
 <h2 id="了解VSCode"><a href="#了解VSCode" class="headerlink" title="了解VSCode"></a>了解VSCode</h2><blockquote>
 <p>VSCode即Visual Studio Code，隶属微软旗下开发工具。是很多人的首选轻量级开发工具，当红炸子鸡，简直红得不要不要。</p>
 <p>一开始，我想着找一个类似html的编辑器就行。以为markdown格式的文件有啥了不起，既不编译，也不纠错。于是，尝试了UltraEdit，又发现了一款HexoEditor，结果体验很不好，至少不能让我完全满意。</p>
@@ -158,11 +161,29 @@
 <p>或者直接编辑<code>~/.mume/style.less</code></p>
 <p>下面以Minos主题为例：</p>
 </blockquote>
-<figure class="highlight css hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-selector-class">.markdown-preview</span><span class="hljs-selector-class">.markdown-preview</span> &#123;</span><br><span class="line">  h2 &#123;</span><br><span class="line">    <span class="hljs-selector-tag">font-size</span>: 20<span class="hljs-selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">h3</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">18px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">table</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">code</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">color</span>: <span class="hljs-number">#ff3860</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f5f5f5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">a</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">color</span>: black;</span><br><span class="line">    <span class="hljs-attribute">text-decoration</span>:underline</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">overflow</span>: auto;</span><br><span class="line">    <span class="hljs-attribute">margin</span>: <span class="hljs-number">20px</span> <span class="hljs-number">0px</span>;</span><br><span class="line">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">1px</span>,<span class="hljs-number">1px</span>;</span><br><span class="line">    <span class="hljs-attribute">font-size</span>: <span class="hljs-number">14px</span>;</span><br><span class="line">    <span class="hljs-attribute">background</span>: <span class="hljs-number">#f3f3f3</span>;</span><br><span class="line">    <span class="hljs-attribute">line-height</span>: <span class="hljs-number">1.6</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#f5f5f5</span>;</span><br><span class="line">    <span class="hljs-attribute">border-left</span>: <span class="hljs-number">4px</span> solid <span class="hljs-number">#dbdbdb</span>;</span><br><span class="line">    <span class="hljs-attribute">padding</span>: <span class="hljs-number">16px</span> <span class="hljs-number">24px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.info</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#209cee</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#def0fd</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.success</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#23d160</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#cbf6da</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.warning</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#ffdd57</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#fff6d1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">blockquote</span><span class="hljs-selector-class">.colorquote</span><span class="hljs-selector-class">.danger</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">border-color</span>: <span class="hljs-number">#ff3860</span>;</span><br><span class="line">    <span class="hljs-attribute">background-color</span>: <span class="hljs-number">#ffb3c2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">h1</span>, <span class="hljs-selector-tag">h2</span>, <span class="hljs-selector-tag">h3</span>, <span class="hljs-selector-tag">h4</span>, <span class="hljs-selector-tag">h5</span>, <span class="hljs-selector-tag">h6</span>, <span class="hljs-selector-tag">blockquote</span>, <span class="hljs-selector-tag">p</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">"Ovo"</span>, <span class="hljs-string">"Georgia"</span>, <span class="hljs-string">"STZhongsong"</span>, <span class="hljs-string">"Microsoft YaHei"</span>, serif;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-selector-tag">code</span>, <span class="hljs-selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">font-family</span>: <span class="hljs-string">"Source Code Pro"</span>, monospace, <span class="hljs-string">"Microsoft YaHei"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.markdown-preview</span><span class="selector-class">.markdown-preview</span> &#123;</span><br><span class="line">  h2 &#123;</span><br><span class="line">    <span class="selector-tag">font-size</span>: 20<span class="selector-tag">px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">h3</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">18px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">table</span> &#123;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">code</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: <span class="number">#ff3860</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f5f5f5</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">a</span> &#123;</span><br><span class="line">    <span class="attribute">color</span>: black;</span><br><span class="line">    <span class="attribute">text-decoration</span>:underline</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="attribute">overflow</span>: auto;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">20px</span> <span class="number">0px</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">1px</span>,<span class="number">1px</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: <span class="number">14px</span>;</span><br><span class="line">    <span class="attribute">background</span>: <span class="number">#f3f3f3</span>;</span><br><span class="line">    <span class="attribute">line-height</span>: <span class="number">1.6</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">blockquote</span> &#123;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#f5f5f5</span>;</span><br><span class="line">    <span class="attribute">border-left</span>: <span class="number">4px</span> solid <span class="number">#dbdbdb</span>;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">16px</span> <span class="number">24px</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">blockquote</span><span class="selector-class">.colorquote</span><span class="selector-class">.info</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#209cee</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#def0fd</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">blockquote</span><span class="selector-class">.colorquote</span><span class="selector-class">.success</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#23d160</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#cbf6da</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">blockquote</span><span class="selector-class">.colorquote</span><span class="selector-class">.warning</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#ffdd57</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff6d1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">blockquote</span><span class="selector-class">.colorquote</span><span class="selector-class">.danger</span> &#123;</span><br><span class="line">    <span class="attribute">border-color</span>: <span class="number">#ff3860</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#ffb3c2</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">h1</span>, <span class="selector-tag">h2</span>, <span class="selector-tag">h3</span>, <span class="selector-tag">h4</span>, <span class="selector-tag">h5</span>, <span class="selector-tag">h6</span>, <span class="selector-tag">blockquote</span>, <span class="selector-tag">p</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">"Ovo"</span>, <span class="string">"Georgia"</span>, <span class="string">"STZhongsong"</span>, <span class="string">"Microsoft YaHei"</span>, serif;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">code</span>, <span class="selector-tag">pre</span> &#123;</span><br><span class="line">    <span class="attribute">font-family</span>: <span class="string">"Source Code Pro"</span>, monospace, <span class="string">"Microsoft YaHei"</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>编辑<code>~/.mume/parser.js</code></p>
 </blockquote>
-<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  onWillParseMarkdown: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-comment">//quote Parser</span></span><br><span class="line">      <span class="hljs-keyword">var</span> quotePatt = <span class="hljs-regexp">/&#123;%\s*colorquote .+?\s*%&#125;\n.+?\n&#123;%\s*endcolorquote\s*%&#125;/g</span>;</span><br><span class="line">      <span class="hljs-keyword">var</span> quoteResult;</span><br><span class="line">      <span class="hljs-keyword">var</span> quoteContent;</span><br><span class="line">      <span class="hljs-keyword">while</span>((quoteResult = quotePatt.exec(markdown)) != <span class="hljs-literal">null</span>)&#123;</span><br><span class="line">        quoteContent = quoteResult[<span class="hljs-number">0</span>];</span><br><span class="line">        typePatt=<span class="hljs-regexp">/info|success|warning|danger/g</span>;</span><br><span class="line">        typeResult = typePatt.exec(quoteContent);</span><br><span class="line">        typeContent = typeResult[<span class="hljs-number">0</span>];</span><br><span class="line">        reg = <span class="hljs-keyword">new</span> <span class="hljs-built_in">RegExp</span>(<span class="hljs-string">"&#123;%\\s*colorquote "</span> + typeContent + <span class="hljs-string">"\\s*%&#125;"</span>,<span class="hljs-string">"g"</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(reg,<span class="hljs-string">""</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(<span class="hljs-regexp">/&#123;%\s*endcolorquote\s*%&#125;/</span>,<span class="hljs-string">""</span>);</span><br><span class="line">        markdown = markdown.replace(quoteResult, </span><br><span class="line">          <span class="hljs-string">"&lt;blockquote class='colorquote "</span>+typeContent+<span class="hljs-string">"'&gt;"</span>+quoteContent+<span class="hljs-string">"&lt;/blockquote&gt;"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="hljs-keyword">return</span> resolve(markdown)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onDidParseMarkdown: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">html</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> resolve(html)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  onWillParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">markdown</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="comment">//quote Parser</span></span><br><span class="line">      <span class="keyword">var</span> quotePatt = <span class="regexp">/&#123;%\s*colorquote .+?\s*%&#125;\n.+?\n&#123;%\s*endcolorquote\s*%&#125;/g</span>;</span><br><span class="line">      <span class="keyword">var</span> quoteResult;</span><br><span class="line">      <span class="keyword">var</span> quoteContent;</span><br><span class="line">      <span class="keyword">while</span>((quoteResult = quotePatt.exec(markdown)) != <span class="literal">null</span>)&#123;</span><br><span class="line">        quoteContent = quoteResult[<span class="number">0</span>];</span><br><span class="line">        typePatt=<span class="regexp">/info|success|warning|danger/g</span>;</span><br><span class="line">        typeResult = typePatt.exec(quoteContent);</span><br><span class="line">        typeContent = typeResult[<span class="number">0</span>];</span><br><span class="line">        reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"&#123;%\\s*colorquote "</span> + typeContent + <span class="string">"\\s*%&#125;"</span>,<span class="string">"g"</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(reg,<span class="string">""</span>);</span><br><span class="line">        quoteContent = quoteContent.replace(<span class="regexp">/&#123;%\s*endcolorquote\s*%&#125;/</span>,<span class="string">""</span>);</span><br><span class="line">        markdown = markdown.replace(quoteResult, </span><br><span class="line">          <span class="string">"&lt;blockquote class='colorquote "</span>+typeContent+<span class="string">"'&gt;"</span>+quoteContent+<span class="string">"&lt;/blockquote&gt;"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> resolve(markdown)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  onDidParseMarkdown: <span class="function"><span class="keyword">function</span>(<span class="params">html</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> resolve(html)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -192,7 +213,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -229,8 +250,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -302,9 +324,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -338,7 +372,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

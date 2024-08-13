@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>迁移Redis内存数据库 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/migrate-redis/" rel="alternate" hreflang="en">
+<link href="/migrate-redis/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Redis是现在最流行的内存数据库系统，你要想让自己的应用跑得飞起，就要用它。相对其他服务，Redis算很好配置的了，简单记录，以备查用。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-15T15:54:33.461Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="迁移Redis内存数据库">
-<meta name="twitter:description" content="Redis是现在最流行的内存数据库系统，你要想让自己的应用跑得飞起，就要用它。相对其他服务，Redis算很好配置的了，简单记录，以备查用。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             迁移Redis内存数据库
@@ -144,6 +146,7 @@
     
         <p>Redis是现在最流行的内存数据库系统，你要想让自己的应用跑得飞起，就要用它。相对其他服务，Redis算很好配置的了，简单记录，以备查用。</p>
 <a id="more"></a>
+
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
 <li><p>在新服务器安装Redis<br><code>apt install redis-server php-redis</code></p>
 </li>
@@ -159,18 +162,33 @@
 </li>
 <li><p>修改Nginx配置</p>
 <ul>
-<li><p>安装apache2的utils，并生成htpasswd</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install apache2-utils</span><br><span class="line">htpasswd -c /etc/phpreadmin/htpasswd admin</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>在phpRedisAdmin的web配置中加密</p>
-<figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">  <span class="hljs-attribute">auth_basic</span> <span class="hljs-string">"Dengcb Redis Admin"</span>;</span><br><span class="line">  <span class="hljs-attribute">auth_basic_user_file</span> /etc/phpreadmin/htpasswd;</span><br><span class="line">  <span class="hljs-attribute">try_files</span> <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.php?<span class="hljs-variable">$args</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>安装apache2的utils，并生成htpasswd<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install apache2-utils</span><br><span class="line">htpasswd -c &#x2F;etc&#x2F;phpreadmin&#x2F;htpasswd admin</span><br></pre></td></tr></table></figure></li>
+<li>在phpRedisAdmin的web配置中加密<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">location</span> / &#123;</span><br><span class="line">  <span class="attribute">auth_basic</span> <span class="string">"Dengcb Redis Admin"</span>;</span><br><span class="line">  <span class="attribute">auth_basic_user_file</span> /etc/phpreadmin/htpasswd;</span><br><span class="line">  <span class="attribute">try_files</span> <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.php?<span class="variable">$args</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>修改php配置</p>
-<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-section">[Session]</span></span><br><span class="line">session.save_handler = redis</span><br><span class="line">session.save_path = "unix:///var/run/redis/redis-server.sock?persistent=1&amp;weight=1"</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Session]</span></span><br><span class="line"><span class="attr">session.save_handler</span> = redis</span><br><span class="line"><span class="attr">session.save_path</span> = <span class="string">"unix:///var/run/redis/redis-server.sock?persistent=1&amp;weight=1"</span></span><br></pre></td></tr></table></figure></li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -200,7 +218,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -237,8 +255,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -310,9 +329,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -346,7 +377,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

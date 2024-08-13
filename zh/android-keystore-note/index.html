@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>Android Keystore笔记 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/android-keystore-note/" rel="alternate" hreflang="en">
+<link href="/android-keystore-note/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-15T06:26:05.674Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Keystore笔记">
-<meta name="twitter:description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             Android Keystore笔记
@@ -144,6 +146,7 @@
     
         <p>Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。</p>
 <a id="more"></a>
+
 <h2 id="了解keystore"><a href="#了解keystore" class="headerlink" title="了解keystore"></a>了解keystore</h2><blockquote>
 <p>数字证书包含公钥/私钥对的公钥，以及可以标识密钥所有者的一些其他元数据（例如名称和位置）。而证书所有者持有对应的私钥。</p>
 <p>当用数字证书对apk进行签名时，会将公钥证书附加到apk文件里，从而变成“指纹”，关联唯一的私钥，成为apk所有者的唯一标识，用以鉴别始作俑者和抄袭者李鬼。而所有者手里的私钥就是应用签名秘钥，从始至终，不能改变，要好好保存。</p>
@@ -167,12 +170,34 @@
 <p>默认debug.keystore的信息如下：<br>Keystore name: “debug.keystore”<br>Keystore password: “android”<br>Key alias: “androiddebugkey”<br>Key password: “android”<br>CN: “CN=Android Debug,O=Android,C=US”</p>
 <ul>
 <li>重命名dengcb.keystore为<code>debug.keystore</code></li>
-<li>修改密钥库密码：<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
-<li>修改密钥别名和密码：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code></li>
 </ul>
+</blockquote>
+<ul>
+<li>修改密钥库密码：<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
+<li>修改密钥别名和密码：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code><blockquote>
 <p>复制替换<code>~/.android/debug.keystore</code></p>
 </blockquote>
-
+</li>
+</ul>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -202,7 +227,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -239,8 +264,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -312,9 +338,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -348,7 +386,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

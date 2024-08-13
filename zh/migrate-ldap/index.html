@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>迁移LDAP服务 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/migrate-ldap/" rel="alternate" hreflang="en">
+<link href="/migrate-ldap/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-19T15:31:01.592Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="迁移LDAP服务">
-<meta name="twitter:description" content="LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             迁移LDAP服务
@@ -144,10 +146,11 @@
     
         <p>LDAP是一个树状信息查询系统，主要用于部门人员的统一管理。通常查询次数远大于修改次数，系统稳定了很少去动它。所以迁移一次都要搔头挠腮，记录此文以备用。</p>
 <a id="more"></a>
+
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><ul>
 <li><p>在新服务器安装OPENLDAP<br><code>apt install slapd ldap-utils php-ldap phpldapadmin</code></p>
 </li>
-<li><p>在旧服务器查询Suffix<br><code>slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix&quot;</code></p>
+<li><p>在旧服务器查询Suffix<br><code>slapcat -b cn=config | grep "^dn: olcDatabase=\|^olcSuffix"</code></p>
 </li>
 </ul>
 <h2 id="备份"><a href="#备份" class="headerlink" title="备份"></a>备份</h2><ul>
@@ -158,17 +161,36 @@
 </ul>
 <h2 id="迁移"><a href="#迁移" class="headerlink" title="迁移"></a>迁移</h2><ul>
 <li><p>恢复config</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/ldap</span><br><span class="line">cp -a slapd.d slapd.d.bak</span><br><span class="line">rm -rf slapd.d/*</span><br><span class="line">slapadd -F slapd.d -b cn=config -l config.ldif</span><br><span class="line">chown -R openldap.openldap slapd.d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd &#x2F;etc&#x2F;ldap</span><br><span class="line">cp -a slapd.d slapd.d.bak</span><br><span class="line">rm -rf slapd.d&#x2F;*</span><br><span class="line">slapadd -F slapd.d -b cn&#x3D;config -l config.ldif</span><br><span class="line">chown -R openldap.openldap slapd.d</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>恢复database</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slapcat -b cn=config | grep &quot;^dn: olcDatabase=\|^olcSuffix\|^olcDbDirectory&quot;</span><br><span class="line">cd /var/lib</span><br><span class="line">cp -a ldap ldap.bak</span><br><span class="line">rm -f ldap/*</span><br><span class="line">cd /etc/ldap</span><br><span class="line">slapadd -F slapd.d -b dc=dengcb,dc=com -l dengcb.ldif</span><br><span class="line">chown openldap.openldap /var/lib/ldap/*</span><br><span class="line">/etc/init.d/slapd restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">slapcat -b cn&#x3D;config | grep &quot;^dn: olcDatabase&#x3D;\|^olcSuffix\|^olcDbDirectory&quot;</span><br><span class="line">cd &#x2F;var&#x2F;lib</span><br><span class="line">cp -a ldap ldap.bak</span><br><span class="line">rm -f ldap&#x2F;*</span><br><span class="line">cd &#x2F;etc&#x2F;ldap</span><br><span class="line">slapadd -F slapd.d -b dc&#x3D;dengcb,dc&#x3D;com -l dengcb.ldif</span><br><span class="line">chown openldap.openldap &#x2F;var&#x2F;lib&#x2F;ldap&#x2F;*</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;slapd restart</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><ul>
 <li>如果遇到和php7兼容问题，请<a href="https://github.com/breisig/phpLDAPadmin" target="_blank" rel="noopener">下载修改过的包</a><br>替换掉<code>/usr/share/phpldapadmin</code>即可</li>
 <li>修改配置文件<br><code>vi /usr/share/phpldapadmin/config/config.php</code></li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -198,7 +220,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -235,8 +257,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -308,9 +331,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -344,7 +379,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

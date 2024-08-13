@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>Migrate MySQL server - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/zh/migrate-mysql/" rel="alternate" hreflang="zh">
+<link href="/zh/migrate-mysql/" rel="alternate" hreflang="zh" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-22T10:43:00.216Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.182Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Migrate MySQL server">
-<meta name="twitter:description" content="MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archive</a>
+            <a class="navbar-item "
+               href="/archives">Archive</a>
             
-            <a class="navbar-item " href="/categories">Category</a>
+            <a class="navbar-item "
+               href="/categories">Category</a>
             
-            <a class="navbar-item " href="/tags">Tag</a>
+            <a class="navbar-item "
+               href="/tags">Tag</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             Migrate MySQL server
@@ -144,6 +146,7 @@
     
         <p>MySQL is the most popular open source database system, used by everyone, and is already standard. Record the migration of one database here for search and share.</p>
 <a id="more"></a>
+
 <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><ul>
 <li><p>install MySQL in new server<br><code>apt install mysql-server-5.7 php7.2-mysql</code></p>
 </li>
@@ -158,18 +161,37 @@
 <h2 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h2><ul>
 <li>modify MySQL config<br><code>vi /etc/mysql/mysql.conf.d/mysql.cnf</code></li>
 <li>modify phpmyadmin config<br><code>https://db.yourdomain.com/setup</code><br>save as<br><code>/usr/share/phpmyadmin/config.inc.php</code></li>
-<li>modify root password<br>MySQL 5.7 root has no password initially<br><code>set password for &#39;root&#39;@&#39;localhost&#39; = password(&#39;123&#39;);</code></li>
-<li>login with phpmyadmin<br>if failed with <code>Access denied for user &#39;root&#39;@&#39;localhost&#39;</code><br>change root login method<br><code>update mysql.user set plugin = &#39;mysql_native_password&#39; where user = &#39;root&#39;;</code></li>
+<li>modify root password<br>MySQL 5.7 root has no password initially<br><code>set password for 'root'@'localhost' = password('123');</code></li>
+<li>login with phpmyadmin<br>if failed with <code>Access denied for user 'root'@'localhost'</code><br>change root login method<br><code>update mysql.user set plugin = 'mysql_native_password' where user = 'root';</code></li>
 <li>flush every time changed<br><code>flush privileges;</code></li>
 </ul>
 <h2 id="Backup"><a href="#Backup" class="headerlink" title="Backup"></a>Backup</h2><ul>
-<li>backup database<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p mydb | bzip2 &gt; /opt/bak/db_mydb_`date +%y_%m_%d`.bz2</span><br></pre></td></tr></table></figure>
+<li>backup database<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqldump -uroot -p mydb | bzip2 &gt; &#x2F;opt&#x2F;bak&#x2F;db_mydb_&#96;date +%y_%m_%d&#96;.bz2</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="Migrate"><a href="#Migrate" class="headerlink" title="Migrate"></a>Migrate</h2><ul>
-<li>restore database<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bzip2 -d db_mydb.bz2</span><br><span class="line">mysql -uroot -p</span><br><span class="line">use mydb</span><br><span class="line">source /opt/bak/db_mydb</span><br></pre></td></tr></table></figure></li>
+<li>restore database<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">bzip2 -d db_mydb.bz2</span><br><span class="line">mysql -uroot -p</span><br><span class="line">use mydb</span><br><span class="line">source &#x2F;opt&#x2F;bak&#x2F;db_mydb</span><br></pre></td></tr></table></figure></li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -199,7 +221,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -236,8 +258,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -309,9 +332,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -345,7 +380,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

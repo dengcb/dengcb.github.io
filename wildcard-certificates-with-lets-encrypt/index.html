@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>Wildcard Certificates With Let&#39;s Encrypt - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/zh/wildcard-certificates-with-lets-encrypt/" rel="alternate" hreflang="zh">
+<link href="/zh/wildcard-certificates-with-lets-encrypt/" rel="alternate" hreflang="zh" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Le">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T14:55:45.992Z">
+<meta property="og:updated_time" content="2024-08-11T20:24:44.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Wildcard Certificates With Let&#39;s Encrypt">
-<meta name="twitter:description" content="Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Le">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archive</a>
+            <a class="navbar-item "
+               href="/archives">Archive</a>
             
-            <a class="navbar-item " href="/categories">Category</a>
+            <a class="navbar-item "
+               href="/categories">Category</a>
             
-            <a class="navbar-item " href="/tags">Tag</a>
+            <a class="navbar-item "
+               href="/tags">Tag</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             Wildcard Certificates With Let&#39;s Encrypt
@@ -136,7 +138,7 @@
         <span class="column is-narrow">
             
             
-            2 minutes read (About 340 words)
+            2 minutes read (About 342 words)
         </span>
         
     </div>
@@ -144,6 +146,7 @@
     
         <p>Now it is a HTTPS age, you can apply free ssl certificates with any cloud platform, but wildcard (*.domain.com) certificate is not free. So how to generate your first free wildcard certificate with Let’s Encrypt?</p>
 <a id="more"></a>
+
 <h2 id="What’s-Let’s-Encrypt"><a href="#What’s-Let’s-Encrypt" class="headerlink" title="What’s Let’s Encrypt"></a>What’s Let’s Encrypt</h2><blockquote>
 <p>Let’s Encrypt is a public benefit organization by the<code>Internet Security Research Group</code>(ISRG), and sponsored by many famous foundations, such as Mozilla, Linux, Cisco, etc.</p>
 <p>The purpose of Let’s Encrypt is to promote<code>HTTPS</code>to whole internet, reduce the difficulty of obtaining and deploying certificates through the<code>Automated Certificate Management Environment</code>(ACME), and realize the simple, automatic and free ssl certificate of the website.</p>
@@ -157,12 +160,13 @@
 <p>install acme.sh:<code>curl https://get.acme.sh | sh</code><br>login again</p>
 </blockquote>
 <blockquote>
-<p>to auto update, get DNS API token,  for example: <a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">Tencent Cloud</a><br>record ID and Token, then run in shell:<br><code>export DP_Id=&quot;id&quot;</code><br><code>export DP_Key=&quot;token&quot;</code><br>run once, remembered by acme.sh</p>
+<p>to auto update, get DNS API token,  for example: <a href="https://www.dnspod.cn/console/user/security" target="_blank" rel="noopener">Tencent Cloud</a><br>record ID and Token, then run in shell:<br><code>export DP_Id="id"</code><br><code>export DP_Key="token"</code><br>run once, remembered by acme.sh</p>
 </blockquote>
 <blockquote>
-<p>issue cert:<code>acme.sh --issue -d dengcb.com -d *.dengcb.com --dns dns_dp</code><br>if alias mode, add:<code>--challenge-alias alias.com</code>(optional)<br>install cert:</p>
+<p>issue cert:<code>acme.sh --issue --force -d dengcb.com -d *.dengcb.com --dns dns_dp --dnssleep</code><br>if alias mode, add:<code>--challenge-alias alias.com</code>(optional)<br>install cert:</p>
 </blockquote>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --installcert -d dengcb.com -d *.dengcb.com \</span><br><span class="line">         --key-file /etc/nginx/ssl/dengcb.key \</span><br><span class="line">         --fullchain-file /etc/nginx/ssl/fullchain.cer \</span><br><span class="line">         --reloadcmd &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">acme.sh  --installcert -d dengcb.com -d *.dengcb.com \</span><br><span class="line">         --key-file &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;dengcb.key \</span><br><span class="line">         --cert-file &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;dengcb.cer \</span><br><span class="line">         --reloadcmd &quot;service nginx force-reload&quot;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>update cert: latest acme.sh supported auto update already</p>
 </blockquote>
@@ -172,7 +176,25 @@
 <blockquote>
 <p>error debug:<code>acme.sh --issue ..... --debug</code>(optional)</p>
 </blockquote>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -200,7 +222,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -237,8 +259,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -310,9 +333,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -346,7 +381,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

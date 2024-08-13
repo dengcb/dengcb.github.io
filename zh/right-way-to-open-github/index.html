@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>GitHub的正确打开方式 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/right-way-to-open-github/" rel="alternate" hreflang="en">
+<link href="/right-way-to-open-github/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="开始用GitHub到今天，其实不到一个月。越用越能体会到，就一个字：好用。好东西不能藏着掖着，众乐乐才乐。因为时间短，认识肤浅，很多好东西还没发现，且走且分享吧！">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-15T08:42:22.920Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GitHub的正确打开方式">
-<meta name="twitter:description" content="开始用GitHub到今天，其实不到一个月。越用越能体会到，就一个字：好用。好东西不能藏着掖着，众乐乐才乐。因为时间短，认识肤浅，很多好东西还没发现，且走且分享吧！">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             GitHub的正确打开方式
@@ -144,6 +146,7 @@
     
         <p>开始用GitHub到今天，其实不到一个月。越用越能体会到，就一个字：好用。好东西不能藏着掖着，众乐乐才乐。因为时间短，认识肤浅，很多好东西还没发现，且走且分享吧！</p>
 <a id="more"></a>
+
 <h2 id="GitHub"><a href="#GitHub" class="headerlink" title="GitHub"></a>GitHub</h2><blockquote>
 <p>Git是 <a href="https://zh.wikipedia.org/wiki/%E6%9E%97%E7%BA%B3%E6%96%AF%C2%B7%E6%89%98%E7%93%A6%E5%85%B9" target="_blank" rel="noopener">Linus</a>（你牛死）老人家的业余作品。2005年，当商业版本管理工具BitKeeper免费版到期时，堂堂Linux开发团队怎能付费呢，于是大神就自己写了一个，直接把版本管理工具带入现代化。</p>
 <p>Git很高端大气，一般人学不会，比如我，现在也只会几个简单命令，一直把Git当SVN用。生逢其时，社区的力量爆发，Ruby社区在酒吧里开始策划，GitHub诞生了，2008年到现在，十年，一统江湖。</p>
@@ -166,7 +169,25 @@
 <h2 id="粉、追、赞和分身"><a href="#粉、追、赞和分身" class="headerlink" title="粉、追、赞和分身"></a>粉、追、赞和分身</h2><blockquote>
 <p>粉：喜欢一个人，跟踪他，注意他的一举一动<br>追：喜欢一个物，订阅它，收听它的任何变化<br>赞：表扬一个物，鼓励它，但是不听它的消息<br>分身：克隆羊一只，可以修改，可以pull request给作者</p>
 </blockquote>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -196,7 +217,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -233,8 +254,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -306,9 +328,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -342,7 +376,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

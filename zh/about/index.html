@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>关于我 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/about/index.html" rel="alternate" hreflang="en">
+<link href="/about/index.html" rel="alternate" hreflang="en" />
     
 
 
@@ -20,24 +20,22 @@
 
 
 
-    <meta name="description" content="我是谁 码农 分享者 创业狗  我会啥 安卓开发 微信小程序 共识算法  我做啥 分享经济 移动互联 智能电车">
+    <meta name="description" content="我是谁 码农 分享者 创业狗  我会啥 安卓开发 微信小程序 共识算法  我做啥 分享经济 移动互联 智能电车           document.querySelectorAll(&amp;apos;.github-emoji&amp;apos;)           .forEach(el &#x3D;&amp;gt; {             if (!el.dataset.src) { return; }             const i">
 <meta name="keywords" content="dengcb,github">
 <meta property="og:type" content="website">
 <meta property="og:title" content="关于我">
 <meta property="og:url" content="https://dengcb.com/zh/about/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="我是谁 码农 分享者 创业狗  我会啥 安卓开发 微信小程序 共识算法  我做啥 分享经济 移动互联 智能电车">
+<meta property="og:description" content="我是谁 码农 分享者 创业狗  我会啥 安卓开发 微信小程序 共识算法  我做啥 分享经济 移动互联 智能电车           document.querySelectorAll(&amp;apos;.github-emoji&amp;apos;)           .forEach(el &#x3D;&amp;gt; {             if (!el.dataset.src) { return; }             const i">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-18T08:34:34.520Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.185Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="我是谁 码农 分享者 创业狗  我会啥 安卓开发 微信小程序 共识算法  我做啥 分享经济 移动互联 智能电车">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item is-active" href="/zh/about">关于</a>
+            <a class="navbar-item is-active"
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             关于我
@@ -140,7 +142,25 @@
 <li><a href="https://www.artec.com" target="_blank" rel="noopener">移动互联</a></li>
 <li><a href="https://www.ecarhome.com" target="_blank" rel="noopener">智能电车</a></li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -152,8 +172,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -225,9 +246,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -261,7 +294,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>带你去星际 - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/bring-you-to-ipfs/" rel="alternate" hreflang="en">
+<link href="/bring-you-to-ipfs/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-01-18T07:32:05.102Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="带你去星际">
-<meta name="twitter:description" content="这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             带你去星际
@@ -144,11 +146,15 @@
     
         <p>这年头，不搞点云计算分布式大数据区块链，就没法和人正常交流了。在上一篇，实现了Hexo的全站双语，兴奋之余，不妨再进一步，让你飞，带你去星际。</p>
 <a id="more"></a>
-<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote class="colorquote warning">这一章，在英文页面里是不存在的</blockquote>
+
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote class="colorquote warning"><p>这一章，在英文页面里是不存在的</p>
+</blockquote>
+
 <p>任何去中心化的东东，都是要反对要消灭的，所以对个人而言，首先需要具备<code>科学上网</code>的能力。如果连这个基础都不具备，下面的内容就不需要再看了，星际系统网站已被墙，你是访问不了的。</p>
 <p><del>注：本站不提供科学上网教程，也是为了你不用科学上网就能访问本站，见谅！</del></p>
 <h2 id="何为星际"><a href="#何为星际" class="headerlink" title="何为星际"></a>何为星际</h2><blockquote><p>星际文件系统（InterPlanetary FileSystem），简称星际。突然间，一口霸气涌上心头，这已经把未来第一次接触后的宇宙合作考虑进去了。的确，咱地球有这么多好片，怎能光顾着自己享受呢？就是不知量子纠缠通信什么时候普及，否则两颗星球之间共享个片，浩叹会耗费多少光年。</p>
 <footer><strong>长斌</strong><cite><a href="https://dengcb.github.io" target="_blank" rel="noopener">欢迎访问我的GitHub主页</a></cite></footer></blockquote>
+
 <p>星际使用内容寻址代替域名寻址，但是后面章节可以看见，要用传统方式访问星际系统里的网站文件，还是离不开域名配置。而去获取内容哈希得到的地址，也要访问星际节点服务器。某种意义上，去中心化文件存储的起点，还是离不开中心化的服务器。</p>
 <p>而分布式的数据存储，必然造成浪费。有些持续升级的文件，之前存储的内容不再有效，使用pin后却永久保留在星际内部，无法剔除。甚至连文件的主人都没有保留之前的内容地址，死文件成了游荡在星际系统里的孤魂野鬼。</p>
 <h2 id="安装星际"><a href="#安装星际" class="headerlink" title="安装星际"></a>安装星际</h2><ul>
@@ -169,13 +175,14 @@
 <ul>
 <li><p>创建星际节点</p>
 <ul>
-<li>输入命令 <code>ipfs init</code>，初始化会在用户目录下生成 <code>.ipfs</code> 目录和配置文件</li>
-<li>把生成的 <code>peer identity</code> 拷贝留用，或者在 <code>~/.ipfs/config</code> 里可见</li>
+<li><p>输入命令 <code>ipfs init</code>，初始化会在用户目录下生成 <code>.ipfs</code> 目录和配置文件</p>
+</li>
+<li><p>把生成的 <code>peer identity</code> 拷贝留用，或者在 <code>~/.ipfs/config</code> 里可见</p>
+</li>
 <li><p>修改配置，选择合适自己的存储空间容量 <code>vi ~/.ipfs/config</code></p>
-<pre><code>&quot;Datastore&quot;: {
-  &quot;StorageMax&quot;: &quot;6GB&quot;
-}
-</code></pre></li>
+<pre><code>"Datastore": {
+  "StorageMax": "6GB"
+}</code></pre></li>
 </ul>
 </li>
 </ul>
@@ -197,8 +204,10 @@
 <ul>
 <li><p>发布至星际</p>
 <ul>
-<li>输入命令 <code>ipfs add -r public</code> 将public目录发布至星际</li>
-<li>将public目录生成的哈希拷贝留用</li>
+<li><p>输入命令 <code>ipfs add -r public</code> 将public目录发布至星际</p>
+</li>
+<li><p>将public目录生成的哈希拷贝留用</p>
+</li>
 <li><p>持久保存 <code>ipfs pin add -r QmUmVuqD8RdLjeuqKZC8dAaKkcRedPsGtDFbwPyKrR278K</code></p>
 <blockquote>
 <p>added <strong><em>QmUmVuqD8RdLjeuqKZC8dAaKkcRedPsGtDFbwPyKrR278K</em></strong> public</p>
@@ -269,13 +278,9 @@
 <li><code>apt install nginx-full</code></li>
 </ul>
 </li>
-<li><p>配置Nginx</p>
-<ul>
-<li><p><code>vi /etc/nginx/sites-available/example_com</code></p>
-<figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">upstream</span> ipfs-server &#123;</span><br><span class="line">    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">map</span> <span class="hljs-variable">$http_upgrade</span> <span class="hljs-variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">default</span> upgrade;</span><br><span class="line">    ''      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">server</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;</span><br><span class="line">    <span class="hljs-attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-NginX-Proxy <span class="hljs-literal">true</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_pass</span> http://ipfs-server/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行 <code>nsite -e</code> <code>service nginx reload</code></p>
-</li>
+<li>配置Nginx<ul>
+<li><code>vi /etc/nginx/sites-available/example_com</code><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ipfs-server &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="attribute">default</span> upgrade;</span><br><span class="line">    ''      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-NginX-Proxy <span class="literal">true</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://ipfs-server/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>运行 <code>nsite -e</code> <code>service nginx reload</code></li>
 </ul>
 </li>
 </ul>
@@ -283,7 +288,25 @@
 <p>实际使用效果，和想象中有点差别。第一次连接会花很长时间，经常出现Timeout，但连接成功一次后就飞快了。这是为什么呢？IPFS官方承认，这是他们IPNS服务不完善造成的。前面，我们把ipfs用代名转成ipns，是为了文件升级时，不用再次修改DNS。</p>
 <p>然而，ipns寻址需要非常耗时，一般都超过20秒。这和ipfs寻址几乎秒开，形成鲜明对比。<a href="https://ipfs.io" target="_blank" rel="noopener">IPFS官方网站</a> 因为内容固定，首页地址基本不变，用的是ipfs寻址，所以打开飞快。</p>
 <p>所以，如果星际系统不能改善IPNS寻址性能，第一次打开网页会遇到超时，谁愿意等待呢？</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -313,7 +336,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -350,8 +373,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -423,9 +447,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -459,7 +495,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

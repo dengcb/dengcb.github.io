@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>迁移Redmine和Gitlab - 长斌</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/migrate-redmine-and-gitlab/" rel="alternate" hreflang="en">
+<link href="/migrate-redmine-and-gitlab/" rel="alternate" hreflang="en" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2019-02-15T15:50:11.043Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.184Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="迁移Redmine和Gitlab">
-<meta name="twitter:description" content="Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/zh/archives">归档</a>
+            <a class="navbar-item "
+               href="/zh/archives">归档</a>
             
-            <a class="navbar-item " href="/zh/categories">分类</a>
+            <a class="navbar-item "
+               href="/zh/categories">分类</a>
             
-            <a class="navbar-item " href="/zh/tags">标签</a>
+            <a class="navbar-item "
+               href="/zh/tags">标签</a>
             
-            <a class="navbar-item " href="/zh/about">关于</a>
+            <a class="navbar-item "
+               href="/zh/about">关于</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             迁移Redmine和Gitlab
@@ -144,43 +146,37 @@
     
         <p>Redmine和Gitlab是非常优秀的项目和代码管理系统，两者都是基于Ruby on Rails的，所以我这里就一起迁移了，同时记录一些关于Rails的迁移笔记。</p>
 <a id="more"></a>
+
 <h2 id="安装Rails环境"><a href="#安装Rails环境" class="headerlink" title="安装Rails环境"></a>安装Rails环境</h2><ul>
 <li><p>在新服务器安装RVM</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gpg2 --keyserver hkp://pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB</span><br><span class="line">\curl -sSL https://get.rvm.io | bash -s stable</span><br><span class="line">source ~/.bashrc</span><br><span class="line">source ~/.bash_profile</span><br><span class="line">rvm -v</span><br><span class="line">echo &quot;ruby_url=https://cache.ruby-china.org/pub/ruby&quot; &gt; ~/.rvm/user/db</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gpg2 --keyserver hkp:&#x2F;&#x2F;pgp.mit.edu --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB</span><br><span class="line">\curl -sSL https:&#x2F;&#x2F;get.rvm.io | bash -s stable</span><br><span class="line">source ~&#x2F;.bashrc</span><br><span class="line">source ~&#x2F;.bash_profile</span><br><span class="line">rvm -v</span><br><span class="line">echo &quot;ruby_url&#x3D;https:&#x2F;&#x2F;cache.ruby-china.org&#x2F;pub&#x2F;ruby&quot; &gt; ~&#x2F;.rvm&#x2F;user&#x2F;db</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在新服务器安装ruby</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br><span class="line">rvm install 2.6.0 --disable-binary</span><br><span class="line">rvm use 2.6.0 --default</span><br><span class="line">rvm list</span><br><span class="line">rvm remove 1.8.7</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rvm list known</span><br><span class="line">rvm install 2.6.0 --disable-binary</span><br><span class="line">rvm use 2.6.0 --default</span><br><span class="line">rvm list</span><br><span class="line">rvm remove 1.8.7</span><br><span class="line">ruby -v</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>设置新的gemset</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rvm use 2.6.0</span><br><span class="line">rvm gemset create rails522</span><br><span class="line">rvm gemset list</span><br><span class="line">rvm use 2.6.0@rails522</span><br><span class="line">gem -v</span><br><span class="line">gem sources --add https://gems.ruby-china.com/ --remove https://rubygems.org/</span><br><span class="line">gem sources -l</span><br><span class="line">bundle config mirror.https://rubygems.org https://gems.ruby-china.com</span><br><span class="line">gem install bundler</span><br><span class="line">gem install rails -v 5.2.2</span><br><span class="line">gem install thin -v 1.7.2</span><br><span class="line">bundle -v</span><br><span class="line">rails -v</span><br><span class="line">thin -v</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">rvm use 2.6.0</span><br><span class="line">rvm gemset create rails522</span><br><span class="line">rvm gemset list</span><br><span class="line">rvm use 2.6.0@rails522</span><br><span class="line">gem -v</span><br><span class="line">gem sources --add https:&#x2F;&#x2F;gems.ruby-china.com&#x2F; --remove https:&#x2F;&#x2F;rubygems.org&#x2F;</span><br><span class="line">gem sources -l</span><br><span class="line">bundle config mirror.https:&#x2F;&#x2F;rubygems.org https:&#x2F;&#x2F;gems.ruby-china.com</span><br><span class="line">gem install bundler</span><br><span class="line">gem install rails -v 5.2.2</span><br><span class="line">gem install thin -v 1.7.2</span><br><span class="line">bundle -v</span><br><span class="line">rails -v</span><br><span class="line">thin -v</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 <h2 id="迁移Redmine"><a href="#迁移Redmine" class="headerlink" title="迁移Redmine"></a>迁移Redmine</h2><ul>
-<li><p>补充开发包</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install libmysqlclient-dev</span><br><span class="line">apt install imagemagick libmagickcore-dev libmagickwand-dev</span><br></pre></td></tr></table></figure>
-<p>如果在18.04下遇到libjbig0版本过高，可以下载<a href="https://packages.ubuntu.com/bionic/amd64/libjbig0/download" target="_blank" rel="noopener">降级安装包</a><br><code>dpkg -i libjbig0_2.1-3.1build1_amd64.deb</code></p>
-</li>
+<li>补充开发包<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install libmysqlclient-dev</span><br><span class="line">apt install imagemagick libmagickcore-dev libmagickwand-dev</span><br></pre></td></tr></table></figure>
+如果在18.04下遇到libjbig0版本过高，可以下载<a href="https://packages.ubuntu.com/bionic/amd64/libjbig0/download" target="_blank" rel="noopener">降级安装包</a><br><code>dpkg -i libjbig0_2.1-3.1build1_amd64.deb</code></li>
 </ul>
 <ul>
-<li><p>修改thin配置</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin install</span><br><span class="line">vi /etc/thin/redmine.yml</span><br></pre></td></tr></table></figure>
+<li>修改thin配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">thin install</span><br><span class="line">vi &#x2F;etc&#x2F;thin&#x2F;redmine.yml</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>---<br>chdir: /var/www/artec/mine<br>environment: production<br>address: 0.0.0.0<br>port: 3000<br>timeout: 30<br>log: log/thin.log<br>pid: tmp/pids/thin.pid<br>max_conns: 1024<br>max_persistent_conns: 512<br>require: []<br>wait: 30<br>servers: 5<br>daemonize: true</p>
 </blockquote>
 </li>
 </ul>
 <ul>
-<li><p>迁移Redmine</p>
-<ul>
+<li>迁移Redmine<ul>
 <li>下载<a href="http://www.redmine.org/projects/redmine/wiki/Download" target="_blank" rel="noopener">最新版</a></li>
-<li><p>迁移配置</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config/database.yml ./config</span><br><span class="line">cp config/configuration.yml ./config</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>迁移数据和主题</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -r files ./</span><br><span class="line">cp -r public/themes/dengcb public/themes</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装gems，在Gemfile中添加<code>gem &quot;thin&quot;, &quot;~&gt; 1.7.2&quot;</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bundle install --without development test</span><br><span class="line">bundle exec rake generate_secret_token</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake tmp:cache:clear RAILS_ENV=production</span><br><span class="line">chown -R www-data.www-data *</span><br><span class="line">/etc/init.d/thin start</span><br></pre></td></tr></table></figure>
+<li>迁移配置<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp config&#x2F;database.yml .&#x2F;config</span><br><span class="line">cp config&#x2F;configuration.yml .&#x2F;config</span><br></pre></td></tr></table></figure></li>
+<li>迁移数据和主题<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp -r files .&#x2F;</span><br><span class="line">cp -r public&#x2F;themes&#x2F;dengcb public&#x2F;themes</span><br></pre></td></tr></table></figure></li>
+<li>安装gems，在Gemfile中添加<code>gem "thin", "~&gt; 1.7.2"</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">bundle install --without development test</span><br><span class="line">bundle exec rake generate_secret_token</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV&#x3D;production</span><br><span class="line">bundle exec rake tmp:cache:clear RAILS_ENV&#x3D;production</span><br><span class="line">chown -R www-data.www-data *</span><br><span class="line">&#x2F;etc&#x2F;init.d&#x2F;thin start</span><br></pre></td></tr></table></figure>
+
 </li>
 </ul>
 </li>
@@ -189,73 +185,68 @@
 <li><p>安装依赖软件</p>
 <ul>
 <li><p>安装nodejs</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh</span><br><span class="line">bash nodesource_setup.sh</span><br><span class="line">apt install nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line">curl -sL https:&#x2F;&#x2F;deb.nodesource.com&#x2F;setup_10.x -o nodesource_setup.sh</span><br><span class="line">bash nodesource_setup.sh</span><br><span class="line">apt install nodejs</span><br><span class="line">node -v</span><br></pre></td></tr></table></figure></li>
 <li><p>安装yarn</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --show-error https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -</span><br><span class="line">echo &quot;deb https://dl.yarnpkg.com/debian/ stable main&quot; | tee /etc/apt/sources.list.d/yarn.list</span><br><span class="line">apt update</span><br><span class="line">apt install yarn</span><br><span class="line">yarn -v</span><br></pre></td></tr></table></figure>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">curl --silent --show-error https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;debian&#x2F;pubkey.gpg | apt-key add -</span><br><span class="line">echo &quot;deb https:&#x2F;&#x2F;dl.yarnpkg.com&#x2F;debian&#x2F; stable main&quot; | tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;yarn.list</span><br><span class="line">apt update</span><br><span class="line">apt install yarn</span><br><span class="line">yarn -v</span><br></pre></td></tr></table></figure></li>
 <li><p>安装go</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install golang</span><br><span class="line">go version</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install golang</span><br><span class="line">go version</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装其他</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install graphicsmagick</span><br><span class="line">apt install postfix</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
-</ul>
-<ul>
-<li>安装其他<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install graphicsmagick</span><br><span class="line">apt install postfix</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
 <li><p>更新系统</p>
 <ul>
-<li><p>更新Gitlab</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd ~/gitlab</span><br><span class="line">git fetch --all --prune</span><br><span class="line">git checkout -- db/schema.rb</span><br><span class="line">git checkout -- locale</span><br><span class="line">git checkout 11-8-stable</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新gitlab-shell</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-shell</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_SHELL_VERSION)</span><br><span class="line">bin/compile</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新gitlab-workhorse</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-workhorse</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_WORKHORSE_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新Gitaly</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i.pre-10.1 &apos;s/\[\[storages\]\]/[[storage]]/&apos; /home/git/gitaly/config.toml</span><br><span class="line">cd ~/gitaly</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITALY_SERVER_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>更新gitlab-pages</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~/gitlab-pages</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;/home/git/gitlab/GITLAB_PAGES_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<li>更新Gitlab<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd ~&#x2F;gitlab</span><br><span class="line">git fetch --all --prune</span><br><span class="line">git checkout -- db&#x2F;schema.rb</span><br><span class="line">git checkout -- locale</span><br><span class="line">git checkout 11-8-stable</span><br></pre></td></tr></table></figure></li>
+<li>更新gitlab-shell<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~&#x2F;gitlab-shell</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;&#x2F;home&#x2F;git&#x2F;gitlab&#x2F;GITLAB_SHELL_VERSION)</span><br><span class="line">bin&#x2F;compile</span><br></pre></td></tr></table></figure></li>
+<li>更新gitlab-workhorse<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~&#x2F;gitlab-workhorse</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;&#x2F;home&#x2F;git&#x2F;gitlab&#x2F;GITLAB_WORKHORSE_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure></li>
+<li>更新Gitaly<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sed -i.pre-10.1 &#39;s&#x2F;\[\[storages\]\]&#x2F;[[storage]]&#x2F;&#39; &#x2F;home&#x2F;git&#x2F;gitaly&#x2F;config.toml</span><br><span class="line">cd ~&#x2F;gitaly</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;&#x2F;home&#x2F;git&#x2F;gitlab&#x2F;GITALY_SERVER_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure></li>
+<li>更新gitlab-pages<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd ~&#x2F;gitlab-pages</span><br><span class="line">git fetch --all --tags --prune</span><br><span class="line">git checkout v$(&lt;&#x2F;home&#x2F;git&#x2F;gitlab&#x2F;GITLAB_PAGES_VERSION)</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>更新配置</p>
 <ul>
-<li><p>更新gitlab.yml</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff origin/11-7-stable:config/gitlab.yml.example origin/11-8-stable:config/gitlab.yml.example</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>启动脚本</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp lib/support/init.d/gitlab /etc/init.d/gitlab</span><br><span class="line">cp lib/support/init.d/gitlab.default.example /etc/default/gitlab</span><br><span class="line">update-rc.d gitlab defaults 21</span><br><span class="line">cp lib/support/logrotate/gitlab /etc/logrotate.d/gitlab</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
+<li>更新gitlab.yml<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff origin&#x2F;11-7-stable:config&#x2F;gitlab.yml.example origin&#x2F;11-8-stable:config&#x2F;gitlab.yml.example</span><br></pre></td></tr></table></figure></li>
+<li>启动脚本<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cp lib&#x2F;support&#x2F;init.d&#x2F;gitlab &#x2F;etc&#x2F;init.d&#x2F;gitlab</span><br><span class="line">cp lib&#x2F;support&#x2F;init.d&#x2F;gitlab.default.example &#x2F;etc&#x2F;default&#x2F;gitlab</span><br><span class="line">update-rc.d gitlab defaults 21</span><br><span class="line">cp lib&#x2F;support&#x2F;logrotate&#x2F;gitlab &#x2F;etc&#x2F;logrotate.d&#x2F;gitlab</span><br><span class="line">systemctl daemon-reload</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>开始迁移</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle install --deployment --without development test postgres aws kerberos</span><br><span class="line">bundle clean</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV=production</span><br><span class="line">bundle exec rake gettext:compile RAILS_ENV=production</span><br><span class="line">bundle exec rake yarn:install gitlab:assets:clean gitlab:assets:compile RAILS_ENV=production NODE_ENV=production</span><br><span class="line">bundle exec rake cache:clear RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">su git -l</span><br><span class="line">cd &#x2F;home&#x2F;git&#x2F;gitlab</span><br><span class="line">bundle install --deployment --without development test postgres aws kerberos</span><br><span class="line">bundle clean</span><br><span class="line">bundle exec rake db:migrate RAILS_ENV&#x3D;production</span><br><span class="line">bundle exec rake gettext:compile RAILS_ENV&#x3D;production</span><br><span class="line">bundle exec rake yarn:install gitlab:assets:clean gitlab:assets:compile RAILS_ENV&#x3D;production NODE_ENV&#x3D;production</span><br><span class="line">bundle exec rake cache:clear RAILS_ENV&#x3D;production</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>启动检查</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service gitlab start</span><br><span class="line">service nginx restart</span><br><span class="line">cd /home/git/gitlab</span><br><span class="line">bundle exec rake gitlab:env:info RAILS_ENV=production</span><br><span class="line">bundle exec rake gitlab:check RAILS_ENV=production</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">service gitlab start</span><br><span class="line">service nginx restart</span><br><span class="line">cd &#x2F;home&#x2F;git&#x2F;gitlab</span><br><span class="line">bundle exec rake gitlab:env:info RAILS_ENV&#x3D;production</span><br><span class="line">bundle exec rake gitlab:check RAILS_ENV&#x3D;production</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>补充</p>
 <ul>
-<li><p>解决git时gnutls_handshake问题</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential fakeroot dpkg-dev libcurl4-openssl-dev</span><br><span class="line">apt build-dep git</span><br><span class="line">mkdir ~/git-openssl</span><br><span class="line">cd ~/git-openssl</span><br><span class="line">apt source git</span><br><span class="line">dpkg-source -x git_2.17.1-1.dsc</span><br><span class="line">cd git-2.17.1</span><br><span class="line">vi debian/control //找到libcurl4-gnutls-dev，替换为libcurl4-openssl-dev</span><br><span class="line">dpkg-buildpackage -rfakeroot -b //如果fail on test，可以将文件debian/rules中的TEST=test注释掉</span><br><span class="line">dpkg -i ../git_2.17.1-1ubuntu0.4_amd64.deb</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解决nodejs的<code>JavaScript heap out of memory</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size=4096 /home/git/gitlab/config/webpack.config.js</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>解决Redmine和Gitlab不同Rails环境冲突<br><code>rvm use 2.5.3 --default</code><br><code>vi /usr/local/rvm/bin/bootup_thin</code></p>
-<figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span></span><br><span class="line">  [[ -s <span class="hljs-string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span> ]]</span><br><span class="line"><span class="hljs-keyword">then</span></span><br><span class="line">  <span class="hljs-built_in">source</span> <span class="hljs-string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span></span><br><span class="line">  <span class="hljs-built_in">exec</span> thin <span class="hljs-string">"<span class="hljs-variable">$@</span>"</span></span><br><span class="line"><span class="hljs-keyword">else</span></span><br><span class="line">  <span class="hljs-built_in">echo</span> <span class="hljs-string">"ERROR: Missing RVM environment file: '/usr/local/rvm/gems/ruby-2.6.0/environment'"</span> &gt;&amp;2</span><br><span class="line">  <span class="hljs-built_in">exit</span> 1</span><br><span class="line"><span class="hljs-keyword">fi</span></span><br></pre></td></tr></table></figure>
-<p><code>vi /etc/init.d/thin</code></p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">#DAEMON=/usr/local/rvm/gems/ruby-2.6.0@rails522/bin/thin</span><br><span class="line">DAEMON=/usr/local/rvm/bin/bootup_thin</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
+<li>解决git时gnutls_handshake问题<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">apt install build-essential fakeroot dpkg-dev libcurl4-openssl-dev</span><br><span class="line">apt build-dep git</span><br><span class="line">mkdir ~&#x2F;git-openssl</span><br><span class="line">cd ~&#x2F;git-openssl</span><br><span class="line">apt source git</span><br><span class="line">dpkg-source -x git_2.17.1-1.dsc</span><br><span class="line">cd git-2.17.1</span><br><span class="line">vi debian&#x2F;control &#x2F;&#x2F;找到libcurl4-gnutls-dev，替换为libcurl4-openssl-dev</span><br><span class="line">dpkg-buildpackage -rfakeroot -b &#x2F;&#x2F;如果fail on test，可以将文件debian&#x2F;rules中的TEST&#x3D;test注释掉</span><br><span class="line">dpkg -i ..&#x2F;git_2.17.1-1ubuntu0.4_amd64.deb</span><br></pre></td></tr></table></figure></li>
+<li>解决nodejs的<code>JavaScript heap out of memory</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node --max-old-space-size&#x3D;4096 &#x2F;home&#x2F;git&#x2F;gitlab&#x2F;config&#x2F;webpack.config.js</span><br></pre></td></tr></table></figure></li>
+<li>解决Redmine和Gitlab不同Rails环境冲突<br><code>rvm use 2.5.3 --default</code><br><code>vi /usr/local/rvm/bin/bootup_thin</code><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/usr/bin/env bash</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span></span><br><span class="line">  [[ -s <span class="string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span> ]]</span><br><span class="line"><span class="keyword">then</span></span><br><span class="line">  <span class="built_in">source</span> <span class="string">"/usr/local/rvm/gems/ruby-2.6.0/environment"</span></span><br><span class="line">  <span class="built_in">exec</span> thin <span class="string">"<span class="variable">$@</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  <span class="built_in">echo</span> <span class="string">"ERROR: Missing RVM environment file: '/usr/local/rvm/gems/ruby-2.6.0/environment'"</span> &gt;&amp;2</span><br><span class="line">  <span class="built_in">exit</span> 1</span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure>
+<code>vi /etc/init.d/thin</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">#DAEMON&#x3D;&#x2F;usr&#x2F;local&#x2F;rvm&#x2F;gems&#x2F;ruby-2.6.0@rails522&#x2F;bin&#x2F;thin</span><br><span class="line">DAEMON&#x3D;&#x2F;usr&#x2F;local&#x2F;rvm&#x2F;bin&#x2F;bootup_thin</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -285,7 +276,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -322,8 +313,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -395,9 +387,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -431,7 +435,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索" />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="has-navbar-fixed-top">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
 <title>Bring You to IPFS - dengcb</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
 
 
-<link href="/zh/bring-you-to-ipfs/" rel="alternate" hreflang="zh">
+<link href="/zh/bring-you-to-ipfs/" rel="alternate" hreflang="zh" />
     
 
 
@@ -28,16 +28,14 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Last post, I use Hexo with Minos to build a full site multi-language blog, it’s exciting! So in this post, I will tell you how to bring the new blog to IPFS.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-01-18T07:38:09.026Z">
+<meta property="og:updated_time" content="2024-08-11T20:14:26.181Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Bring You to IPFS">
-<meta name="twitter:description" content="Last post, I use Hexo with Minos to build a full site multi-language blog, it’s exciting! So in this post, I will tell you how to bring the new blog to IPFS.">
 
 
 
 
 
-<link rel="icon" href="/favicon.png">
+<link rel="icon" href="/favicon.ico">
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
@@ -85,13 +83,17 @@
         
         <div class="navbar-menu navbar-start">
             
-            <a class="navbar-item " href="/archives">Archive</a>
+            <a class="navbar-item "
+               href="/archives">Archive</a>
             
-            <a class="navbar-item " href="/categories">Category</a>
+            <a class="navbar-item "
+               href="/categories">Category</a>
             
-            <a class="navbar-item " href="/tags">Tag</a>
+            <a class="navbar-item "
+               href="/tags">Tag</a>
             
-            <a class="navbar-item " href="/about">About</a>
+            <a class="navbar-item "
+               href="/about">About</a>
             
         </div>
         
@@ -116,7 +118,7 @@
 
     <section class="section">
     <div class="container">
-    <article class="article content gallery" itemscope="" itemprop="blogPost">
+    <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
             Bring You to IPFS
@@ -144,8 +146,10 @@
     
         <p>Last post, I use Hexo with Minos to build a full site multi-language blog, it’s exciting! So in this post, I will tell you how to bring the new blog to IPFS.</p>
 <a id="more"></a>
+
 <h2 id="What-is-IPFS"><a href="#What-is-IPFS" class="headerlink" title="What is IPFS"></a>What is IPFS</h2><blockquote><p>IPFS is called for short of <strong><em>InterPlanetary FileSystem</em></strong>, maybe you can visit your data from another galaxy. Due to the limit speed of light, we need quantum entanglement communication to play well.</p>
 <footer><strong>dengcb</strong><cite><a href="https://dengcb.github.io" target="_blank" rel="noopener">Welcome to my GitHub</a></cite></footer></blockquote>
+
 <p>IPFS uses data hash address instead of website domain, but in the next, you will find if you want to visit your data in IPFS within a traditional website, you still need domain. And to get hash data, you have to visit a IPFS node server. So, want to decentralize, you maybe need a centralized server first.</p>
 <p>Meanwhile, distributed data storage will cause waste. Some updated files, previous versions are no longer valid, but are pinned and permanently retained inside IPFS and cannot be deleted. Even the owner has forgotten the previous data hash, the dead files become ghosts in the IPFS system.</p>
 <h2 id="Install-IPFS"><a href="#Install-IPFS" class="headerlink" title="Install IPFS"></a>Install IPFS</h2><ul>
@@ -166,13 +170,14 @@
 <ul>
 <li><p>Initialize the node</p>
 <ul>
-<li>Execute <code>ipfs init</code>, init the folder <code>.ipfs</code> and create config files</li>
-<li>Keep the <code>peer identity</code>, or find it in <code>~/.ipfs/config</code></li>
+<li><p>Execute <code>ipfs init</code>, init the folder <code>.ipfs</code> and create config files</p>
+</li>
+<li><p>Keep the <code>peer identity</code>, or find it in <code>~/.ipfs/config</code></p>
+</li>
 <li><p>Modify config file, set the storage space <code>vi ~/.ipfs/config</code></p>
-<pre><code>&quot;Datastore&quot;: {
-  &quot;StorageMax&quot;: &quot;6GB&quot;
-}
-</code></pre></li>
+<pre><code>"Datastore": {
+  "StorageMax": "6GB"
+}</code></pre></li>
 </ul>
 </li>
 </ul>
@@ -193,8 +198,10 @@
 <ul>
 <li><p>Add to IPFS</p>
 <ul>
-<li>Execute <code>ipfs add -r public</code> to add public folder to IPFS</li>
-<li>Keep the public hash</li>
+<li><p>Execute <code>ipfs add -r public</code> to add public folder to IPFS</p>
+</li>
+<li><p>Keep the public hash</p>
+</li>
 <li><p>Persistent storage <code>ipfs pin add -r QmUmVuqD8RdLjeuqKZC8dAaKkcRedPsGtDFbwPyKrR278K</code></p>
 <blockquote>
 <p>added <strong><em>QmUmVuqD8RdLjeuqKZC8dAaKkcRedPsGtDFbwPyKrR278K</em></strong> public</p>
@@ -265,13 +272,9 @@
 <li><code>apt install nginx-full</code></li>
 </ul>
 </li>
-<li><p>Config Nginx</p>
-<ul>
-<li><p><code>vi /etc/nginx/sites-available/example_com</code></p>
-<figure class="highlight nginx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attribute">upstream</span> ipfs-server &#123;</span><br><span class="line">    <span class="hljs-attribute">server</span> <span class="hljs-number">127.0.0.1:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-attribute">map</span> <span class="hljs-variable">$http_upgrade</span> <span class="hljs-variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">default</span> upgrade;</span><br><span class="line">    ''      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-section">server</span> &#123;</span><br><span class="line">    <span class="hljs-attribute">listen</span> <span class="hljs-number">80</span>;</span><br><span class="line">    <span class="hljs-attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-attribute">location</span> / &#123;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Real-IP <span class="hljs-variable">$remote_addr</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-Forwarded-For <span class="hljs-variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> Host <span class="hljs-variable">$http_host</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_set_header</span> X-NginX-Proxy <span class="hljs-literal">true</span>;</span><br><span class="line">        <span class="hljs-attribute">proxy_pass</span> http://ipfs-server/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>execute <code>nsite -e</code> <code>service nginx reload</code></p>
-</li>
+<li>Config Nginx<ul>
+<li><code>vi /etc/nginx/sites-available/example_com</code><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ipfs-server &#123;</span><br><span class="line">    <span class="attribute">server</span> <span class="number">127.0.0.1:8080</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="attribute">map</span> <span class="variable">$http_upgrade</span> <span class="variable">$connection_upgrade</span> &#123;</span><br><span class="line">    <span class="attribute">default</span> upgrade;</span><br><span class="line">    ''      close;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> example.com;</span><br><span class="line"></span><br><span class="line">    <span class="attribute">location</span> / &#123;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$http_host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-NginX-Proxy <span class="literal">true</span>;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://ipfs-server/;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>execute <code>nsite -e</code> <code>service nginx reload</code></li>
 </ul>
 </li>
 </ul>
@@ -279,7 +282,25 @@
 <p>The actual feeling, is different from we thought before. The first open takes a long time, always 504 timeout, but once connection is success, open will be very quick. Why? The IPFS official admits this is caused by the IPNS service bugs. We published name in the past, so we don’t need modify DNS while change files.</p>
 <p>However, ipns service is very time-consuming and takes more than 20 seconds often. Meanwhile, ipfs is almost second. <a href="https://ipfs.io" target="_blank" rel="noopener">IPFS Officle website</a> content is fixed, so hash address doesn’t change, using ipfs and open fast.</p>
 <p>If, IPFS cannot enhance the speed of ipns service, first open meets 504 always, who can wait?</p>
-
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
     
     </div>
     
@@ -309,7 +330,7 @@
 <div class="sharebox">
     
 <div class="sharethis-inline-share-buttons"></div>
-<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons" async="async"></script>
+<script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5ad47e52d0b9d300137e38f0&amp;product=inline-share-buttons' async='async'></script>
 
 </div>
 
@@ -346,8 +367,9 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2019 dengcb&nbsp;
-                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+                &copy; 2024 dengcb&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
 
@@ -419,9 +441,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 <script>
     MathJax.Hub.Config({
-        "HTML-CSS": {matchFontHeight: false},
-        SVG: {matchFontHeight: false},
-        CommonHTML: {matchFontHeight: false}
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
     });
 </script>
 
@@ -455,7 +489,7 @@
     <div class="searchbox-mask"></div>
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
