@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Android开发，肯定要编译、调试和发布，这其中就离不开用keystore来对apk进行数字签名，其中调试阶段有debug证书，发布阶段有release证书，分享相关笔记。">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2024-08-11T20:14:26.183Z">
+<meta property="og:updated_time" content="2024-09-01T17:32:59.484Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -138,7 +138,7 @@
         <span class="column is-narrow">
             
             
-            5 分钟 读完 (约 683 字)
+            5 分钟 读完 (约 696 字)
         </span>
         
     </div>
@@ -173,8 +173,9 @@
 </ul>
 </blockquote>
 <ul>
-<li>修改密钥库密码：<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
-<li>修改密钥别名和密码：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code><blockquote>
+<li>修改密钥别名：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey</code></li>
+<li>修改密钥别名密码：<code>keytool -keypasswd -keystore debug.keystore -alias androiddebugkey -new android</code></li>
+<li>修改密钥库密码：<code>keytool -storepasswd -keystore debug.keystore -new android</code><blockquote>
 <p>复制替换<code>~/.android/debug.keystore</code></p>
 </blockquote>
 </li>

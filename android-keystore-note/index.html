@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="dengcb">
 <meta property="og:description" content="Android developers use keystore to complie, debug and release APK files. You have debug key in debugging phase, and release key in release phase. Here is some notes for keystore.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2024-08-11T20:14:26.181Z">
+<meta property="og:updated_time" content="2024-09-01T17:36:39.033Z">
 <meta name="twitter:card" content="summary">
 
 
@@ -138,7 +138,7 @@
         <span class="column is-narrow">
             
             
-            3 minutes read (About 377 words)
+            3 minutes read (About 388 words)
         </span>
         
     </div>
@@ -173,8 +173,9 @@
 </ul>
 </blockquote>
 <ul>
-<li>modify keystore password:<code>keytool -storepasswd -keystore debug.keystore -new android</code></li>
-<li>modify key alias and password:<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android</code><blockquote>
+<li>modify key alias：<code>keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey</code></li>
+<li>modify key password：<code>keytool -keypasswd -keystore debug.keystore -alias androiddebugkey -new android</code></li>
+<li>modify keystore password：<code>keytool -storepasswd -keystore debug.keystore -new android</code><blockquote>
 <p>replace<code>~/.android/debug.keystore</code></p>
 </blockquote>
 </li>
