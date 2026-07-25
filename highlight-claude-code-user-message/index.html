@@ -20,15 +20,15 @@
 
 
 
-    <meta name="description" content="我经常给iTerm2的Profile窗口配一点透明度。结果用Claude Code时，用户信息默认高亮是灰色，一透明就和窗口背景颜色融合了，导致高亮失效。想寻找自己的历史信息，狗眼都看瞎了。">
+    <meta name="description" content="I use a transparent iTerm2 profile. In Claude Code, the default gray highlight for user messages blends into the background, which makes old messages hard to spot.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Highlight Claude Code User Message">
 <meta property="og:url" content="https://dengcb.com/highlight-claude-code-user-message/index.html">
 <meta property="og:site_name" content="dengcb">
-<meta property="og:description" content="我经常给iTerm2的Profile窗口配一点透明度。结果用Claude Code时，用户信息默认高亮是灰色，一透明就和窗口背景颜色融合了，导致高亮失效。想寻找自己的历史信息，狗眼都看瞎了。">
+<meta property="og:description" content="I use a transparent iTerm2 profile. In Claude Code, the default gray highlight for user messages blends into the background, which makes old messages hard to spot.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-07-25T13:33:11.000Z">
-<meta property="article:modified_time" content="2026-07-25T14:36:14.054Z">
+<meta property="article:modified_time" content="2026-07-25T15:57:54.039Z">
 <meta property="article:author" content="dengcb">
 <meta property="article:tag" content="tutorial">
 <meta name="twitter:card" content="summary">
@@ -135,38 +135,39 @@
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/AI/">AI</a><span>></span><a class="article-category-link" href="/categories/AI/iterm/">iTerm</a>
+            <a class="article-category-link" href="/categories/coding/">coding</a><span>></span><a class="article-category-link" href="/categories/coding/ai/">ai</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            2 minutes read (About 241 words)
+            a minute read (About 147 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>我经常给iTerm2的Profile窗口配一点透明度。结果用Claude Code时，用户信息默认高亮是灰色，一透明就和窗口背景颜色融合了，导致高亮失效。想寻找自己的历史信息，狗眼都看瞎了。</p>
+        <p>I use a transparent iTerm2 profile. In Claude Code, the default gray highlight for user messages blends into the background, which makes old messages hard to spot.</p>
 <a id="more"></a>
 
-<h2 id="其他尝试"><a href="#其他尝试" class="headerlink" title="其他尝试"></a>其他尝试</h2><blockquote>
-<p>问了下Claude Code，他建议我用iTerm2的Trigger功能来解决这个问题<br><strong>Profiles → Default → Advanced → Triggers</strong><br>使用正则 <strong><em>^❯</em></strong> 来匹配，Action选 <strong><em>Highlight Text</em></strong><br>结果，只能匹配一行而已，不满足需求</p>
+<h2 id="Attempts"><a href="#Attempts" class="headerlink" title="Attempts"></a>Attempts</h2><blockquote>
+<p>I asked Claude Code about it, and it suggested using the Trigger feature in iTerm2.<br><strong>Profiles → Default → Advanced → Triggers</strong><br>Use the regex <strong><em>^❯</em></strong> for matching, and choose <strong><em>Highlight Text</em></strong> as the Action.<br>But, it could only match one line, which did not solve the problem.</p>
 </blockquote>
-<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><pre><code>进入Claude Code</code></pre><p><strong>/theme</strong></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><pre><code>Open Claude Code</code></pre><p><strong>/theme</strong></p>
 <ul>
-<li>移动光标到<code>New custom theme...</code>，新增一个自定义主题</li>
-<li>输入自定义主题名称，比如<code>my-dark</code></li>
+<li>Move the cursor to <code>New custom theme...</code> and create a custom theme</li>
+<li>Enter a custom theme name, for example <code>my-dark</code></li>
 </ul>
-<p><strong>修改配置</strong></p>
+<p><strong>Edit the config</strong></p>
 <ul>
-<li>配置文件是<code>~/.claude/themes/my-dark.json</code></li>
-<li>自己打开或让你家的AI编辑配置文件</li>
-<li>添加一个<code>overrides</code>，<code>"userMessageBackground": "rgb(20, 50, 35)"</code></li>
+<li>The config file is <code>~/.claude/themes/my-dark.json</code></li>
+<li>Open it yourself, or let your AI help edit the file</li>
+<li>Add an <code>overrides</code> field: <code>"userMessageBackground": "rgb(20, 50, 35)"</code></li>
 </ul>
-<blockquote class="colorquote success"><p>打完收工，试试愉快地和Claude Code一起玩耍吧！</p>
-</blockquote><script>
+<blockquote class="colorquote success"><p>Done. Now go enjoy chatting with Claude Code a bit more happily.</p>
+</blockquote>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }

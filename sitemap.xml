@@ -4,14 +4,21 @@
   <url>
     <loc>https://dengcb.com/highlight-claude-code-user-message/</loc>
     
-    <lastmod>2026-07-25T14:36:14.054Z</lastmod>
+    <lastmod>2026-07-25T15:57:54.039Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://dengcb.com/zh/highlight-claude-code-user-message/</loc>
     
-    <lastmod>2026-07-25T14:35:26.402Z</lastmod>
+    <lastmod>2026-07-25T15:57:34.648Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dengcb.com/zh/use-iterm2-telnet-smth-bbs/</loc>
+    
+    <lastmod>2026-07-25T15:53:36.843Z</lastmod>
     
   </url>
   
@@ -58,20 +65,6 @@
   </url>
   
   <url>
-    <loc>https://dengcb.com/zh/use-iterm2-telnet-smth-bbs/</loc>
-    
-    <lastmod>2024-08-11T20:14:26.185Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://dengcb.com/zh/hexo-minos-multi-language/</loc>
-    
-    <lastmod>2024-08-11T20:14:26.184Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://dengcb.com/zh/hello-world/</loc>
     
     <lastmod>2024-08-11T20:14:26.184Z</lastmod>
@@ -79,7 +72,7 @@
   </url>
   
   <url>
-    <loc>https://dengcb.com/zh/migrate-redis/</loc>
+    <loc>https://dengcb.com/zh/hexo-minos-multi-language/</loc>
     
     <lastmod>2024-08-11T20:14:26.184Z</lastmod>
     
@@ -101,6 +94,13 @@
   
   <url>
     <loc>https://dengcb.com/zh/migrate-mysql/</loc>
+    
+    <lastmod>2024-08-11T20:14:26.184Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://dengcb.com/zh/migrate-redis/</loc>
     
     <lastmod>2024-08-11T20:14:26.184Z</lastmod>
     
@@ -156,14 +156,14 @@
   </url>
   
   <url>
-    <loc>https://dengcb.com/hello-world/</loc>
+    <loc>https://dengcb.com/migrate-ldap/</loc>
     
     <lastmod>2024-08-11T20:14:26.182Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://dengcb.com/migrate-ldap/</loc>
+    <loc>https://dengcb.com/migrate-redis/</loc>
     
     <lastmod>2024-08-11T20:14:26.182Z</lastmod>
     
@@ -177,7 +177,7 @@
   </url>
   
   <url>
-    <loc>https://dengcb.com/migrate-redis/</loc>
+    <loc>https://dengcb.com/hello-world/</loc>
     
     <lastmod>2024-08-11T20:14:26.182Z</lastmod>
     
