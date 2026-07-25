@@ -80,6 +80,7 @@ category_map:
   Rails: rails
   Android: android
   证书: ssl
+  人工智能: ai
 tag_map:
   随笔: anything
   教程: tutorial
@@ -105,7 +106,7 @@ theme: minos
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/dengcb/dengcb.github.io.git
+  repo: git@github.com:dengcb/dengcb.github.io.git
   branch: master
 
 stylus:

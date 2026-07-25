@@ -8,16 +8,16 @@ layout: "about"
 comments: false
 ---
 ### 我是谁
-- 码农
+- AI 码农
 - 分享者
 - 创业狗
 
 ### 我会啥
-- 安卓开发
-- 微信小程序
-- 共识算法
+- 歪脖扣顶
+- 古法编程
+- 踩单车
 
 ### 我做啥
 - [分享经济](https://at.cn)
-- [移动互联](https://www.artec.com)
-- [智能电车](https://www.ecarhome.com)
+- [智能硬件](https://www.artec.com)
+- [新能源](https://www.ecarhome.com)

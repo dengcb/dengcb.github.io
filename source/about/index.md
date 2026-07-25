@@ -8,16 +8,16 @@ layout: "about"
 comments: false
 ---
 ### Who I am
-- Coder
+- AI Coder
 - Sharer
 - Founder
 
 ### What I do
-- Android
-- Miniapp
-- Consensus
+- Vibe
+- Coding
+- OPC
 
 ### Where I go
-- [Shared economy](https://at.cn)
-- [Mobile internet](https://www.artec.com)
-- [Smart ecarhome](https://www.ecarhome.com)
+- [Shared Economy](https://at.cn)
+- [Smart Device](https://www.artec.com)
+- [Green Energy](https://www.ecarhome.com)

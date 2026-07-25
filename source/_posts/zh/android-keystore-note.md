@@ -53,7 +53,8 @@ Key password: “android”
 CN: “CN=Android Debug,O=Android,C=US”
 > 
 > - 重命名dengcb.keystore为`debug.keystore`
+- 修改密钥别名：`keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey`
+- 修改密钥别名密码：`keytool -keypasswd -keystore debug.keystore -alias androiddebugkey -new android`
 - 修改密钥库密码：`keytool -storepasswd -keystore debug.keystore -new android`
-- 修改密钥别名和密码：`keytool -changealias -keystore debug.keystore -alias dengcb -destalias androiddebugkey -destkeypass android`
 > 
 > 复制替换`~/.android/debug.keystore`
